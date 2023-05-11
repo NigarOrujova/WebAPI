@@ -1,4 +1,4 @@
-﻿namespace YelloAd.Domain.Enums;
+﻿namespace Yelload.Domain.Enums;
 
 public enum PriorityLevel
 {

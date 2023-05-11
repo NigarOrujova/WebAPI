@@ -1,10 +1,10 @@
-﻿using YelloAd.Application.Common.Interfaces;
-using YelloAd.Domain.Common;
+﻿using Yelload.Application.Common.Interfaces;
+using Yelload.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace YelloAd.Infrastructure.Persistence.Interceptors;
+namespace Yelload.Infrastructure.Persistence.Interceptors;
 
 public class AuditableEntitySaveChangesInterceptor : SaveChangesInterceptor
 {

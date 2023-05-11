@@ -1,5 +1,5 @@
-﻿using YelloAd.Application.Common.Interfaces;
-using YelloAd.Infrastructure.Persistence;
+﻿using Yelload.Application.Common.Interfaces;
+using Yelload.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 
-namespace YelloAd.Application.IntegrationTests;
+namespace Yelload.Application.IntegrationTests;
 
 using static Testing;
 

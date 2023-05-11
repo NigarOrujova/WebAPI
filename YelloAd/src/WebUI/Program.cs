@@ -1,4 +1,4 @@
-using YelloAd.Infrastructure.Persistence;
+using Yelload.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 

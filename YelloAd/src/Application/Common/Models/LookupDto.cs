@@ -1,7 +1,7 @@
-﻿using YelloAd.Application.Common.Mappings;
-using YelloAd.Domain.Entities;
+﻿using Yelload.Application.Common.Mappings;
+using Yelload.Domain.Entities;
 
-namespace YelloAd.Application.Common.Models;
+namespace Yelload.Application.Common.Models;
 
 // Note: This is currently just used to demonstrate applying multiple IMapFrom attributes.
 public class LookupDto : IMapFrom<TodoList>, IMapFrom<TodoItem>

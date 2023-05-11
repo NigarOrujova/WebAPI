@@ -1,4 +1,4 @@
-export const ApplicationName = 'YelloAd.WebUI';
+export const ApplicationName = 'Yelload.WebUI';
 
 export const ReturnUrlType = 'returnUrl';
 

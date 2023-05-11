@@ -1,6 +1,6 @@
-﻿global using YelloAd.Domain.Common;
-global using YelloAd.Domain.Entities;
-global using YelloAd.Domain.Enums;
-global using YelloAd.Domain.Events;
-global using YelloAd.Domain.Exceptions;
-global using YelloAd.Domain.ValueObjects;
+﻿global using Yelload.Domain.Common;
+global using Yelload.Domain.Entities;
+global using Yelload.Domain.Enums;
+global using Yelload.Domain.Events;
+global using Yelload.Domain.Exceptions;
+global using Yelload.Domain.ValueObjects;

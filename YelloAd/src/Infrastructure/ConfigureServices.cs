@@ -1,9 +1,9 @@
-﻿using YelloAd.Application.Common.Interfaces;
-using YelloAd.Infrastructure.Files;
-using YelloAd.Infrastructure.Identity;
-using YelloAd.Infrastructure.Persistence;
-using YelloAd.Infrastructure.Persistence.Interceptors;
-using YelloAd.Infrastructure.Services;
+﻿using Yelload.Application.Common.Interfaces;
+using Yelload.Infrastructure.Files;
+using Yelload.Infrastructure.Identity;
+using Yelload.Infrastructure.Persistence;
+using Yelload.Infrastructure.Persistence.Interceptors;
+using Yelload.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +20,7 @@ public static class ConfigureServices
         if (configuration.GetValue<bool>("UseInMemoryDatabase"))
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseInMemoryDatabase("YelloAdDb"));
+                options.UseInMemoryDatabase("YelloadDb"));
         }
         else
         {

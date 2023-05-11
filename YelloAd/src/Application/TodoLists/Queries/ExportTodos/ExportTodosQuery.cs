@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using YelloAd.Application.Common.Interfaces;
+using Yelload.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace YelloAd.Application.TodoLists.Queries.ExportTodos;
+namespace Yelload.Application.TodoLists.Queries.ExportTodos;
 
 public record ExportTodosQuery : IRequest<ExportTodosVm>
 {

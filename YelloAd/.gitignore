@@ -233,6 +233,6 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 /NDependOut
-/YelloAd.ndproj
+/Yelload.ndproj
 /.mfractor
 src/WebUI/ClientApp/package-lock.json

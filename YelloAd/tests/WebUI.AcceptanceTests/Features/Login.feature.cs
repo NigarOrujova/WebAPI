@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace YelloAd.WebUI.AcceptanceTests.Features
+namespace Yelload.WebUI.AcceptanceTests.Features
 {
     using TechTalk.SpecFlow;
     using System;

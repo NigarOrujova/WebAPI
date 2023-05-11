@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <InternalsVisibleTo Include="YelloAd.Application.IntegrationTests" />
+        <InternalsVisibleTo Include="Yelload.Application.IntegrationTests" />
     </ItemGroup>
 
     <ItemGroup>

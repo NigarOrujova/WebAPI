@@ -1,14 +1,14 @@
-﻿using YelloAd.Application.Common.Exceptions;
-using YelloAd.Application.TodoItems.Commands.CreateTodoItem;
-using YelloAd.Application.TodoItems.Commands.UpdateTodoItem;
-using YelloAd.Application.TodoItems.Commands.UpdateTodoItemDetail;
-using YelloAd.Application.TodoLists.Commands.CreateTodoList;
-using YelloAd.Domain.Entities;
-using YelloAd.Domain.Enums;
+﻿using Yelload.Application.Common.Exceptions;
+using Yelload.Application.TodoItems.Commands.CreateTodoItem;
+using Yelload.Application.TodoItems.Commands.UpdateTodoItem;
+using Yelload.Application.TodoItems.Commands.UpdateTodoItemDetail;
+using Yelload.Application.TodoLists.Commands.CreateTodoList;
+using Yelload.Domain.Entities;
+using Yelload.Domain.Enums;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace YelloAd.Application.IntegrationTests.TodoItems.Commands;
+namespace Yelload.Application.IntegrationTests.TodoItems.Commands;
 
 using static Testing;
 

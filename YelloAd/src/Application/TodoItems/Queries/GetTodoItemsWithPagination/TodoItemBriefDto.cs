@@ -1,7 +1,7 @@
-﻿using YelloAd.Application.Common.Mappings;
-using YelloAd.Domain.Entities;
+﻿using Yelload.Application.Common.Mappings;
+using Yelload.Domain.Entities;
 
-namespace YelloAd.Application.TodoItems.Queries.GetTodoItemsWithPagination;
+namespace Yelload.Application.TodoItems.Queries.GetTodoItemsWithPagination;
 
 public class TodoItemBriefDto : IMapFrom<TodoItem>
 {

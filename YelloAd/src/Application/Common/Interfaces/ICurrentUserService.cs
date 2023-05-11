@@ -1,4 +1,4 @@
-﻿namespace YelloAd.Application.Common.Interfaces;
+﻿namespace Yelload.Application.Common.Interfaces;
 
 public interface ICurrentUserService
 {

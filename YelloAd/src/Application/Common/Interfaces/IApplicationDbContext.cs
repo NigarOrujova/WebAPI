@@ -1,7 +1,7 @@
-﻿using YelloAd.Domain.Entities;
+﻿using Yelload.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace YelloAd.Application.Common.Interfaces;
+namespace Yelload.Application.Common.Interfaces;
 
 public interface IApplicationDbContext
 {

@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
-using YelloAd.Application.Common.Exceptions;
-using YelloAd.Application.Common.Interfaces;
-using YelloAd.Application.Common.Security;
+using Yelload.Application.Common.Exceptions;
+using Yelload.Application.Common.Interfaces;
+using Yelload.Application.Common.Security;
 using MediatR;
 
-namespace YelloAd.Application.Common.Behaviours;
+namespace Yelload.Application.Common.Behaviours;
 
 public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {

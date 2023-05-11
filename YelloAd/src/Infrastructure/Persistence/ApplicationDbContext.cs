@@ -1,15 +1,15 @@
 ﻿using System.Reflection;
-using YelloAd.Application.Common.Interfaces;
-using YelloAd.Domain.Entities;
-using YelloAd.Infrastructure.Identity;
-using YelloAd.Infrastructure.Persistence.Interceptors;
+using Yelload.Application.Common.Interfaces;
+using Yelload.Domain.Entities;
+using Yelload.Infrastructure.Identity;
+using Yelload.Infrastructure.Persistence.Interceptors;
 using Duende.IdentityServer.EntityFramework.Options;
 using MediatR;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-namespace YelloAd.Infrastructure.Persistence;
+namespace Yelload.Infrastructure.Persistence;
 
 public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, IApplicationDbContext
 {

@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-      <RootNamespace>YelloAd.WebUI.AcceptanceTests</RootNamespace>
-      <AssemblyName>YelloAd.WebUI.AcceptanceTests</AssemblyName>
+      <RootNamespace>Yelload.WebUI.AcceptanceTests</RootNamespace>
+      <AssemblyName>Yelload.WebUI.AcceptanceTests</AssemblyName>
       <Nullable>enable</Nullable>
       <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>

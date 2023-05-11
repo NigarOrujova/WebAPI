@@ -1,4 +1,4 @@
-﻿namespace YelloAd.Domain.ValueObjects;
+﻿namespace Yelload.Domain.ValueObjects;
 
 public class Colour : ValueObject
 {

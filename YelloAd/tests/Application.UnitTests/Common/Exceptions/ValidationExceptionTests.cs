@@ -1,9 +1,9 @@
-﻿using YelloAd.Application.Common.Exceptions;
+﻿using Yelload.Application.Common.Exceptions;
 using FluentAssertions;
 using FluentValidation.Results;
 using NUnit.Framework;
 
-namespace YelloAd.Application.UnitTests.Common.Exceptions;
+namespace Yelload.Application.UnitTests.Common.Exceptions;
 
 public class ValidationExceptionTests
 {

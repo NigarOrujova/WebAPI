@@ -1,4 +1,4 @@
-﻿namespace YelloAd.Application.Common.Models;
+﻿namespace Yelload.Application.Common.Models;
 
 public class Result
 {

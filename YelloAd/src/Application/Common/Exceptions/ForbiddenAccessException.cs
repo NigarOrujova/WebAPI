@@ -1,4 +1,4 @@
-﻿namespace YelloAd.Application.Common.Exceptions;
+﻿namespace Yelload.Application.Common.Exceptions;
 
 public class ForbiddenAccessException : Exception
 {

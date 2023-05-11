@@ -1,4 +1,4 @@
-﻿namespace YelloAd.Domain.Common;
+﻿namespace Yelload.Domain.Common;
 
 public abstract class BaseAuditableEntity : BaseEntity
 {

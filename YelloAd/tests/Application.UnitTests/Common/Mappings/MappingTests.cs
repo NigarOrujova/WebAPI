@@ -1,12 +1,12 @@
 ﻿using System.Runtime.Serialization;
 using AutoMapper;
-using YelloAd.Application.Common.Mappings;
-using YelloAd.Application.Common.Models;
-using YelloAd.Application.TodoLists.Queries.GetTodos;
-using YelloAd.Domain.Entities;
+using Yelload.Application.Common.Mappings;
+using Yelload.Application.Common.Models;
+using Yelload.Application.TodoLists.Queries.GetTodos;
+using Yelload.Domain.Entities;
 using NUnit.Framework;
 
-namespace YelloAd.Application.UnitTests.Common.Mappings;
+namespace Yelload.Application.UnitTests.Common.Mappings;
 
 public class MappingTests
 {

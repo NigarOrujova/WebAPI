@@ -2,8 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
-        <RootNamespace>YelloAd.Domain</RootNamespace>
-        <AssemblyName>YelloAd.Domain</AssemblyName>
+        <RootNamespace>Yelload.Domain</RootNamespace>
+        <AssemblyName>Yelload.Domain</AssemblyName>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>

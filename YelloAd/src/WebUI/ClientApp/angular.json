@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "YelloAd.WebUI": {
+    "Yelload.WebUI": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "YelloAd.WebUI:build:production"
+              "browserTarget": "Yelload.WebUI:build:production"
             },
             "development": {
-              "browserTarget": "YelloAd.WebUI:build:development",
+              "browserTarget": "Yelload.WebUI:build:development",
               "proxyConfig": "proxy.conf.js"
             }
           },
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "YelloAd.WebUI:build"
+            "browserTarget": "Yelload.WebUI:build"
           }
         },
         "test": {
@@ -131,5 +131,8 @@
       }
     }
   },
-  "defaultProject": "YelloAd.WebUI"
+  "defaultProject": "Yelload.WebUI",
+  "cli": {
+    "analytics": "567563c5-3d31-4225-9824-6f49265b9964"
+  }
 }

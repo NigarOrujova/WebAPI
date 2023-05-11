@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 using MediatR;
-using ValidationException = YelloAd.Application.Common.Exceptions.ValidationException;
+using ValidationException = Yelload.Application.Common.Exceptions.ValidationException;
 
-namespace YelloAd.Application.Common.Behaviours;
+namespace Yelload.Application.Common.Behaviours;
 
 public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
      where TRequest : IRequest<TResponse>

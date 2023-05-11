@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using YelloAd.Application.Common.Behaviours;
+using Yelload.Application.Common.Behaviours;
 using FluentValidation;
 using MediatR;
 

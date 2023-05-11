@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace YelloAd.WebUI.AcceptanceTests;
+namespace Yelload.WebUI.AcceptanceTests;
 
 public static class ConfigurationHelper
 {

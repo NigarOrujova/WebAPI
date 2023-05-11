@@ -1,10 +1,10 @@
-﻿using YelloAd.Application.Common.Exceptions;
-using YelloAd.Application.Common.Interfaces;
-using YelloAd.Domain.Entities;
+﻿using Yelload.Application.Common.Exceptions;
+using Yelload.Application.Common.Interfaces;
+using Yelload.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace YelloAd.Application.TodoLists.Commands.DeleteTodoList;
+namespace Yelload.Application.TodoLists.Commands.DeleteTodoList;
 
 public record DeleteTodoListCommand(int Id) : IRequest;
 

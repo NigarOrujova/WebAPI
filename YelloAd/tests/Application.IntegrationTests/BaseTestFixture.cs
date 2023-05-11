@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace YelloAd.Application.IntegrationTests;
+namespace Yelload.Application.IntegrationTests;
 
 using static Testing;
 

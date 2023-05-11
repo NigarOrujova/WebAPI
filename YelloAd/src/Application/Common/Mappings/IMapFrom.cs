@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace YelloAd.Application.Common.Mappings;
+namespace Yelload.Application.Common.Mappings;
 
 public interface IMapFrom<T>
 {

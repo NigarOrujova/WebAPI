@@ -1,6 +1,6 @@
-﻿using YelloAd.Application.TodoLists.Queries.ExportTodos;
+﻿using Yelload.Application.TodoLists.Queries.ExportTodos;
 
-namespace YelloAd.Application.Common.Interfaces;
+namespace Yelload.Application.Common.Interfaces;
 
 public interface ICsvFileBuilder
 {

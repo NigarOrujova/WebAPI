@@ -1,8 +1,8 @@
-﻿using YelloAd.Domain.Entities;
+﻿using Yelload.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace YelloAd.Infrastructure.Persistence.Configurations;
+namespace Yelload.Infrastructure.Persistence.Configurations;
 
 public class TodoListConfiguration : IEntityTypeConfiguration<TodoList>
 {

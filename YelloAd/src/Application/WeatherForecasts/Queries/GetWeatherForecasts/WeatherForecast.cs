@@ -1,4 +1,4 @@
-﻿namespace YelloAd.Application.WeatherForecasts.Queries.GetWeatherForecasts;
+﻿namespace Yelload.Application.WeatherForecasts.Queries.GetWeatherForecasts;
 
 public class WeatherForecast
 {

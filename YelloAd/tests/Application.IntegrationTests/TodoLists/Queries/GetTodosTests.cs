@@ -1,10 +1,10 @@
-﻿using YelloAd.Application.TodoLists.Queries.GetTodos;
-using YelloAd.Domain.Entities;
-using YelloAd.Domain.ValueObjects;
+﻿using Yelload.Application.TodoLists.Queries.GetTodos;
+using Yelload.Domain.Entities;
+using Yelload.Domain.ValueObjects;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace YelloAd.Application.IntegrationTests.TodoLists.Queries;
+namespace Yelload.Application.IntegrationTests.TodoLists.Queries;
 
 using static Testing;
 

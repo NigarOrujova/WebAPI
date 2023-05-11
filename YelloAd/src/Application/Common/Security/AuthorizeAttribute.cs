@@ -1,4 +1,4 @@
-﻿namespace YelloAd.Application.Common.Security;
+﻿namespace Yelload.Application.Common.Security;
 
 /// <summary>
 /// Specifies the class this attribute is applied to requires authorization.

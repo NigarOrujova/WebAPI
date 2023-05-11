@@ -1,13 +1,13 @@
-﻿using YelloAd.Application.Common.Models;
-using YelloAd.Application.TodoItems.Commands.CreateTodoItem;
-using YelloAd.Application.TodoItems.Commands.DeleteTodoItem;
-using YelloAd.Application.TodoItems.Commands.UpdateTodoItem;
-using YelloAd.Application.TodoItems.Commands.UpdateTodoItemDetail;
-using YelloAd.Application.TodoItems.Queries.GetTodoItemsWithPagination;
+﻿using Yelload.Application.Common.Models;
+using Yelload.Application.TodoItems.Commands.CreateTodoItem;
+using Yelload.Application.TodoItems.Commands.DeleteTodoItem;
+using Yelload.Application.TodoItems.Commands.UpdateTodoItem;
+using Yelload.Application.TodoItems.Commands.UpdateTodoItemDetail;
+using Yelload.Application.TodoItems.Queries.GetTodoItemsWithPagination;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace YelloAd.WebUI.Controllers;
+namespace Yelload.WebUI.Controllers;
 
 [Authorize]
 public class TodoItemsController : ApiControllerBase

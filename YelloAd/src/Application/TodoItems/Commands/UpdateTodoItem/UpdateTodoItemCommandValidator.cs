@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace YelloAd.Application.TodoItems.Commands.UpdateTodoItem;
+namespace Yelload.Application.TodoItems.Commands.UpdateTodoItem;
 
 public class UpdateTodoItemCommandValidator : AbstractValidator<UpdateTodoItemCommand>
 {

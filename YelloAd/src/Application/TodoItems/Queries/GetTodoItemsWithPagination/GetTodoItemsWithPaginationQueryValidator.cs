@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace YelloAd.Application.TodoItems.Queries.GetTodoItemsWithPagination;
+namespace Yelload.Application.TodoItems.Queries.GetTodoItemsWithPagination;
 
 public class GetTodoItemsWithPaginationQueryValidator : AbstractValidator<GetTodoItemsWithPaginationQuery>
 {

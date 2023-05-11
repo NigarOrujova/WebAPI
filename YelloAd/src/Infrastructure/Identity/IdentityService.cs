@@ -1,10 +1,10 @@
-﻿using YelloAd.Application.Common.Interfaces;
-using YelloAd.Application.Common.Models;
+﻿using Yelload.Application.Common.Interfaces;
+using Yelload.Application.Common.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace YelloAd.Infrastructure.Identity;
+namespace Yelload.Infrastructure.Identity;
 
 public class IdentityService : IIdentityService
 {

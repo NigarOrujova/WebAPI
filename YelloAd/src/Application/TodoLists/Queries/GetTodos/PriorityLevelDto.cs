@@ -1,4 +1,4 @@
-﻿namespace YelloAd.Application.TodoLists.Queries.GetTodos;
+﻿namespace Yelload.Application.TodoLists.Queries.GetTodos;
 
 public class PriorityLevelDto
 {

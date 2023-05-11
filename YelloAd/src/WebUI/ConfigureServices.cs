@@ -1,7 +1,7 @@
-﻿using YelloAd.Application.Common.Interfaces;
-using YelloAd.Infrastructure.Persistence;
-using YelloAd.WebUI.Filters;
-using YelloAd.WebUI.Services;
+﻿using Yelload.Application.Common.Interfaces;
+using Yelload.Infrastructure.Persistence;
+using Yelload.WebUI.Filters;
+using Yelload.WebUI.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using NSwag;
@@ -34,7 +34,7 @@ public static class ConfigureServices
 
         services.AddOpenApiDocument(configure =>
         {
-            configure.Title = "YelloAd API";
+            configure.Title = "Yelload API";
             configure.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
             {
                 Type = OpenApiSecuritySchemeType.ApiKey,

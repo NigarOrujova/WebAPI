@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using YelloAd.Application.Common.Interfaces;
-using YelloAd.Application.Common.Mappings;
-using YelloAd.Application.Common.Models;
+using Yelload.Application.Common.Interfaces;
+using Yelload.Application.Common.Mappings;
+using Yelload.Application.Common.Models;
 using MediatR;
 
-namespace YelloAd.Application.TodoItems.Queries.GetTodoItemsWithPagination;
+namespace Yelload.Application.TodoItems.Queries.GetTodoItemsWithPagination;
 
 public record GetTodoItemsWithPaginationQuery : IRequest<PaginatedList<TodoItemBriefDto>>
 {

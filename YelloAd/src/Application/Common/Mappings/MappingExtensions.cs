@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using YelloAd.Application.Common.Models;
+using Yelload.Application.Common.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace YelloAd.Application.Common.Mappings;
+namespace Yelload.Application.Common.Mappings;
 
 public static class MappingExtensions
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace YelloAd.Application.IntegrationTests;
+namespace Yelload.Application.IntegrationTests;
 
 public static class ServiceCollectionExtensions
 {

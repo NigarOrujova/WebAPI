@@ -1,7 +1,7 @@
-﻿using YelloAd.Application.Common.Mappings;
-using YelloAd.Domain.Entities;
+﻿using Yelload.Application.Common.Mappings;
+using Yelload.Domain.Entities;
 
-namespace YelloAd.Application.TodoLists.Queries.GetTodos;
+namespace Yelload.Application.TodoLists.Queries.GetTodos;
 
 public class TodoListDto : IMapFrom<TodoList>
 {

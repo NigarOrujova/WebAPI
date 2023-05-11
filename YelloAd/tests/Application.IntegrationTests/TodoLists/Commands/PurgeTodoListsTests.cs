@@ -1,12 +1,12 @@
-﻿using YelloAd.Application.Common.Exceptions;
-using YelloAd.Application.Common.Security;
-using YelloAd.Application.TodoLists.Commands.CreateTodoList;
-using YelloAd.Application.TodoLists.Commands.PurgeTodoLists;
-using YelloAd.Domain.Entities;
+﻿using Yelload.Application.Common.Exceptions;
+using Yelload.Application.Common.Security;
+using Yelload.Application.TodoLists.Commands.CreateTodoList;
+using Yelload.Application.TodoLists.Commands.PurgeTodoLists;
+using Yelload.Domain.Entities;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace YelloAd.Application.IntegrationTests.TodoLists.Commands;
+namespace Yelload.Application.IntegrationTests.TodoLists.Commands;
 
 using static Testing;
 

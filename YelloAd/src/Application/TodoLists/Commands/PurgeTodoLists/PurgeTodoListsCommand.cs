@@ -1,8 +1,8 @@
-﻿using YelloAd.Application.Common.Interfaces;
-using YelloAd.Application.Common.Security;
+﻿using Yelload.Application.Common.Interfaces;
+using Yelload.Application.Common.Security;
 using MediatR;
 
-namespace YelloAd.Application.TodoLists.Commands.PurgeTodoLists;
+namespace Yelload.Application.TodoLists.Commands.PurgeTodoLists;
 
 [Authorize(Roles = "Administrator")]
 [Authorize(Policy = "CanPurge")]

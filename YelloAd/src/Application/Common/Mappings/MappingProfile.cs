@@ -1,7 +1,7 @@
 using System.Reflection;
 using AutoMapper;
 
-namespace YelloAd.Application.Common.Mappings;
+namespace Yelload.Application.Common.Mappings;
 
 public class MappingProfile : Profile
 {

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace YelloAd.Application.WeatherForecasts.Queries.GetWeatherForecasts;
+namespace Yelload.Application.WeatherForecasts.Queries.GetWeatherForecasts;
 
 public record GetWeatherForecastsQuery : IRequest<IEnumerable<WeatherForecast>>;
 

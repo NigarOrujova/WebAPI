@@ -1,10 +1,10 @@
-﻿using YelloAd.Domain.Entities;
-using YelloAd.Infrastructure.Identity;
+﻿using Yelload.Domain.Entities;
+using Yelload.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace YelloAd.Infrastructure.Persistence;
+namespace Yelload.Infrastructure.Persistence;
 
 public class ApplicationDbContextInitialiser
 {

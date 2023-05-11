@@ -1,8 +1,8 @@
 ﻿using System.Security.Claims;
 
-using YelloAd.Application.Common.Interfaces;
+using Yelload.Application.Common.Interfaces;
 
-namespace YelloAd.WebUI.Services;
+namespace Yelload.WebUI.Services;
 
 public class CurrentUserService : ICurrentUserService
 {

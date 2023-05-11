@@ -1,6 +1,6 @@
-﻿using YelloAd.Application.Common.Models;
+﻿using Yelload.Application.Common.Models;
 
-namespace YelloAd.Application.Common.Interfaces;
+namespace Yelload.Application.Common.Interfaces;
 
 public interface IIdentityService
 {

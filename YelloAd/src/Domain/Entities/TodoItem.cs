@@ -1,4 +1,4 @@
-﻿namespace YelloAd.Domain.Entities;
+﻿namespace Yelload.Domain.Entities;
 
 public class TodoItem : BaseAuditableEntity
 {

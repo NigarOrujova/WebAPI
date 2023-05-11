@@ -1,4 +1,4 @@
-﻿namespace YelloAd.Domain.Exceptions;
+﻿namespace Yelload.Domain.Exceptions;
 
 public class UnsupportedColourException : Exception
 {

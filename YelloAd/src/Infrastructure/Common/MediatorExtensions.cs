@@ -1,4 +1,4 @@
-﻿using YelloAd.Domain.Common;
+﻿using Yelload.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace MediatR;

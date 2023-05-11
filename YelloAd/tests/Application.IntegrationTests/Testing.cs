@@ -1,5 +1,5 @@
-﻿using YelloAd.Infrastructure.Identity;
-using YelloAd.Infrastructure.Persistence;
+﻿using Yelload.Infrastructure.Identity;
+using Yelload.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using Respawn;
 
-namespace YelloAd.Application.IntegrationTests;
+namespace Yelload.Application.IntegrationTests;
 
 [SetUpFixture]
 public partial class Testing

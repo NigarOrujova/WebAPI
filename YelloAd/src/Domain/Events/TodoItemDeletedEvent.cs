@@ -1,4 +1,4 @@
-﻿namespace YelloAd.Domain.Events;
+﻿namespace Yelload.Domain.Events;
 
 public class TodoItemDeletedEvent : BaseEvent
 {

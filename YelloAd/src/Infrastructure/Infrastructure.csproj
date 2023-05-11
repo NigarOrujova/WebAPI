@@ -2,8 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
-        <RootNamespace>YelloAd.Infrastructure</RootNamespace>
-        <AssemblyName>YelloAd.Infrastructure</AssemblyName>
+        <RootNamespace>Yelload.Infrastructure</RootNamespace>
+        <AssemblyName>Yelload.Infrastructure</AssemblyName>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>

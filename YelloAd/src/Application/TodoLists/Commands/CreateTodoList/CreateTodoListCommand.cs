@@ -1,8 +1,8 @@
-﻿using YelloAd.Application.Common.Interfaces;
-using YelloAd.Domain.Entities;
+﻿using Yelload.Application.Common.Interfaces;
+using Yelload.Domain.Entities;
 using MediatR;
 
-namespace YelloAd.Application.TodoLists.Commands.CreateTodoList;
+namespace Yelload.Application.TodoLists.Commands.CreateTodoList;
 
 public record CreateTodoListCommand : IRequest<int>
 {

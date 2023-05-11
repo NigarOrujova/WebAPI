@@ -1,4 +1,4 @@
-﻿namespace YelloAd.WebUI.AcceptanceTests.Pages;
+﻿namespace Yelload.WebUI.AcceptanceTests.Pages;
 
 public abstract class BasePage
 {

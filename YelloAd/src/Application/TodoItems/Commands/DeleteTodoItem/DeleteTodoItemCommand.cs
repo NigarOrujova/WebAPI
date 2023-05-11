@@ -1,10 +1,10 @@
-﻿using YelloAd.Application.Common.Exceptions;
-using YelloAd.Application.Common.Interfaces;
-using YelloAd.Domain.Entities;
-using YelloAd.Domain.Events;
+﻿using Yelload.Application.Common.Exceptions;
+using Yelload.Application.Common.Interfaces;
+using Yelload.Domain.Entities;
+using Yelload.Domain.Events;
 using MediatR;
 
-namespace YelloAd.Application.TodoItems.Commands.DeleteTodoItem;
+namespace Yelload.Application.TodoItems.Commands.DeleteTodoItem;
 
 public record DeleteTodoItemCommand(int Id) : IRequest;
 

@@ -1,9 +1,9 @@
-﻿using YelloAd.Application.Common.Exceptions;
+﻿using Yelload.Application.Common.Exceptions;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace YelloAd.WebUI.Filters;
+namespace Yelload.WebUI.Filters;
 
 public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
 {

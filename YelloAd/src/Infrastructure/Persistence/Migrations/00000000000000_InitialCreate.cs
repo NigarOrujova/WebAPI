@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace YelloAd.Infrastructure.Persistence.Migrations
+namespace Yelload.Infrastructure.Persistence.Migrations
 {
     public partial class InitialCreate : Migration
     {

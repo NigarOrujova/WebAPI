@@ -1,8 +1,8 @@
-﻿using YelloAd.Application.Common.Interfaces;
+﻿using Yelload.Application.Common.Interfaces;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
-namespace YelloAd.Application.TodoLists.Commands.UpdateTodoList;
+namespace Yelload.Application.TodoLists.Commands.UpdateTodoList;
 
 public class UpdateTodoListCommandValidator : AbstractValidator<UpdateTodoListCommand>
 {

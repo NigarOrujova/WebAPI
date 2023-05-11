@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace YelloAd.Domain.Common;
+namespace Yelload.Domain.Common;
 
 public abstract class BaseEntity
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace YelloAd.Infrastructure.Identity;
+namespace Yelload.Infrastructure.Identity;
 
 public class ApplicationUser : IdentityUser
 {

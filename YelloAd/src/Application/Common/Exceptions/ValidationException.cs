@@ -1,6 +1,6 @@
 ﻿using FluentValidation.Results;
 
-namespace YelloAd.Application.Common.Exceptions;
+namespace Yelload.Application.Common.Exceptions;
 
 public class ValidationException : Exception
 {

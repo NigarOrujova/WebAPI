@@ -1,6 +1,6 @@
-﻿using YelloAd.Application.Common.Interfaces;
+﻿using Yelload.Application.Common.Interfaces;
 
-namespace YelloAd.Infrastructure.Services;
+namespace Yelload.Infrastructure.Services;
 
 public class DateTimeService : IDateTime
 {

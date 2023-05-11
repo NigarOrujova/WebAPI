@@ -1,9 +1,9 @@
-﻿using YelloAd.Domain.Exceptions;
-using YelloAd.Domain.ValueObjects;
+﻿using Yelload.Domain.Exceptions;
+using Yelload.Domain.ValueObjects;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace YelloAd.Domain.UnitTests.ValueObjects;
+namespace Yelload.Domain.UnitTests.ValueObjects;
 
 public class ColourTests
 {

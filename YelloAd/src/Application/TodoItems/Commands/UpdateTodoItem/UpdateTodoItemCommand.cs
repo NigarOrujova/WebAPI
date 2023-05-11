@@ -1,9 +1,9 @@
-﻿using YelloAd.Application.Common.Exceptions;
-using YelloAd.Application.Common.Interfaces;
-using YelloAd.Domain.Entities;
+﻿using Yelload.Application.Common.Exceptions;
+using Yelload.Application.Common.Interfaces;
+using Yelload.Domain.Entities;
 using MediatR;
 
-namespace YelloAd.Application.TodoItems.Commands.UpdateTodoItem;
+namespace Yelload.Application.TodoItems.Commands.UpdateTodoItem;
 
 public record UpdateTodoItemCommand : IRequest
 {

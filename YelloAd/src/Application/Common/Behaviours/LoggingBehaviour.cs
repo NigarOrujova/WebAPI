@@ -1,8 +1,8 @@
-﻿using YelloAd.Application.Common.Interfaces;
+﻿using Yelload.Application.Common.Interfaces;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
 
-namespace YelloAd.Application.Common.Behaviours;
+namespace Yelload.Application.Common.Behaviours;
 
 public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest> where TRequest : notnull
 {
@@ -28,7 +28,7 @@ public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest> where T
             userName = await _identityService.GetUserNameAsync(userId);
         }
 
-        _logger.LogInformation("YelloAd Request: {Name} {@UserId} {@UserName} {@Request}",
+        _logger.LogInformation("Yelload Request: {Name} {@UserId} {@UserName} {@Request}",
             requestName, userId, userName, request);
     }
 }

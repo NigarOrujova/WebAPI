@@ -1,7 +1,7 @@
-﻿using YelloAd.Application.WeatherForecasts.Queries.GetWeatherForecasts;
+﻿using Yelload.Application.WeatherForecasts.Queries.GetWeatherForecasts;
 using Microsoft.AspNetCore.Mvc;
 
-namespace YelloAd.WebUI.Controllers;
+namespace Yelload.WebUI.Controllers;
 
 public class WeatherForecastController : ApiControllerBase
 {

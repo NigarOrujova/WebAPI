@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using YelloAd.Application.Common.Interfaces;
-using YelloAd.Application.Common.Security;
-using YelloAd.Domain.Enums;
+using Yelload.Application.Common.Interfaces;
+using Yelload.Application.Common.Security;
+using Yelload.Domain.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace YelloAd.Application.TodoLists.Queries.GetTodos;
+namespace Yelload.Application.TodoLists.Queries.GetTodos;
 
 [Authorize]
 public record GetTodosQuery : IRequest<TodosVm>;

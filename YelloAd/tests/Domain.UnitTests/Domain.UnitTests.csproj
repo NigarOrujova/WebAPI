@@ -2,8 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
-        <RootNamespace>YelloAd.Domain.UnitTests</RootNamespace>
-        <AssemblyName>YelloAd.Domain.UnitTests</AssemblyName>
+        <RootNamespace>Yelload.Domain.UnitTests</RootNamespace>
+        <AssemblyName>Yelload.Domain.UnitTests</AssemblyName>
 
         <IsPackable>false</IsPackable>
         <ImplicitUsings>enable</ImplicitUsings>

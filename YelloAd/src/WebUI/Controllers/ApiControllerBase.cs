@@ -2,7 +2,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 
-namespace YelloAd.WebUI.Controllers;
+namespace Yelload.WebUI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

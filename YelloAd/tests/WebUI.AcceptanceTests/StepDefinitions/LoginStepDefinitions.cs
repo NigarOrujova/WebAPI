@@ -1,4 +1,4 @@
-namespace YelloAd.WebUI.AcceptanceTests.StepDefinitions;
+namespace Yelload.WebUI.AcceptanceTests.StepDefinitions;
 
 [Binding]
 public sealed class LoginStepDefinitions
