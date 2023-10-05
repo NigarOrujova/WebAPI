@@ -5,6 +5,6 @@ namespace Application.Abstracts.Common;
 
 public interface IYelloadDbContext
 {
-    public DbSet<OurValue> OurValues { get; set; }
+    DbSet<OurValue> OurValues { get;}
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
