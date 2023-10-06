@@ -10,9 +10,9 @@ public class OurValueConfiguration : IEntityTypeConfiguration<OurValue>
     {
         builder.Property(t => t.Title)
             .HasMaxLength(200)
-            .IsRequired(false);
+            .IsRequired();
         builder.Property(t => t.Description)
             .HasMaxLength(1000)
-            .IsRequired(false);
+            .IsRequired();
     }
 }

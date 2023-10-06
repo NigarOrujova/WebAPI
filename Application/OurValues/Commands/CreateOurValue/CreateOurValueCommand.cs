@@ -11,11 +11,11 @@ public record CreateOurValueCommand : IRequest<int>
 }
 public class CreateOurValueCommandHandler : IRequestHandler<CreateOurValueCommand, int>
 {
-    private readonly IYelloadDbContext _context;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CreateOurValueCommandHandler(IYelloadDbContext context)
+    public CreateOurValueCommandHandler(IUnitOfWork unitOfWork)
     {
-        _context = context;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<int> Handle(CreateOurValueCommand request, CancellationToken cancellationToken)
@@ -23,10 +23,10 @@ public class CreateOurValueCommandHandler : IRequestHandler<CreateOurValueComman
         var entity = new OurValue();
 
         entity.Title = request.Title;
+        entity.Description = request.Description;
 
-        _context.OurValues.Add(entity);
-
-        await _context.SaveChangesAsync(cancellationToken);
+        await _unitOfWork.OurValueRepository.AddAsync(entity);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return entity.Id;
     }

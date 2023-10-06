@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation;
 
-namespace Application.OurValues.Commands.CreateOurValue
+namespace Application.OurValues.Commands.CreateOurValue;
+
+public class CreateOurValueCommandValidator : AbstractValidator<CreateOurValueCommand>
 {
-    internal class CreateOurValueCommandValidator
+    public CreateOurValueCommandValidator()
     {
+        RuleFor(v => v.Title)
+            .MaximumLength(200)
+            .NotEmpty();
+        RuleFor(v => v.Description)
+            .MaximumLength(1000)
+            .NotEmpty();
     }
 }
