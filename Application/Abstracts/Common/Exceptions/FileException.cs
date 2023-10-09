@@ -1,4 +1,4 @@
-﻿namespace Domain.Exceptions;
+﻿namespace Application.Abstracts.Common.Exceptions;
 
 public class FileException : Exception
 {

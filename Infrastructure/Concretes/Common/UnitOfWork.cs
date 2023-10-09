@@ -1,4 +1,4 @@
-﻿using Application.Abstracts.Common;
+﻿using Application.Abstracts.Common.Interfaces;
 using Application.Abstracts.Repositories;
 using Infrastructure.Concretes.Repositories;
 using Infrastructure.Persistance;

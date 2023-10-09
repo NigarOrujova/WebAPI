@@ -1,7 +1,7 @@
-﻿using Application.Abstracts.Common;
+﻿using Application.Abstracts.Common.Interfaces;
 using Application.Extensions;
 using Domain.Entities;
-using Domain.Exceptions;
+using Application.Abstracts.Common.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;

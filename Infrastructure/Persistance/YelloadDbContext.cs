@@ -1,12 +1,14 @@
-﻿using Application.Abstracts.Common;
+﻿using Application.Abstracts.Common.Interfaces;
 using Domain.Entities;
+using Domain.Entities.Membership;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace Infrastructure.Persistance;
 
-public partial class YelloadDbContext : IdentityDbContext, IYelloadDbContext
+public partial class YelloadDbContext : IdentityDbContext<AppUser, AppRole, int, AppUserClaim, AppUserRole,
+        AppUserLogin, AppRoleClaim, AppUserToken>, IYelloadDbContext
 {
     public YelloadDbContext(DbContextOptions<YelloadDbContext> options) : base(options) { }
 

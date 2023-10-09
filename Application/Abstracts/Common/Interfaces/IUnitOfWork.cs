@@ -1,6 +1,6 @@
 ﻿using Application.Abstracts.Repositories;
 
-namespace Application.Abstracts.Common;
+namespace Application.Abstracts.Common.Interfaces;
 
 public interface IUnitOfWork
 {

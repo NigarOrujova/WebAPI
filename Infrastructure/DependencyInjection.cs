@@ -1,4 +1,4 @@
-﻿using Application.Abstracts.Common;
+﻿using Application.Abstracts.Common.Interfaces;
 using Infrastructure.Concretes.Common;
 using Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
