@@ -8,7 +8,7 @@ public static partial class Extension
 {
     public static string ToMd5(this string value,string saltKey)
     {
-        byte[] buffer = Encoding.UTF8.GetBytes($"{saltKey}{value}Absheron.Domain.AppCode.Extensions");
+        byte[] buffer = Encoding.UTF8.GetBytes($"{saltKey}{value}Yelload.Domain.AppCode.Extensions");
 
         //var provider = MD5.Create();
         var provider = new MD5CryptoServiceProvider();
@@ -20,7 +20,7 @@ public static partial class Extension
 
     public static string ToSha1(this string value, string saltKey)
     {
-        byte[] buffer = Encoding.UTF8.GetBytes($"{saltKey}{value}2Absheron.Domain.AppCode.Extensions");
+        byte[] buffer = Encoding.UTF8.GetBytes($"{saltKey}{value}2Yelload.Domain.AppCode.Extensions");
 
         var provider = SHA1.Create();
 
@@ -29,7 +29,7 @@ public static partial class Extension
 
     public static string ToSha256(this string value, string saltKey)
     {
-        byte[] buffer = Encoding.UTF8.GetBytes($"{saltKey}{value}1Absheron.Domain.AppCode.Extensions");
+        byte[] buffer = Encoding.UTF8.GetBytes($"{saltKey}{value}1Yelload.Domain.AppCode.Extensions");
 
         var provider = SHA256.Create();
 

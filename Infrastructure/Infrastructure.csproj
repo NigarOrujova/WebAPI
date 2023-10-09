@@ -26,10 +26,4 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Identity\Accounts\" />
-    <Folder Include="Identity\Roles\" />
-    <Folder Include="Identity\Users\" />
-  </ItemGroup>
-
 </Project>
