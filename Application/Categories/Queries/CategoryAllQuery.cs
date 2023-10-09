@@ -2,7 +2,7 @@
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Categorys.Queries;
+namespace Application.Categories.Queries;
 
 public record CategoryAllQuery:IRequest<IEnumerable<Category>>;
 public class CategoryAllQueryHandler : IRequestHandler<CategoryAllQuery, IEnumerable<Category>>
