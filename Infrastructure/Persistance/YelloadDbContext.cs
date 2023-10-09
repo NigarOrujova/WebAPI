@@ -12,6 +12,18 @@ public partial class YelloadDbContext : IdentityDbContext, IYelloadDbContext
 
     public DbSet<OurValue> OurValues => Set<OurValue>();
 
+    public DbSet<Category> Categories => Set<Category>();
+
+    public DbSet<Customer> Customers => Set<Customer>();
+
+    public DbSet<Media> Medias => Set<Media>();
+
+    public DbSet<Portfolio> Portfolios => Set<Portfolio>();
+
+    public DbSet<PortfolioImage> PortfolioImages => Set<PortfolioImage>();
+
+    public DbSet<Team> Teams => Set<Team>();
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

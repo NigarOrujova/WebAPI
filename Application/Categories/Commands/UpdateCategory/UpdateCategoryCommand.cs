@@ -1,0 +1,35 @@
+﻿using Application.Abstracts.Common;
+using Domain.Entities;
+using MediatR;
+
+namespace Application.Categories.Commands.UpdateCategory;
+
+public record UpdateCategoryCommand : IRequest<Category>
+{
+    public int Id { get; init; }
+    public string Name { get; init; }
+    public int? PortfolioId { get; init; }
+}
+public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, Category>
+{
+    private readonly IUnitOfWork _unitOfWork;
+
+    public UpdateCategoryCommandHandler(IUnitOfWork unitOfWork)
+    {
+        _unitOfWork = unitOfWork;
+    }
+
+    public async Task<Category> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
+    {
+        Category entity = await _unitOfWork.CategoryRepository.GetAsync(n => n.Id == request.Id)
+             ?? throw new NullReferenceException();
+
+        entity.Name = request.Name;
+        entity.PortfolioId = request.PortfolioId;
+
+        await _unitOfWork.CategoryRepository.UpdateAsync(entity);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        return entity;
+    }
+}

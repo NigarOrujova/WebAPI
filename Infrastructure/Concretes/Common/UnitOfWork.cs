@@ -14,7 +14,25 @@ public class UnitOfWork : IUnitOfWork
         _dbContext = dbContext;
     }
     private IOurValueRepository? _ourValueRepository;
+    private ICategoryRepository? _categoryRepository;
+    private IMediaRepository? _mediaRepository;
+    private ICustomerRepository? _customerRepository;
+    private IPortfolioRepository? _portfolioRepository;
+    private IPortfolioImageRepository? _portfolioImageRepository;
+    private ITeamRepository? _teamRepository;
     public IOurValueRepository OurValueRepository => _ourValueRepository ??= new OurValueRepository(_dbContext);
+
+    public ICategoryRepository CategoryRepository => _categoryRepository ??= new CategoryRepository(_dbContext);
+
+    public IMediaRepository MediaRepository => _mediaRepository ??= new MediaRepository(_dbContext);
+
+    public ICustomerRepository CustomerRepository => _customerRepository ??= new CustomerRepository(_dbContext);
+
+    public IPortfolioImageRepository PortfolioImageRepository => _portfolioImageRepository ??= new PortfolioImageRepository(_dbContext);
+
+    public IPortfolioRepository PortfolioRepository => _portfolioRepository ??= new PortfolioRepository(_dbContext);
+
+    public ITeamRepository TeamRepository => _teamRepository ??= new TeamRepository(_dbContext);
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) => await _dbContext.SaveChangesAsync(cancellationToken);
 }
