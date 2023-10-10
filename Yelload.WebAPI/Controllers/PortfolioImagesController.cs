@@ -2,7 +2,7 @@
 using Application.PortfolioImages.Commands.DeletePortfolioImage;
 using Application.PortfolioImages.Commands.UpdatePortfolioImage;
 using Application.PortfolioImages.Queries;
-using Microsoft.AspNetCore.Http;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Yelload.WebAPI.Controllers.Base;
 
@@ -16,6 +16,14 @@ namespace Yelload.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
        => Ok(await Mediator.Send(new PortfolioImageAllQuery()));
+        [HttpGet("paginate")]
+        public async Task<ActionResult<List<PortfolioImage>>> GetPortfolioImages(int page = 1, int size = 10)
+        {
+            var query = new PortfolioImagesWithPaginationQuery { Page = page, Size = size };
+            var result = await Mediator.Send(query);
+
+            return Ok(result);
+        }
         [HttpPost]
         public async Task<IActionResult> CreateAsync([FromForm] CreatePortfolioImageCommand request)
        => Ok(await Mediator.Send(request));

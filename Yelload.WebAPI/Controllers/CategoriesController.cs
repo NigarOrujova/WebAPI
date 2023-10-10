@@ -2,6 +2,7 @@
 using Application.Categories.Commands.DeleteCategory;
 using Application.Categories.Commands.UpdateCategory;
 using Application.Categories.Queries;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Yelload.WebAPI.Controllers.Base;
 
@@ -15,6 +16,14 @@ public class CategoriesController : ApiControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
    => Ok(await Mediator.Send(new CategoryAllQuery()));
+    [HttpGet("paginate")]
+    public async Task<ActionResult<List<Category>>> GetCategories(int page = 1, int size = 10)
+    {
+        var query = new CategoriesWithPaginationQuery { Page = page, Size = size };
+        var result = await Mediator.Send(query);
+
+        return Ok(result);
+    }
     [HttpPost]
     public async Task<IActionResult> CreateAsync([FromForm] CreateCategoryCommand request)
    => Ok(await Mediator.Send(request));

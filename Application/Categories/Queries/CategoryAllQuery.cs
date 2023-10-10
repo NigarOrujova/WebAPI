@@ -16,9 +16,9 @@ public class CategoryAllQueryHandler : IRequestHandler<CategoryAllQuery, IEnumer
 
     public async Task<IEnumerable<Category>> Handle(CategoryAllQuery request, CancellationToken cancellationToken)
     {
-        IEnumerable<Category> Categorys = await _unitOfWork.CategoryRepository.GetAllAsync()
+        IEnumerable<Category> Categories = await _unitOfWork.CategoryRepository.GetAllAsync()
             ?? throw new NullReferenceException();
 
-        return Categorys;
+        return Categories;
     }
 }

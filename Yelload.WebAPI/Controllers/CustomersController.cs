@@ -2,6 +2,7 @@
 using Application.Customers.Commands.DeleteCustomer;
 using Application.Customers.Commands.UpdateCustomer;
 using Application.Customers.Queries;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Yelload.WebAPI.Controllers.Base;
 
@@ -15,6 +16,14 @@ public class CustomersController : ApiControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
    => Ok(await Mediator.Send(new CustomerAllQuery()));
+    [HttpGet("paginate")]
+    public async Task<ActionResult<List<Customer>>> GetCustomers(int page = 1, int size = 10)
+    {
+        var query = new CustomersWithPaginationQuery { Page = page, Size = size };
+        var result = await Mediator.Send(query);
+
+        return Ok(result);
+    }
     [HttpPost]
     public async Task<IActionResult> CreateAsync([FromForm] CreateCustomerCommand request)
    => Ok(await Mediator.Send(request));

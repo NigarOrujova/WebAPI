@@ -24,7 +24,13 @@ public class Repository<TEntity> : IRepository<TEntity>
             ? await query.ToListAsync()
             : await query.Where(filter).ToListAsync();
     }
-
+    public async Task<IEnumerable<TEntity>> GetPaginatedAsync(int page, int pageSize)
+    {
+        return await _context.Set<TEntity>()
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+    }
     public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter = null, params string[] includes)
     {
         var query = GetQuery(includes);

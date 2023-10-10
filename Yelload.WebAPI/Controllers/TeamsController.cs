@@ -2,11 +2,7 @@
 using Application.Teams.Commands.DeleteTeam;
 using Application.Teams.Commands.UpdateTeam;
 using Application.Teams.Queries;
-using Application.Medias.Commands.CreateMedia;
-using Application.Medias.Commands.DeleteMedia;
-using Application.Medias.Commands.UpdateMedia;
-using Application.Medias.Queries;
-using Microsoft.AspNetCore.Http;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Yelload.WebAPI.Controllers.Base;
 
@@ -17,6 +13,14 @@ namespace Yelload.WebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
         => Ok(await Mediator.Send(new TeamSingleQuery(id)));
+        [HttpGet("paginate")]
+        public async Task<ActionResult<List<Team>>> GetTeams(int page = 1, int size = 10)
+        {
+            var query = new TeamsWithPaginationQuery { Page = page, Size = size };
+            var result = await Mediator.Send(query);
+
+            return Ok(result);
+        }
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
        => Ok(await Mediator.Send(new TeamAllQuery()));

@@ -2,6 +2,7 @@
 using Application.OurValues.Commands.DeleteOurValue;
 using Application.OurValues.Commands.UpdateOurValue;
 using Application.OurValues.Queries;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Yelload.WebAPI.Controllers.Base;
 
@@ -15,6 +16,14 @@ public class OurValuesController : ApiControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
    => Ok(await Mediator.Send(new OurValueAllQuery()));
+    [HttpGet("paginate")]
+    public async Task<ActionResult<List<OurValue>>> GetOurValues(int page = 1, int size = 10)
+    {
+        var query = new OurValuesWithPaginationQuery { Page = page, Size = size };
+        var result = await Mediator.Send(query);
+
+        return Ok(result);
+    }
     [HttpPost]
     public async Task<IActionResult> CreateAsync([FromForm] CreateOurValueCommand request)
    => Ok(await Mediator.Send(request));
