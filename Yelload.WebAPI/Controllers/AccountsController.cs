@@ -11,7 +11,7 @@ public class AccountsController : ApiControllerBase
     protected ITokenService TokenService => _tokenService ??= HttpContext.RequestServices.GetService<ITokenService>()!;
 
     [HttpPost("signin")]
-    public async Task<IActionResult> Signin(SigninCommand command)
+    public async Task<IActionResult> Signin([FromForm]SigninCommand command)
     {
         var user = await Mediator.Send(command);
 
@@ -29,7 +29,7 @@ public class AccountsController : ApiControllerBase
         });
     }
     [HttpPost("signup")]
-    public async Task<IActionResult> Signup(RegisterCommand command)
+    public async Task<IActionResult> Signup([FromForm]RegisterCommand command)
     {
         var user = await Mediator.Send(command);
 
