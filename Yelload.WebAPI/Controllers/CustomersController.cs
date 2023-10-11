@@ -3,6 +3,7 @@ using Application.Customers.Commands.DeleteCustomer;
 using Application.Customers.Commands.UpdateCustomer;
 using Application.Customers.Queries;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Yelload.WebAPI.Controllers.Base;
 
@@ -25,12 +26,15 @@ public class CustomersController : ApiControllerBase
         return Ok(result);
     }
     [HttpPost]
+    [Authorize(Policy = "admin.customers.post")]
     public async Task<IActionResult> CreateAsync([FromForm] CreateCustomerCommand request)
    => Ok(await Mediator.Send(request));
     [HttpPut]
+    [Authorize(Policy = "admin.customers.put")]
     public async Task<IActionResult> UpdateAsync([FromForm] UpdateCustomerCommand request)
    => Ok(await Mediator.Send(request));
     [HttpDelete("{id}")]
+    [Authorize(Policy = "admin.customers.delete")]
     public async Task<IActionResult> DeleteAsync([FromRoute] int id)
    => Ok(await Mediator.Send(new DeleteCustomerCommand(id)));
 }

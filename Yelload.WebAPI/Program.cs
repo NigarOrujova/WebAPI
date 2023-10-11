@@ -1,4 +1,5 @@
 using Application;
+using Application.Extensions;
 using FluentValidation;
 using Infrastructure;
 using Infrastructure.Identity.Providers;
@@ -42,6 +43,21 @@ AppClaimProvider.principals = types
     .ToArray();
 
 
+builder.Services.AddAuthorization(cfg =>
+{
+
+    foreach (string principal in AppClaimProvider.principals)
+    {
+        cfg.AddPolicy(principal, p =>
+        {
+            p.RequireAssertion(handler =>
+            {
+                return handler.User.HasAccess(principal);
+
+            });
+        });
+    }
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -55,6 +71,7 @@ if (app.Environment.IsDevelopment())
 }
 app.UseCors("allowAll");
 app.UseHttpsRedirection();
+
 app.UseAuthentication();
 app.UseAuthorization();
 

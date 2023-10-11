@@ -9,12 +9,15 @@ namespace Yelload.WebAPI.Controllers;
 public class RolesController : ApiControllerBase
 {
     [HttpGet("{id}")]
+    [Authorize(Policy = "admin.teams.get")]
     public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
    => Ok(await Mediator.Send(new RoleSingleQuery(id)));
     [HttpPost("create")]
+    [Authorize(Policy = "admin.teams.create")]
     public async Task<IActionResult> CreateAsync([FromForm] RoleCreateCommand request)
    => Ok(await Mediator.Send(request));
     [HttpPost("setprincipal")]
+    [Authorize(Policy = "admin.teams.setprincipal")]
     public async Task<IActionResult> SetPrincipalAsync([FromForm] RoleSetPrincipalCommand request)
    => Ok(await Mediator.Send(request));
     [HttpPost("rolesorting")]

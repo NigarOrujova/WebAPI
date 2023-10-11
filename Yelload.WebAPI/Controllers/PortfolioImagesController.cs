@@ -3,6 +3,7 @@ using Application.PortfolioImages.Commands.DeletePortfolioImage;
 using Application.PortfolioImages.Commands.UpdatePortfolioImage;
 using Application.PortfolioImages.Queries;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Yelload.WebAPI.Controllers.Base;
 
@@ -25,12 +26,15 @@ namespace Yelload.WebAPI.Controllers
             return Ok(result);
         }
         [HttpPost]
+        [Authorize(Policy = "admin.portfolioimages.post")]
         public async Task<IActionResult> CreateAsync([FromForm] CreatePortfolioImageCommand request)
        => Ok(await Mediator.Send(request));
         [HttpPut]
+        [Authorize(Policy = "admin.portfolioimages.put")]
         public async Task<IActionResult> UpdateAsync([FromForm] UpdatePortfolioImageCommand request)
        => Ok(await Mediator.Send(request));
         [HttpDelete("{id}")]
+        [Authorize(Policy = "admin.portfolioimages.delete")]
         public async Task<IActionResult> DeleteAsync([FromRoute] int id)
        => Ok(await Mediator.Send(new DeletePortfolioImageCommand(id)));
     }

@@ -1,4 +1,5 @@
 ﻿using Application.Abstracts.Common.Interfaces;
+using Application.Categories.Queries;
 using Infrastructure.Identity.Accounts.Commands;
 using Microsoft.AspNetCore.Mvc;
 using Yelload.WebAPI.Controllers.Base;
@@ -44,5 +45,9 @@ public class AccountsController : ApiControllerBase
             message = "Signup successful"
         });
     }
+
+    [HttpGet("email-confirm")]
+    public async Task<IActionResult> EmailConfirmationlAsync([FromQuery]RegisterConfirmationCommand command)
+    => Ok(await Mediator.Send(command));
 
 }

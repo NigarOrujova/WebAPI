@@ -1,9 +1,10 @@
 ﻿using Infrastructure.Identity.Users.Commands;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Yelload.WebAPI.Controllers.Base;
 
 namespace Yelload.WebAPI.Controllers;
-
+[Authorize(Roles = "sa")]
 public class UsersController : ApiControllerBase
 {
     [HttpPost("setrole")]
