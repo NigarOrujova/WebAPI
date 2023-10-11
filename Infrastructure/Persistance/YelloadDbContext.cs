@@ -26,6 +26,8 @@ public partial class YelloadDbContext : IdentityDbContext<AppUser, AppRole, int,
 
     public DbSet<Team> Teams => Set<Team>();
 
+    public DbSet<Footer> Footers => Set<Footer>();
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

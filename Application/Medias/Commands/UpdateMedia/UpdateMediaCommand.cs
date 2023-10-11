@@ -26,6 +26,7 @@ public class UpdateMediaCommandHandler : IRequestHandler<UpdateMediaCommand, Med
 
         entity.Title = request.Title;
         entity.URL = request.URL;
+        entity.FooterId = 1;
 
         await _unitOfWork.MediaRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

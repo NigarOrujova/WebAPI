@@ -24,6 +24,7 @@ public class CreateMediaCommandHandler : IRequestHandler<CreateMediaCommand, int
 
         entity.Title = request.Title;
         entity.URL = request.URL;
+        entity.FooterId = 1;
 
         await _unitOfWork.MediaRepository.AddAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

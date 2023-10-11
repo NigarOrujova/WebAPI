@@ -20,6 +20,7 @@ public class UnitOfWork : IUnitOfWork
     private IPortfolioRepository? _portfolioRepository;
     private IPortfolioImageRepository? _portfolioImageRepository;
     private ITeamRepository? _teamRepository;
+    private IFooterRepository? _footerRepository;
     public IOurValueRepository OurValueRepository => _ourValueRepository ??= new OurValueRepository(_dbContext);
 
     public ICategoryRepository CategoryRepository => _categoryRepository ??= new CategoryRepository(_dbContext);
@@ -33,6 +34,8 @@ public class UnitOfWork : IUnitOfWork
     public IPortfolioRepository PortfolioRepository => _portfolioRepository ??= new PortfolioRepository(_dbContext);
 
     public ITeamRepository TeamRepository => _teamRepository ??= new TeamRepository(_dbContext);
+
+    public IFooterRepository FooterRepository => _footerRepository ??= new FooterRepository(_dbContext);
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) => await _dbContext.SaveChangesAsync(cancellationToken);
 }

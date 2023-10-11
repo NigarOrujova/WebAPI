@@ -11,5 +11,6 @@ public interface IUnitOfWork
     IPortfolioRepository PortfolioRepository { get; }
     ITeamRepository TeamRepository { get; }
     IOurValueRepository OurValueRepository { get; }
+    IFooterRepository FooterRepository { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
