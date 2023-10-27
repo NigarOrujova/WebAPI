@@ -13,6 +13,6 @@ public class FooterController : ApiControllerBase
     => Ok(await Mediator.Send(new FooterSingleQuery()));
     [HttpPut]
     [Authorize(Policy = "admin.footer.put")]
-    public async Task<IActionResult> UpdateAsync([FromForm] UpdateFooterCommand request)
+    public async Task<IActionResult> UpdateAsync(UpdateFooterCommand request)
     => Ok(await Mediator.Send(request));
 }

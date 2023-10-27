@@ -1,5 +1,4 @@
 ﻿using Application.Abstracts.Common.Interfaces;
-using Application.Categories.Queries;
 using Infrastructure.Identity.Accounts.Commands;
 using Microsoft.AspNetCore.Mvc;
 using Yelload.WebAPI.Controllers.Base;

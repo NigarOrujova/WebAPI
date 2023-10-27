@@ -27,11 +27,11 @@ public class CustomersController : ApiControllerBase
     }
     [HttpPost]
     [Authorize(Policy = "admin.customers.post")]
-    public async Task<IActionResult> CreateAsync([FromForm] CreateCustomerCommand request)
+    public async Task<IActionResult> CreateAsync(CreateCustomerCommand request)
    => Ok(await Mediator.Send(request));
     [HttpPut]
     [Authorize(Policy = "admin.customers.put")]
-    public async Task<IActionResult> UpdateAsync([FromForm] UpdateCustomerCommand request)
+    public async Task<IActionResult> UpdateAsync(UpdateCustomerCommand request)
    => Ok(await Mediator.Send(request));
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.customers.delete")]

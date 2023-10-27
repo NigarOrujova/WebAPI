@@ -7,35 +7,34 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Yelload.WebAPI.Controllers.Base;
 
-namespace Yelload.WebAPI.Controllers
-{
-    public class TeamsController : ApiControllerBase
-    {
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
-        => Ok(await Mediator.Send(new TeamSingleQuery(id)));
-        [HttpGet("paginate")]
-        public async Task<ActionResult<List<Team>>> GetTeams(int page = 1, int size = 10)
-        {
-            var query = new TeamsWithPaginationQuery { Page = page, Size = size };
-            var result = await Mediator.Send(query);
+namespace Yelload.WebAPI.Controllers;
 
-            return Ok(result);
-        }
-        [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
-       => Ok(await Mediator.Send(new TeamAllQuery()));
-        [HttpPost]
-        [Authorize(Policy = "admin.teams.post")]
-        public async Task<IActionResult> CreateAsync([FromForm] CreateTeamCommand request)
-       => Ok(await Mediator.Send(request));
-        [HttpPut]
-        [Authorize(Policy = "admin.teams.put")]
-        public async Task<IActionResult> UpdateAsync([FromForm] UpdateTeamCommand request)
-       => Ok(await Mediator.Send(request));
-        [HttpDelete("{id}")]
-        [Authorize(Policy = "admin.teams.delete")]
-        public async Task<IActionResult> DeleteAsync([FromRoute] int id)
-       => Ok(await Mediator.Send(new DeleteTeamCommand(id)));
+public class TeamsController : ApiControllerBase
+{
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
+    => Ok(await Mediator.Send(new TeamSingleQuery(id)));
+    [HttpGet("paginate")]
+    public async Task<ActionResult<List<Team>>> GetTeams(int page = 1, int size = 10)
+    {
+        var query = new TeamsWithPaginationQuery { Page = page, Size = size };
+        var result = await Mediator.Send(query);
+
+        return Ok(result);
     }
+    [HttpGet]
+    public async Task<IActionResult> GetAllAsync()
+   => Ok(await Mediator.Send(new TeamAllQuery()));
+    [HttpPost]
+    [Authorize(Policy = "admin.teams.post")]
+    public async Task<IActionResult> CreateAsync(CreateTeamCommand request)
+   => Ok(await Mediator.Send(request));
+    [HttpPut]
+    [Authorize(Policy = "admin.teams.put")]
+    public async Task<IActionResult> UpdateAsync(UpdateTeamCommand request)
+   => Ok(await Mediator.Send(request));
+    [HttpDelete("{id}")]
+    [Authorize(Policy = "admin.teams.delete")]
+    public async Task<IActionResult> DeleteAsync([FromRoute] int id)
+   => Ok(await Mediator.Send(new DeleteTeamCommand(id)));
 }

@@ -13,10 +13,10 @@ public class CategoriesController : ApiControllerBase
 {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
- => Ok(await Mediator.Send(new CategorySingleQuery(id)));
+        => Ok(await Mediator.Send(new CategorySingleQuery(id)));
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
-   => Ok(await Mediator.Send(new CategoryAllQuery()));
+        => Ok(await Mediator.Send(new CategoryAllQuery()));
     [HttpGet("paginate")]
     public async Task<ActionResult<List<Category>>> GetCategories(int page = 1, int size = 10)
     {
@@ -27,14 +27,14 @@ public class CategoriesController : ApiControllerBase
     }
     [HttpPost]
     [Authorize(Policy = "admin.categories.post")]
-    public async Task<IActionResult> CreateAsync([FromForm] CreateCategoryCommand request)
-   => Ok(await Mediator.Send(request));
+    public async Task<IActionResult> CreateAsync(CreateCategoryCommand request)
+        => Ok(await Mediator.Send(request));
     [HttpPut]
     [Authorize(Policy = "admin.categories.put")]
-    public async Task<IActionResult> UpdateAsync([FromForm] UpdateCategoryCommand request)
-   => Ok(await Mediator.Send(request));
+    public async Task<IActionResult> UpdateAsync(UpdateCategoryCommand request)
+        => Ok(await Mediator.Send(request));
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.categories.delete")]
     public async Task<IActionResult> DeleteAsync([FromRoute] int id)
-   => Ok(await Mediator.Send(new DeleteCategoryCommand(id)));
+        => Ok(await Mediator.Send(new DeleteCategoryCommand(id)));
 }

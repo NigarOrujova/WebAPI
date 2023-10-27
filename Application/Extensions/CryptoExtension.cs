@@ -8,7 +8,7 @@ public static partial class Extension
 {
     public static string ToMd5(this string value,string saltKey)
     {
-        byte[] buffer = Encoding.UTF8.GetBytes($"{saltKey}{value}Yelload.Domain.AppCode.Extensions");
+        byte[] buffer = Encoding.UTF8.GetBytes($"{saltKey}{value}Application.Extensions");
 
         //var provider = MD5.Create();
         var provider = new MD5CryptoServiceProvider();
@@ -20,7 +20,7 @@ public static partial class Extension
 
     public static string ToSha1(this string value, string saltKey)
     {
-        byte[] buffer = Encoding.UTF8.GetBytes($"{saltKey}{value}2Yelload.Domain.AppCode.Extensions");
+        byte[] buffer = Encoding.UTF8.GetBytes($"{saltKey}{value}2Application.Extensions");
 
         var provider = SHA1.Create();
 
@@ -29,7 +29,7 @@ public static partial class Extension
 
     public static string ToSha256(this string value, string saltKey)
     {
-        byte[] buffer = Encoding.UTF8.GetBytes($"{saltKey}{value}1Yelload.Domain.AppCode.Extensions");
+        byte[] buffer = Encoding.UTF8.GetBytes($"{saltKey}{value}1Application.Extensions");
 
         var provider = SHA256.Create();
 
@@ -45,7 +45,7 @@ public static partial class Extension
             using (var md5 = new MD5CryptoServiceProvider())
             {
                 var keyBuffer = md5.ComputeHash(Encoding.UTF8.GetBytes($"#{key}!2022"));
-                var ivBuffer = md5.ComputeHash(Encoding.UTF8.GetBytes($"2022@{key}$"));
+                var ivBuffer = md5.ComputeHash(Encoding  .UTF8.GetBytes($"2022@{key}$"));
 
                 var transform = provider.CreateEncryptor(keyBuffer, ivBuffer);
 

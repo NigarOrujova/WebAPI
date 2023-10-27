@@ -11,6 +11,7 @@ public record UpdatePortfolioCommand : IRequest<Portfolio>
     public string? SubTitle { get; init; }
     public string? Description { get; init; }
     public bool IsMain { get; init; }
+    public List<int>? CategoryIds { get; set; }
 }
 public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioCommand, Portfolio>
 {
@@ -30,7 +31,19 @@ public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioComm
         entity.SubTitle = request.SubTitle;
         entity.Description = request.Description;
         entity.IsMain = request.IsMain;
-
+        if (request.CategoryIds != null)
+        {
+            entity.PortfolioCategories?.RemoveAll(x => !request.CategoryIds.Contains(x.CategoryId));
+            foreach (var categoryId in request.CategoryIds.Where(x => !entity.PortfolioCategories.Any(rc => rc.CategoryId == x)))
+            {
+                PortfolioCategory portfolioCategory = new PortfolioCategory
+                {
+                    PortfolioId = request.Id,
+                    CategoryId = categoryId
+                };
+                entity.PortfolioCategories.Add(portfolioCategory);
+            }
+        }
         await _unitOfWork.PortfolioRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 

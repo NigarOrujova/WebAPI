@@ -16,14 +16,20 @@ public class Repository<TEntity> : IRepository<TEntity>
     }
 
     public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null,
-            params string[] includes)
+    params Expression<Func<TEntity, object>>[] includes)
     {
-        var query = GetQuery(includes);
+        var query = _context.Set<TEntity>().AsQueryable();
+
+        foreach (var include in includes)
+        {
+            query = query.Include(include);
+        }
 
         return filter is null
             ? await query.ToListAsync()
             : await query.Where(filter).ToListAsync();
     }
+
     public async Task<IEnumerable<TEntity>> GetPaginatedAsync(int page, int pageSize)
     {
         return await _context.Set<TEntity>()

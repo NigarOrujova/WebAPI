@@ -4,7 +4,7 @@ namespace Application.Abstracts.Repositories.Base;
 
 public interface IRepository<T>
 {
-    Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, params string[] includes);
+    Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, params Expression<Func<T, object>>[] includes);
     Task<T> GetAsync(Expression<Func<T, bool>>? filter = null, params string[] includes);
     Task<IEnumerable<T>> GetPaginatedAsync(int page, int pageSize);
     Task AddAsync(T entity);

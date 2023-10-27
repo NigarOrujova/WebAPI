@@ -10,6 +10,7 @@ public record CreatePortfolioCommand : IRequest<int>
     public string? SubTitle { get; init; }
     public string? Description { get; init; }
     public bool IsMain { get; init; }
+    public List<int>? CategoryIds { get; set; } = new List<int>();
 }
 public class CreatePortfolioCommandHandler : IRequestHandler<CreatePortfolioCommand, int>
 {
@@ -28,6 +29,19 @@ public class CreatePortfolioCommandHandler : IRequestHandler<CreatePortfolioComm
         entity.SubTitle = request.SubTitle;
         entity.Description = request.Description;
         entity.IsMain = request.IsMain;
+        if (request.CategoryIds != null)
+        {
+            entity.PortfolioCategories = new List<PortfolioCategory>();
+            foreach (var id in request.CategoryIds)
+            {
+                PortfolioCategory portfolioCategory = new PortfolioCategory()
+                {
+                    CategoryId = id,
+                    Portfolio = entity
+                };
+                entity.PortfolioCategories.Add(portfolioCategory);
+            }
+        }
 
         await _unitOfWork.PortfolioRepository.AddAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

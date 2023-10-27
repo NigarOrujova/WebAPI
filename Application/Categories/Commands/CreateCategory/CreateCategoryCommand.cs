@@ -7,7 +7,7 @@ namespace Application.Categories.Commands.CreateCategory;
 public record CreateCategoryCommand : IRequest<int>
 {
     public string Name { get; init; } = null!;
-    public int? PortfolioId { get; init; }
+    public List<int>? PortfolioIds { get; set; } = new List<int>();
 }
 public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, int>
 {
@@ -23,7 +23,19 @@ public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryComman
         var entity = new Category();
 
         entity.Name = request.Name;
-        entity.PortfolioId = request.PortfolioId;
+        if (request.PortfolioIds != null)
+        {
+            entity.PortfolioCategories = new List<PortfolioCategory>();
+            foreach (var id in request.PortfolioIds)
+            {
+                PortfolioCategory portfolioCategory = new PortfolioCategory()
+                {
+                    PortfolioId = id,
+                    Category = entity
+                };
+                entity.PortfolioCategories.Add(portfolioCategory);
+            }
+        }
 
         await _unitOfWork.CategoryRepository.AddAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

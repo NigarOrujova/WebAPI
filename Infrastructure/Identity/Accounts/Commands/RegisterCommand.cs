@@ -47,17 +47,23 @@ public class RegisterCommand : IRequest<AppUser>
                 Email = request.Email,
                 Name = request.Name,
                 Surname = request.Surname,
-                UserName = $"{request.Name}-{Guid.NewGuid()}".ToLower()
+                UserName = $"{request.Name}-{Guid.NewGuid()}".ToLower(),
+                EmailConfirmed=true
             };
+            bool isExistUsername = userManager.Users.Any(us => us.UserName == user.UserName);
+            if (isExistUsername)
+            {
+                ctx.ActionContext.ModelState.AddModelError(String.Empty,
+                    "Bu İstifadəçi adı artıq mövcuddur. Başqa İstifadəçi adı istifadə edin");
+                return null;
+            }
 
-            //var countOfUserName = await userManager.Users.CountAsync(u => u.UserName.StartsWith(user.UserName)
-            //               , cancellationToken);
-
-            //if (countOfUserName > 0)
-            //{
-            //    user.UserName = $"{request.Surname}.{request}{countOfUserName + 1}";
-            //}
-
+            bool isExistEmail = userManager.Users.Any(us => us.Email == user.Email);
+            if (isExistEmail)
+            {
+                ctx.ActionContext.ModelState.AddModelError(String.Empty, "Bu Email artıq mövcuddur. Başqa Email istifadə edin");
+                return null;
+            }
 
             var result = await userManager.CreateAsync(user, request.Password);
 
@@ -70,23 +76,6 @@ public class RegisterCommand : IRequest<AppUser>
 
                 return null;
             }
-
-            var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
-
-
-            string myToken = cryptoService.Encrypt($"{user.Id}-{token}", true);
-
-            string scheme = ctx.ActionContext.HttpContext.Request.Scheme;
-            string host = ctx.ActionContext.HttpContext.Request.Host.ToString();
-
-
-            var url = $"{scheme}://{host}/email-confirm?token={myToken}";
-
-            //{scheme}://{host}/email-confirm?token=1
-
-            await emailService.SendEmailAsync(user.Email, 
-                "Registration",
-                $"Qeydiyyati tamamlamaq ucun <a href='{url}'>buraya</a> kecid edin");
 
             return user;
         }
