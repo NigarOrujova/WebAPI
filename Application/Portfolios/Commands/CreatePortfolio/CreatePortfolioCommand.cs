@@ -1,6 +1,9 @@
 ﻿using Application.Abstracts.Common.Interfaces;
+using Application.Dtos.Images;
+using Application.Extensions;
 using Domain.Entities;
 using MediatR;
+using Microsoft.Extensions.Hosting;
 
 namespace Application.Portfolios.Commands.CreatePortfolio;
 
@@ -10,15 +13,18 @@ public record CreatePortfolioCommand : IRequest<int>
     public string? SubTitle { get; init; }
     public string? Description { get; init; }
     public bool IsMain { get; init; }
+    public List<ImageDto>? Images { get; set; }
     public List<int>? CategoryIds { get; set; } = new List<int>();
 }
 public class CreatePortfolioCommandHandler : IRequestHandler<CreatePortfolioCommand, int>
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IHostEnvironment _env;
 
-    public CreatePortfolioCommandHandler(IUnitOfWork unitOfWork)
+    public CreatePortfolioCommandHandler(IUnitOfWork unitOfWork, IHostEnvironment env)
     {
         _unitOfWork = unitOfWork;
+        _env = env;
     }
 
     public async Task<int> Handle(CreatePortfolioCommand request, CancellationToken cancellationToken)
@@ -42,7 +48,26 @@ public class CreatePortfolioCommandHandler : IRequestHandler<CreatePortfolioComm
                 entity.PortfolioCategories.Add(portfolioCategory);
             }
         }
+        entity.Images = new List<PortfolioImage>();
+        if (request.Images != null)
+        {
+            foreach (var item in request.Images)
+            {
+                if (item != null)
+                {
+                    var image = new PortfolioImage();
 
+                    image.ImagePath = item.Image.GetRandomImagePath("portfolio");
+
+                    await _env.SaveAsync(item.Image, image.ImagePath, cancellationToken);
+
+                    image.IsMain = item.IsMain;
+                    image.ImageAlt = item.ImageAlt;
+
+                    entity.Images.Add(image);
+                }
+            }
+        }
         await _unitOfWork.PortfolioRepository.AddAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 

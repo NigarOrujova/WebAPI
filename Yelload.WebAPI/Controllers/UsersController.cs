@@ -1,6 +1,5 @@
 ﻿using Infrastructure.Identity.Users.Commands;
 using Infrastructure.Identity.Users.Queries;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Yelload.WebAPI.Controllers.Base;
 
