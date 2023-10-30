@@ -27,11 +27,11 @@ public class PortfoliosController : ApiControllerBase
     }
     [HttpPost]
     [Authorize(Policy = "admin.portfolios.post")]
-    public async Task<IActionResult> CreateAsync(CreatePortfolioCommand request)
+    public async Task<IActionResult> CreateAsync([FromForm] CreatePortfolioCommand request)
    => Ok(await Mediator.Send(request));
     [HttpPut]
     [Authorize(Policy = "admin.portfolios.put")]
-    public async Task<IActionResult> UpdateAsync(UpdatePortfolioCommand request)
+    public async Task<IActionResult> UpdateAsync([FromForm] UpdatePortfolioCommand request)
    => Ok(await Mediator.Send(request));
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.portfolios.delete")]

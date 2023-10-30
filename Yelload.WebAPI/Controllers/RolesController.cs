@@ -14,14 +14,14 @@ public class RolesController : ApiControllerBase
    => Ok(await Mediator.Send(new RoleSingleQuery(id)));
     [HttpPost("create")]
     [Authorize(Policy = "admin.teams.create")]
-    public async Task<IActionResult> CreateAsync(RoleCreateCommand request)
+    public async Task<IActionResult> CreateAsync([FromForm] RoleCreateCommand request)
    => Ok(await Mediator.Send(request));
     [HttpPost("setprincipal")]
     [Authorize(Policy = "admin.teams.setprincipal")]
-    public async Task<IActionResult> SetPrincipalAsync(RoleSetPrincipalCommand request)
+    public async Task<IActionResult> SetPrincipalAsync([FromForm] RoleSetPrincipalCommand request)
    => Ok(await Mediator.Send(request));
     [HttpPost("rolesorting")]
     [Authorize(Roles = "sa")]
-    public async Task<IActionResult> RoleSorting(RoleSortCommand request)
+    public async Task<IActionResult> RoleSorting([FromForm] RoleSortCommand request)
   => Ok(await Mediator.Send(request));
 }

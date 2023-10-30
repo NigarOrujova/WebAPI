@@ -27,11 +27,11 @@ public class TeamsController : ApiControllerBase
    => Ok(await Mediator.Send(new TeamAllQuery()));
     [HttpPost]
     [Authorize(Policy = "admin.teams.post")]
-    public async Task<IActionResult> CreateAsync(CreateTeamCommand request)
+    public async Task<IActionResult> CreateAsync([FromForm] CreateTeamCommand request)
    => Ok(await Mediator.Send(request));
     [HttpPut]
     [Authorize(Policy = "admin.teams.put")]
-    public async Task<IActionResult> UpdateAsync(UpdateTeamCommand request)
+    public async Task<IActionResult> UpdateAsync([FromForm] UpdateTeamCommand request)
    => Ok(await Mediator.Send(request));
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.teams.delete")]

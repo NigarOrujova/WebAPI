@@ -11,12 +11,12 @@ public class UsersController : ApiControllerBase
     public async Task<IActionResult> GetAllAsync()
         => Ok(await Mediator.Send(new UserAllQuery()));
     [HttpPost("setrole")]
-    public async Task<IActionResult> SetRoleAsync(UserSetRoleCommand request)
+    public async Task<IActionResult> SetRoleAsync([FromForm]UserSetRoleCommand request)
    => Ok(await Mediator.Send(request));
     [HttpPost("setprincipal")]
-    public async Task<IActionResult> SetPrincipalAsync(UserSetPrincipalCommand request)
+    public async Task<IActionResult> SetPrincipalAsync([FromForm] UserSetPrincipalCommand request)
    => Ok(await Mediator.Send(request));
     [HttpDelete]
-    public async Task<IActionResult> DeleteAsync(UserDeleteCommand request)
+    public async Task<IActionResult> DeleteAsync([FromForm] UserDeleteCommand request)
    => Ok(await Mediator.Send(request));
 }

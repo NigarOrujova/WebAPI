@@ -27,11 +27,11 @@ public class CategoriesController : ApiControllerBase
     }
     [HttpPost]
     [Authorize(Policy = "admin.categories.post")]
-    public async Task<IActionResult> CreateAsync(CreateCategoryCommand request)
+    public async Task<IActionResult> CreateAsync([FromForm] CreateCategoryCommand request)
         => Ok(await Mediator.Send(request));
     [HttpPut]
     [Authorize(Policy = "admin.categories.put")]
-    public async Task<IActionResult> UpdateAsync(UpdateCategoryCommand request)
+    public async Task<IActionResult> UpdateAsync([FromForm] UpdateCategoryCommand request)
         => Ok(await Mediator.Send(request));
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.categories.delete")]
