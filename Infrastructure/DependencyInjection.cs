@@ -50,7 +50,7 @@ public static class DependencyInjection
                 ValidIssuer = configuration["jwt:issuer"],
                 ValidAudience = configuration["jwt:audience"],
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["jwt:key"])),
-                ClockSkew = TimeSpan.Zero,
+                ClockSkew = TimeSpan.FromDays(1),
                 LifetimeValidator = (notBefore, expires, securityToken, validationParameters) =>
                 {
                     return expires >= DateTime.UtcNow;
