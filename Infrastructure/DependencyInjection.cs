@@ -57,13 +57,6 @@ public static class DependencyInjection
                 }
             };
         });
-        services.Configure<IdentityOptions>(options =>
-        {
-            // Diğer ayarlar...
-            options.SignIn.RequireConfirmedAccount = false;
-            options.Password.RequireUppercase = false;
-            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromHours(3);
-        });
         services.Configure<CryptoServiceOptions>(cfg =>
         {
             configuration.GetSection("cryptograpy").Bind(cfg);
@@ -79,19 +72,13 @@ public static class DependencyInjection
         services.Configure<TokenServiceOptions>(cfg =>
         {
             configuration.GetSection("jwt").Bind(cfg);
+            cfg.DurationMinutes = (int)TimeSpan.FromHours(3).TotalMinutes;
         });
         services.AddSingleton<ITokenService, TokenService>();
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IClaimsTransformation, AppClaimProvider>();
-        services.AddCors(cfg => {
-            cfg.AddPolicy("allowAll", p =>
-            {
-                p.AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowAnyOrigin();
-            });
-        });
+        
         return services;
     }
 }

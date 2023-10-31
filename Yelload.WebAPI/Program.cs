@@ -6,12 +6,21 @@ using Infrastructure.Identity.Providers;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddCors(cfg => {
+    cfg.AddPolicy("allowAll", p =>
+    {
+        p.AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowAnyOrigin();
+    });
+});
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
@@ -19,7 +28,6 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-
 var assemblies = AppDomain.CurrentDomain
     .GetAssemblies()
     .ToArray();
@@ -73,6 +81,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.ContentRootPath, "Images")),
+    RequestPath = "/Images"
+});
 app.UseCors("allowAll");
 app.UseSwagger();
 app.UseSwaggerUI(c =>
