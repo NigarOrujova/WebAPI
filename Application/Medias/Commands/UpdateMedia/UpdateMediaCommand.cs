@@ -4,12 +4,7 @@ using MediatR;
 
 namespace Application.Medias.Commands.UpdateMedia;
 
-public record UpdateMediaCommand : IRequest<Media>
-{
-    public int Id { get; init; }
-    public string Title { get; init; }
-    public string URL { get; init; }
-}
+public record UpdateMediaCommand(int Id,Media request) : IRequest<Media>;
 public class UpdateMediaCommandHandler : IRequestHandler<UpdateMediaCommand, Media>
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -24,8 +19,8 @@ public class UpdateMediaCommandHandler : IRequestHandler<UpdateMediaCommand, Med
         Media entity = await _unitOfWork.MediaRepository.GetAsync(n => n.Id == request.Id)
              ?? throw new NullReferenceException();
 
-        entity.Title = request.Title;
-        entity.URL = request.URL;
+        entity.Title = request.request.Title;
+        entity.URL = request.request.URL;
         entity.FooterId = 1;
 
         await _unitOfWork.MediaRepository.UpdateAsync(entity);

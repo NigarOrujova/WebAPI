@@ -4,13 +4,7 @@ using MediatR;
 
 namespace Application.Categories.Commands.UpdateCategory;
 
-public record UpdateCategoryCommand : IRequest<Category>
-{
-    public int Id { get; init; }
-    public string Name { get; init; }
-    public int? PortfolioId { get; init; }
-    public List<int>? PortfolioIds { get; set; }
-}
+public record UpdateCategoryCommand(int Id,Category Category) : IRequest<Category>;
 public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, Category>
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -25,11 +19,11 @@ public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryComman
         Category entity = await _unitOfWork.CategoryRepository.GetAsync(n => n.Id == request.Id)
              ?? throw new NullReferenceException();
 
-        entity.Name = request.Name;
-        if (request.PortfolioIds != null)
+        entity.Name = request.Category.Name;
+        if (request.Category.PortfolioIds != null)
         {
-            entity.PortfolioCategories?.RemoveAll(x => !request.PortfolioIds.Contains(x.CategoryId));
-            foreach (var portfolioId in request.PortfolioIds.Where(x => !entity.PortfolioCategories.Any(rc => rc.CategoryId == x)))
+            entity.PortfolioCategories?.RemoveAll(x => !request.Category.PortfolioIds.Contains(x.CategoryId));
+            foreach (var portfolioId in request.Category.PortfolioIds.Where(x => !entity.PortfolioCategories.Any(rc => rc.CategoryId == x)))
             {
                 PortfolioCategory portfolioCategory = new PortfolioCategory
                 {

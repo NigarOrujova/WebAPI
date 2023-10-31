@@ -29,10 +29,10 @@ public class MediasController : ApiControllerBase
     [Authorize(Policy = "admin.medias.post")]
     public async Task<IActionResult> CreateAsync([FromForm] CreateMediaCommand request)
    => Ok(await Mediator.Send(request));
-    [HttpPut]
+    [HttpPut("{id}")]
     [Authorize(Policy = "admin.medias.put")]
-    public async Task<IActionResult> UpdateAsync([FromForm] UpdateMediaCommand request)
-   => Ok(await Mediator.Send(request));
+    public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromForm] Media request)
+   => Ok(await Mediator.Send(new UpdateMediaCommand(id,request)));
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.medias.delete")]
     public async Task<IActionResult> DeleteAsync([FromRoute] int id)

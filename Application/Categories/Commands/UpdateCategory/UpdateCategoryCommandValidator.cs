@@ -6,7 +6,6 @@ public class UpdateCategoryCommandValidator : AbstractValidator<UpdateCategoryCo
 {
     public UpdateCategoryCommandValidator()
     {
-        RuleFor(v => v.Name)
-            .MaximumLength(200);
+        //
     }
 }
