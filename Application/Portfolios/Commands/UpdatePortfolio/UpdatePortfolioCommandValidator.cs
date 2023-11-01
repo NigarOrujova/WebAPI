@@ -6,10 +6,10 @@ public class UpdatePortfolioCommandValidator : AbstractValidator<UpdatePortfolio
 {
     public UpdatePortfolioCommandValidator()
     {
-        RuleFor(v => v.Title)
+        RuleFor(v => v.Portfolio.Title)
             .MaximumLength(200);
 
-        RuleFor(v => v.Description)
+        RuleFor(v => v.Portfolio.Description)
             .MaximumLength(10000);
     }
 }

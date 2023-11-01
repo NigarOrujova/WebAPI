@@ -6,7 +6,8 @@ public class UpdateCustomerCommandValidator : AbstractValidator<UpdateCustomerCo
 {
     public UpdateCustomerCommandValidator()
     {
-        RuleFor(v => v.ImageAlt)
-            .MaximumLength(200);
+        RuleFor(v => v.Customer.ImageAlt)
+            .MaximumLength(200)
+            .NotEmpty();
     }
 }

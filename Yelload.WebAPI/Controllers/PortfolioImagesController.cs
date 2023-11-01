@@ -1,4 +1,5 @@
-﻿using Application.PortfolioImages.Commands.CreatePortfolioImage;
+﻿using Application.OurValues.Commands.UpdateOurValue;
+using Application.PortfolioImages.Commands.CreatePortfolioImage;
 using Application.PortfolioImages.Commands.DeletePortfolioImage;
 using Application.PortfolioImages.Commands.UpdatePortfolioImage;
 using Application.PortfolioImages.Queries;
@@ -29,10 +30,10 @@ public class PortfolioImagesController : ApiControllerBase
     [Authorize(Policy = "admin.portfolioimages.post")]
     public async Task<IActionResult> CreateAsync([FromForm] CreatePortfolioImageCommand request)
    => Ok(await Mediator.Send(request));
-    [HttpPut]
+    [HttpPut("{id}")]
     [Authorize(Policy = "admin.portfolioimages.put")]
-    public async Task<IActionResult> UpdateAsync([FromForm] UpdatePortfolioImageCommand request)
-   => Ok(await Mediator.Send(request));
+    public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromForm] PortfolioImage request)
+   => Ok(await Mediator.Send(new UpdatePortfolioImageCommand(id, request)));
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.portfolioimages.delete")]
     public async Task<IActionResult> DeleteAsync([FromRoute] int id)

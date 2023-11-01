@@ -17,5 +17,6 @@ public class PortfolioConfiguration : IEntityTypeConfiguration<Portfolio>
         builder.Property(t => t.Description)
             .HasMaxLength(10000)
             .IsRequired();
+        builder.Ignore(x => x.CategoryIds); 
     }
 }

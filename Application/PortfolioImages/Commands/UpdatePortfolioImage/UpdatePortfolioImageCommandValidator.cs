@@ -6,7 +6,7 @@ public class UpdatePortfolioImageCommandValidator : AbstractValidator<UpdatePort
 {
     public UpdatePortfolioImageCommandValidator()
     {
-        RuleFor(v => v.ImageAlt)
+        RuleFor(v => v.PortfolioImage.ImageAlt)
             .MaximumLength(200);
     }
 }

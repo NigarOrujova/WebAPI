@@ -4,12 +4,7 @@ using MediatR;
 
 namespace Application.OurValues.Commands.UpdateOurValue;
 
-public record UpdateOurValueCommand : IRequest<OurValue>
-{
-    public int Id { get; init; }
-    public string Title { get; init; }
-    public string Description { get; init; }
-}
+public record UpdateOurValueCommand(int Id,OurValue OurValue) : IRequest<OurValue>;
 public class UpdateOurValueCommandHandler : IRequestHandler<UpdateOurValueCommand, OurValue>
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -24,8 +19,8 @@ public class UpdateOurValueCommandHandler : IRequestHandler<UpdateOurValueComman
         OurValue entity = await _unitOfWork.OurValueRepository.GetAsync(n => n.Id == request.Id)
              ?? throw new NullReferenceException();
 
-        entity.Title = request.Title;
-        entity.Description = request.Description;
+        entity.Title = request.OurValue.Title;
+        entity.Description = request.OurValue.Description;
 
         await _unitOfWork.OurValueRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

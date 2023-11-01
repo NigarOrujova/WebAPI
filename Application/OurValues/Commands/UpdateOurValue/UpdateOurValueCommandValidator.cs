@@ -6,10 +6,10 @@ public class UpdateOurValueCommandValidator : AbstractValidator<UpdateOurValueCo
 {
     public UpdateOurValueCommandValidator()
     {
-        RuleFor(v => v.Title)
+        RuleFor(v => v.OurValue.Title)
             .MaximumLength(200);
 
-        RuleFor(v => v.Description)
+        RuleFor(v => v.OurValue.Description)
             .MaximumLength(1000);
     }
 }

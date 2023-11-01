@@ -1,4 +1,5 @@
-﻿using Application.Teams.Commands.CreateTeam;
+﻿using Application.Portfolios.Commands.UpdatePortfolio;
+using Application.Teams.Commands.CreateTeam;
 using Application.Teams.Commands.DeleteTeam;
 using Application.Teams.Commands.UpdateTeam;
 using Application.Teams.Queries;
@@ -29,10 +30,10 @@ public class TeamsController : ApiControllerBase
     [Authorize(Policy = "admin.teams.post")]
     public async Task<IActionResult> CreateAsync([FromForm] CreateTeamCommand request)
    => Ok(await Mediator.Send(request));
-    [HttpPut]
+    [HttpPut("{id}")]
     [Authorize(Policy = "admin.teams.put")]
-    public async Task<IActionResult> UpdateAsync([FromForm] UpdateTeamCommand request)
-   => Ok(await Mediator.Send(request));
+    public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromForm] Team request)
+   => Ok(await Mediator.Send(new UpdateTeamCommand(id, request)));
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.teams.delete")]
     public async Task<IActionResult> DeleteAsync([FromRoute] int id)

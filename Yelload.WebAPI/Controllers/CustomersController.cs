@@ -1,4 +1,5 @@
-﻿using Application.Customers.Commands.CreateCustomer;
+﻿using Application.Categories.Commands.UpdateCategory;
+using Application.Customers.Commands.CreateCustomer;
 using Application.Customers.Commands.DeleteCustomer;
 using Application.Customers.Commands.UpdateCustomer;
 using Application.Customers.Queries;
@@ -29,10 +30,10 @@ public class CustomersController : ApiControllerBase
     [Authorize(Policy = "admin.customers.post")]
     public async Task<IActionResult> CreateAsync([FromForm] CreateCustomerCommand request)
    => Ok(await Mediator.Send(request));
-    [HttpPut]
+    [HttpPut("{id}")]
     [Authorize(Policy = "admin.customers.put")]
-    public async Task<IActionResult> UpdateAsync([FromForm] UpdateCustomerCommand request)
-   => Ok(await Mediator.Send(request));
+    public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromForm] Customer request)
+        => Ok(await Mediator.Send(new UpdateCustomerCommand(id, request)));
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.customers.delete")]
     public async Task<IActionResult> DeleteAsync([FromRoute] int id)

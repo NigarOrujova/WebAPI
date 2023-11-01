@@ -1,21 +1,13 @@
-﻿using Application.Abstracts.Common.Interfaces;
+﻿using Application.Abstracts.Common.Exceptions;
+using Application.Abstracts.Common.Interfaces;
 using Application.Extensions;
 using Domain.Entities;
-using Application.Abstracts.Common.Exceptions;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 
 namespace Application.PortfolioImages.Commands.UpdatePortfolioImage;
 
-public record UpdatePortfolioImageCommand : IRequest<PortfolioImage>
-{
-    public int Id { get; init; }
-    public IFormFile Image { get; set; }
-    public string ImageAlt { get; init; }
-    public bool IsMain { get; init; }
-    public int PortfolioId { get; init; }
-}
+public record UpdatePortfolioImageCommand(int Id,PortfolioImage PortfolioImage) : IRequest<PortfolioImage>;
 public class UpdatePortfolioImageCommandHandler : IRequestHandler<UpdatePortfolioImageCommand, PortfolioImage>
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -31,27 +23,27 @@ public class UpdatePortfolioImageCommandHandler : IRequestHandler<UpdatePortfoli
     {
         PortfolioImage entity = await _unitOfWork.PortfolioImageRepository.GetAsync(n => n.Id == request.Id)
              ?? throw new NullReferenceException();
-        if (request.Image == null)
+        if (request.PortfolioImage.Image == null)
         {
-            request.Image = entity.Image;
+            request.PortfolioImage.Image = entity.Image;
             goto save;
         }
 
-        if (!request.Image.CheckFileSize(1000))
+        if (!request.PortfolioImage.Image.CheckFileSize(1000))
             throw new FileException("File max size 1 mb");
-        if (!request.Image.CheckFileType("image/"))
+        if (!request.PortfolioImage.Image.CheckFileType("image/"))
             throw new FileException("File type must be image");
-        string newImageName = request.Image.GetRandomImagePath("customer");
+        string newImageName = request.PortfolioImage.Image.GetRandomImagePath("PortfolioImage");
 
         _env.ArchiveImage(entity.ImagePath);
-        await _env.SaveAsync(request.Image, newImageName, cancellationToken);
+        await _env.SaveAsync(request.PortfolioImage.Image, newImageName, cancellationToken);
 
         entity.ImagePath = newImageName;
 
     save:
-        entity.ImageAlt = request.ImageAlt;
-        entity.IsMain = request.IsMain;
-        entity.PortfolioId = request.PortfolioId;
+        entity.ImageAlt = request.PortfolioImage.ImageAlt;
+        entity.IsMain = request.PortfolioImage.IsMain;
+        entity.PortfolioId = request.PortfolioImage.PortfolioId;
 
         await _unitOfWork.PortfolioImageRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

@@ -6,10 +6,10 @@ public class UpdateTeamCommandValidator : AbstractValidator<UpdateTeamCommand>
 {
     public UpdateTeamCommandValidator()
     {
-        RuleFor(v => v.FulllName)
+        RuleFor(v => v.Team.FulllName)
             .MaximumLength(200);
 
-        RuleFor(v => v.Job)
+        RuleFor(v => v.Team.Job)
             .MaximumLength(100);
     }
 }

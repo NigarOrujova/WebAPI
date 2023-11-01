@@ -1,4 +1,5 @@
-﻿using Application.OurValues.Commands.CreateOurValue;
+﻿using Application.Medias.Commands.UpdateMedia;
+using Application.OurValues.Commands.CreateOurValue;
 using Application.OurValues.Commands.DeleteOurValue;
 using Application.OurValues.Commands.UpdateOurValue;
 using Application.OurValues.Queries;
@@ -29,10 +30,10 @@ public class OurValuesController : ApiControllerBase
     [Authorize(Policy = "admin.ourvalues.post")]
     public async Task<IActionResult> CreateAsync([FromForm] CreateOurValueCommand request)
    => Ok(await Mediator.Send(request));
-    [HttpPut]
+    [HttpPut("{id}")]
     [Authorize(Policy = "admin.ourvalues.put")]
-    public async Task<IActionResult> UpdateAsync([FromForm] UpdateOurValueCommand request)
-   => Ok(await Mediator.Send(request));
+    public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromForm] OurValue request)
+   => Ok(await Mediator.Send(new UpdateOurValueCommand(id, request)));
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.ourvalues.delete")]
     public async Task<IActionResult> DeleteAsync([FromRoute] int id)

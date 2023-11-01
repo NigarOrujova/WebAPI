@@ -1,19 +1,13 @@
-﻿using Application.Abstracts.Common.Interfaces;
+﻿using Application.Abstracts.Common.Exceptions;
+using Application.Abstracts.Common.Interfaces;
 using Application.Extensions;
 using Domain.Entities;
-using Application.Abstracts.Common.Exceptions;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 
 namespace Application.Customers.Commands.UpdateCustomer;
 
-public record UpdateCustomerCommand : IRequest<Customer>
-{
-    public int Id { get; init; }
-    public IFormFile? Image { get; set; }
-    public string ImageAlt { get; init; }
-}
+public record UpdateCustomerCommand(int Id,Customer Customer) : IRequest<Customer>;
 public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, Customer>
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -31,25 +25,25 @@ public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerComman
              ?? throw new NullReferenceException();
 
 
-        if (request.Image == null)
+        if (request.Customer.Image == null)
         {
-            request.Image = entity.Image;
+            request.Customer.Image = entity.Image;
             goto save;
         }
 
-        if (!request.Image.CheckFileSize(1000))
+        if (!request.Customer.Image.CheckFileSize(1000))
             throw new FileException("File max size 1 mb");
-        if (!request.Image.CheckFileType("image/"))
+        if (!request.Customer.Image.CheckFileType("image/"))
             throw new FileException("File type must be image");
-        string newImageName = request.Image.GetRandomImagePath("customer");
+        string newImageName = request.Customer.Image.GetRandomImagePath("customer");
 
         _env.ArchiveImage(entity.ImagePath);
-        await _env.SaveAsync(request.Image, newImageName, cancellationToken);
+        await _env.SaveAsync(request.Customer.Image, newImageName, cancellationToken);
 
         entity.ImagePath = newImageName;
 
     save:
-        entity.ImageAlt = request.ImageAlt;
+        entity.ImageAlt = request.Customer.ImageAlt;
 
         await _unitOfWork.CustomerRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

@@ -32,7 +32,7 @@ public class CategoriesController : ApiControllerBase
     [HttpPut("{id}")]
     [Authorize(Policy = "admin.categories.put")]
     public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromForm] Category request)
-        => Ok(await Mediator.Send(new UpdateCategoryCommand(id,request));
+        => Ok(await Mediator.Send(new UpdateCategoryCommand(id,request)));
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.categories.delete")]
     public async Task<IActionResult> DeleteAsync([FromRoute] int id)
