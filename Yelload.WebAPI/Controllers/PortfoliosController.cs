@@ -1,5 +1,4 @@
-﻿using Application.OurValues.Commands.UpdateOurValue;
-using Application.Portfolios.Commands.CreatePortfolio;
+﻿using Application.Portfolios.Commands.CreatePortfolio;
 using Application.Portfolios.Commands.DeletePortfolio;
 using Application.Portfolios.Commands.UpdatePortfolio;
 using Application.Portfolios.Queries;
@@ -28,7 +27,7 @@ public class PortfoliosController : ApiControllerBase
     }
     [HttpPost]
     [Authorize(Policy = "admin.portfolios.post")]
-    public async Task<IActionResult> CreateAsync([FromForm] CreatePortfolioCommand request)
+    public async Task<IActionResult> CreateAsync(CreatePortfolioCommand request)
    => Ok(await Mediator.Send(request));
     [HttpPut("{id}")]
     [Authorize(Policy = "admin.portfolios.put")]
