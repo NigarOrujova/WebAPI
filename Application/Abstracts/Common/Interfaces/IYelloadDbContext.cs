@@ -13,4 +13,9 @@ public interface IYelloadDbContext
     DbSet<PortfolioImage> PortfolioImages { get; }
     DbSet<Team> Teams { get; }
     DbSet<Footer> Footers { get; }
+    DbSet<Home> Home { get; }
+    DbSet<We> We { get; }
+    DbSet<Love> Love { get; }
+    DbSet<Esc> Esc { get; }
+    DbSet<Contact> Contact { get; }
 }

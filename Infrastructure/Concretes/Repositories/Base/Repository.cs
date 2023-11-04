@@ -79,19 +79,4 @@ public class Repository<TEntity> : IRepository<TEntity>
     {
         return await _context.Set<TEntity>().AnyAsync(filter);
     }
-
-    private IQueryable<TEntity> GetQuery(string[] includes)
-    {
-        var query = _context.Set<TEntity>().AsQueryable();
-
-        if (!(includes is null))
-        {
-            foreach (var include in includes)
-            {
-                query = query.Include(include);
-            }
-        }
-
-        return query;
-    }
 }

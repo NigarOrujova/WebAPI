@@ -28,6 +28,16 @@ public partial class YelloadDbContext : IdentityDbContext<AppUser, AppRole, int,
 
     public DbSet<Footer> Footers => Set<Footer>();
 
+    public DbSet<Home> Home => Set<Home>();
+
+    public DbSet<We> We => Set<We>();
+
+    public DbSet<Love> Love => Set<Love>();
+
+    public DbSet<Esc> Esc => Set<Esc>();
+
+    public DbSet<Contact> Contact => Set<Contact>();
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
