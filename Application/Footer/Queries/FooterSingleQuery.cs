@@ -17,7 +17,8 @@ internal class FooterSingleQueryHandler : IRequestHandler<FooterSingleQuery, Foo
 
     public async Task<Footer> Handle(FooterSingleQuery request, CancellationToken cancellationToken)
     {
-        Footer entity = await _unitOfWork.FooterRepository.GetAsync()
+        Footer entity = await _unitOfWork.FooterRepository.GetAsync(
+        includes:x=>x.Medias)
             ?? throw new NullReferenceException();
 
         return entity;

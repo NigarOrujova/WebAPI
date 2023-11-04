@@ -1,6 +1,7 @@
 ﻿using Application.Abstracts.Common.Interfaces;
 using Domain.Entities;
 using MediatR;
+using System.Linq.Expressions;
 
 namespace Application.Portfolios.Queries;
 
@@ -16,7 +17,12 @@ public class PortfolioAllQueryHandler : IRequestHandler<PortfolioAllQuery, IEnum
 
     public async Task<IEnumerable<Portfolio>> Handle(PortfolioAllQuery request, CancellationToken cancellationToken)
     {
-        IEnumerable<Portfolio> Portfolios = await _unitOfWork.PortfolioRepository.GetAllAsync()
+        IEnumerable<Portfolio> Portfolios = await _unitOfWork.PortfolioRepository.GetAllAsync(
+        includes: new Expression<Func<Portfolio, object>>[]
+        {
+            x => x.PortfolioCategories,
+            x => x.Images
+        })
             ?? throw new NullReferenceException();
 
         return Portfolios;

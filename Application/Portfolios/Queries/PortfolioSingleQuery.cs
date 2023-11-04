@@ -1,6 +1,7 @@
 ﻿using Application.Abstracts.Common.Interfaces;
 using Domain.Entities;
 using MediatR;
+using System.Linq.Expressions;
 
 namespace Application.Portfolios.Queries;
 
@@ -17,7 +18,12 @@ internal class PortfolioSingleQueryHandler : IRequestHandler<PortfolioSingleQuer
 
     public async Task<Portfolio> Handle(PortfolioSingleQuery request, CancellationToken cancellationToken)
     {
-        Portfolio entity = await _unitOfWork.PortfolioRepository.GetAsync(n => n.Id == request.Id)
+        Portfolio entity = await _unitOfWork.PortfolioRepository.GetAsync(n => n.Id == request.Id,
+            includes: new Expression<Func<Portfolio, object>>[]
+            {
+                x => x.PortfolioCategories,
+                x => x.Images
+            })
             ?? throw new NullReferenceException();
 
         return entity;

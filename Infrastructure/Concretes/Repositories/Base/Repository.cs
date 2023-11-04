@@ -37,9 +37,14 @@ public class Repository<TEntity> : IRepository<TEntity>
             .Take(pageSize)
             .ToListAsync();
     }
-    public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter = null, params string[] includes)
+    public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includes)
     {
-        var query = GetQuery(includes);
+        var query = _context.Set<TEntity>().AsQueryable();
+
+        foreach (var include in includes)
+        {
+            query = query.Include(include);
+        }
 
         return filter is null
             ? await query.FirstOrDefaultAsync()

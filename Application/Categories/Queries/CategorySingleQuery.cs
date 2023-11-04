@@ -17,7 +17,7 @@ internal class CategorySingleQueryHandler : IRequestHandler<CategorySingleQuery,
 
     public async Task<Category> Handle(CategorySingleQuery request, CancellationToken cancellationToken)
     {
-        Category entity = await _unitOfWork.CategoryRepository.GetAsync(n => n.Id == request.Id)
+        Category entity = await _unitOfWork.CategoryRepository.GetAsync(n => n.Id == request.Id,includes: x => x.PortfolioCategories)
             ?? throw new NullReferenceException();
 
         return entity;
