@@ -23,9 +23,4 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="MetaDatas\We\Commands\" />
-    <Folder Include="MetaDatas\We\Queries\" />
-  </ItemGroup>
-
 </Project>

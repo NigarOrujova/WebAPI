@@ -1,9 +1,9 @@
 ﻿using Application.Abstracts.Common.Interfaces;
 using MediatR;
 
-namespace Application.MetaDatas.Love.Commands;
+namespace Application.MetaDatas.We.Commands;
 
-public record LoveUpdateCommand : IRequest<Domain.Entities.Love>
+public record WeUpdateCommand : IRequest<Domain.Entities.We>
 {
     public string? MetaTitle { get; set; }
     public string? OgTitle { get; set; }
@@ -13,17 +13,17 @@ public record LoveUpdateCommand : IRequest<Domain.Entities.Love>
     public string? MobileTitle { get; set; }
     public string? AppName { get; set; }
 }
-public class LoveUpdateCommandHandler : IRequestHandler<LoveUpdateCommand, Domain.Entities.Love>
+public class WeUpdateCommandHandler : IRequestHandler<WeUpdateCommand, Domain.Entities.We>
 {
     private readonly IUnitOfWork _unitOfWork;
 
-    public LoveUpdateCommandHandler(IUnitOfWork unitOfWork)
+    public WeUpdateCommandHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }
-    public async Task<Domain.Entities.Love> Handle(LoveUpdateCommand request, CancellationToken cancellationToken)
+    public async Task<Domain.Entities.We> Handle(WeUpdateCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _unitOfWork.LoveRepository.GetAsync()
+        var entity = await _unitOfWork.WeRepository.GetAsync()
         ?? throw new NotImplementedException();
 
         entity.MetaTitle = request.MetaTitle;
@@ -34,7 +34,7 @@ public class LoveUpdateCommandHandler : IRequestHandler<LoveUpdateCommand, Domai
         entity.MobileTitle = request.MobileTitle;
         entity.AppName = request.AppName;
 
-        await _unitOfWork.LoveRepository.AddAsync(entity);
+        await _unitOfWork.WeRepository.AddAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return entity;
     }

@@ -15,7 +15,7 @@ public class UpdateFooterCommandHandler : IRequestHandler<UpdateFooterCommand, F
     private readonly IUnitOfWork _unitOfWork;
 
     public UpdateFooterCommandHandler(IUnitOfWork unitOfWork)
-    {
+    {   
         _unitOfWork = unitOfWork;
     }
 

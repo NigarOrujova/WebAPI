@@ -21,6 +21,11 @@ public class UnitOfWork : IUnitOfWork
     private IPortfolioImageRepository? _portfolioImageRepository;
     private ITeamRepository? _teamRepository;
     private IFooterRepository? _footerRepository;
+    private IHomeRepository? _homeRepository;
+    private IContactRepository? _contactRepository;
+    private IEscRepository? _escRepository;
+    private ILoveRepository? _loveRepository;
+    private IWeRepository? _weRepository;
     public IOurValueRepository OurValueRepository => _ourValueRepository ??= new OurValueRepository(_dbContext);
 
     public ICategoryRepository CategoryRepository => _categoryRepository ??= new CategoryRepository(_dbContext);
@@ -36,6 +41,16 @@ public class UnitOfWork : IUnitOfWork
     public ITeamRepository TeamRepository => _teamRepository ??= new TeamRepository(_dbContext);
 
     public IFooterRepository FooterRepository => _footerRepository ??= new FooterRepository(_dbContext);
+
+    public IContactRepository ContactRepository => _contactRepository ??=new ContactRepository(_dbContext);
+
+    public IHomeRepository HomeRepository => _homeRepository ??= new HomeRepository(_dbContext);
+
+    public IEscRepository EscRepository => _escRepository ??= new EscRepository(_dbContext);
+
+    public ILoveRepository LoveRepository => _loveRepository ??= new LoveRepository(_dbContext);
+
+    public IWeRepository WeRepository => _weRepository ??= new WeRepository(_dbContext);
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) => await _dbContext.SaveChangesAsync(cancellationToken);
 }

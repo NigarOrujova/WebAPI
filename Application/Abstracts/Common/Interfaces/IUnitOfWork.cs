@@ -12,5 +12,10 @@ public interface IUnitOfWork
     ITeamRepository TeamRepository { get; }
     IOurValueRepository OurValueRepository { get; }
     IFooterRepository FooterRepository { get; }
+    IContactRepository ContactRepository { get; }
+    IHomeRepository HomeRepository { get; }
+    IEscRepository EscRepository { get; }
+    ILoveRepository LoveRepository { get; }
+    IWeRepository WeRepository { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
