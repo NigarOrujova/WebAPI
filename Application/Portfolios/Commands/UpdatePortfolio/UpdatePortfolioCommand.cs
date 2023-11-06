@@ -7,10 +7,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Application.Portfolios.Commands.UpdatePortfolio;
 
-public record UpdatePortfolioCommand(int Id,Portfolio Portfolio) : IRequest<Portfolio>
-{
-    public List<ImageDto>? Images { get; set; }
-}
+public record UpdatePortfolioCommand(int Id,Portfolio Portfolio) : IRequest<Portfolio>;
 public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioCommand, Portfolio>
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -45,9 +42,9 @@ public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioComm
             }
         }
         entity.Images = new List<PortfolioImage>();
-        if (request.Images != null)
+        if (request.Portfolio.Images != null)
         {
-            foreach (var item in request.Images)
+            foreach (var item in request.Portfolio.Images)
             {
                 if (item != null)
                 {
