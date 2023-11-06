@@ -8,6 +8,9 @@ namespace Yelload.WebAPI.Controllers;
 
 public class RolesController : ApiControllerBase
 {
+    [HttpGet]
+    public async Task<IActionResult> GetAllAsync()
+       => Ok(await Mediator.Send(new RoleAllQuery()));
     [HttpGet("{id}")]
     [Authorize(Policy = "admin.teams.get")]
     public async Task<IActionResult> GetByIdAsync([FromRoute] int id)

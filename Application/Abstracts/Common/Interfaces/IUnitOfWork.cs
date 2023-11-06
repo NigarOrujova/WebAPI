@@ -17,5 +17,6 @@ public interface IUnitOfWork
     IEscRepository EscRepository { get; }
     ILoveRepository LoveRepository { get; }
     IWeRepository WeRepository { get; }
+    IEmployeesPageRepository EmployeesPageRepository { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
