@@ -4,6 +4,7 @@ using Application.Extensions;
 using Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Hosting;
+using System.Linq.Expressions;
 
 namespace Application.Portfolios.Commands.UpdatePortfolio;
 
@@ -21,9 +22,11 @@ public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioComm
 
     public async Task<Portfolio> Handle(UpdatePortfolioCommand request, CancellationToken cancellationToken)
     {
-        Portfolio entity = await _unitOfWork.PortfolioRepository.GetAsync(n => n.Id == request.Id)
-             ?? throw new NullReferenceException();
-
+        Portfolio entity = await _unitOfWork.PortfolioRepository.GetAsync(n => n.Id == request.Id);
+        if (entity == null)
+        {
+            return null;
+        }
         entity.Title = request.Portfolio.Title;
         entity.SubTitle = request.Portfolio.SubTitle;
         entity.Description = request.Portfolio.Description;
