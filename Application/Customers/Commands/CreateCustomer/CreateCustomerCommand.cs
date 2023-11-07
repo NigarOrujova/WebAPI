@@ -12,6 +12,7 @@ public record CreateCustomerCommand : IRequest<int>
 {
     public IFormFile Image { get; set; }
     public string ImageAlt { get; init; }
+    public string ImageAltAz { get; init; }
 }
 public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, int>
 {
@@ -29,6 +30,7 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
         var entity = new Customer();
 
         entity.ImageAlt = request.ImageAlt;
+        entity.ImageAltAz = request.ImageAltAz;
         if (request.Image != null)
         {
             if (!request.Image.CheckFileSize(1000))

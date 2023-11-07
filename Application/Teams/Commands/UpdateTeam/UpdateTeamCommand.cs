@@ -1,9 +1,8 @@
-﻿using Application.Abstracts.Common.Interfaces;
+﻿using Application.Abstracts.Common.Exceptions;
+using Application.Abstracts.Common.Interfaces;
 using Application.Extensions;
 using Domain.Entities;
-using Application.Abstracts.Common.Exceptions;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 
 namespace Application.Teams.Commands.UpdateTeam;
@@ -34,7 +33,7 @@ public class UpdateTeamCommandHandler : IRequestHandler<UpdateTeamCommand, Team>
             throw new FileException("File max size 1 mb");
         if (!request.Team.Image.CheckFileType("image/"))
             throw new FileException("File type must be image");
-        string newImageName = request.Team.Image.GetRandomImagePath("Team");
+        string newImageName = request.Team.Image.GetRandomImagePath("Teams");
 
         _env.ArchiveImage(entity.ImagePath);
         await _env.SaveAsync(request.Team.Image, newImageName, cancellationToken);
@@ -52,7 +51,7 @@ public class UpdateTeamCommandHandler : IRequestHandler<UpdateTeamCommand, Team>
             throw new FileException("File max size 1 mb");
         if (!request.Team.Image2.CheckFileType("image/"))
             throw new FileException("File type must be image");
-        string newImageName2 = request.Team.Image2.GetRandomImagePath("Team");
+        string newImageName2 = request.Team.Image2.GetRandomImagePath("Teams");
 
         _env.ArchiveImage(entity.ImagePath2);
         await _env.SaveAsync(request.Team.Image2, newImageName2, cancellationToken);
@@ -61,8 +60,11 @@ public class UpdateTeamCommandHandler : IRequestHandler<UpdateTeamCommand, Team>
 
     saveimg:
         entity.FulllName = request.Team.FulllName;
+        entity.FulllNameAz = request.Team.FulllNameAz;
         entity.Job = request.Team.Job;
+        entity.JobAz = request.Team.JobAz;
         entity.ImageAlt = request.Team.ImageAlt;
+        entity.ImageAltAz = request.Team.ImageAltAz;
 
         await _unitOfWork.TeamRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

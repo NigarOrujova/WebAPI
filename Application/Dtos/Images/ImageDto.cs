@@ -8,6 +8,7 @@ public class ImageDto
     public string? ImagePath { get; set; }
     public IFormFile Image { get; set; }
     public string? ImageAlt { get; set; }
+    public string? ImageAltAz { get; set; }
     public bool IsMain { get; set; }
     public int? PortfolioId { get; set; }
     public Portfolio? Portfolio { get; set; }

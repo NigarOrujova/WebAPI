@@ -1,5 +1,4 @@
-﻿using Application.Categories.Commands.UpdateCategory;
-using Application.Customers.Commands.CreateCustomer;
+﻿using Application.Customers.Commands.CreateCustomer;
 using Application.Customers.Commands.DeleteCustomer;
 using Application.Customers.Commands.UpdateCustomer;
 using Application.Customers.Queries;

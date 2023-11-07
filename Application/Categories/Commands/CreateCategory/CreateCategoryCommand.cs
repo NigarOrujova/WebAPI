@@ -7,6 +7,7 @@ namespace Application.Categories.Commands.CreateCategory;
 public record CreateCategoryCommand : IRequest<int>
 {
     public string Name { get; init; } = null!;
+    public string NameAz { get; init; }
     public List<int>? PortfolioIds { get; set; } = new List<int>();
 }
 public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, int>
@@ -23,6 +24,7 @@ public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryComman
         var entity = new Category();
 
         entity.Name = request.Name;
+        entity.NameAz = request.NameAz;
         if (request.PortfolioIds != null)
         {
             entity.PortfolioCategories = new List<PortfolioCategory>();

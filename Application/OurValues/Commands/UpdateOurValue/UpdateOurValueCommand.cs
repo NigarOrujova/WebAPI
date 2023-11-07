@@ -20,7 +20,9 @@ public class UpdateOurValueCommandHandler : IRequestHandler<UpdateOurValueComman
              ?? throw new NullReferenceException();
 
         entity.Title = request.OurValue.Title;
+        entity.TitleAz = request.OurValue.TitleAz;
         entity.Description = request.OurValue.Description;
+        entity.DescriptionAz = request.OurValue.DescriptionAz;
 
         await _unitOfWork.OurValueRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

@@ -12,6 +12,7 @@ public record CreatePortfolioImageCommand : IRequest<int>
 {
     public IFormFile Image { get; set; }
     public string ImageAlt { get; init; } = null!;
+    public string ImageAltAz { get; init; }
     public bool IsMain { get; init; }
     public int PortfolioId { get; init; }
 }
@@ -35,11 +36,12 @@ public class CreatePortfolioImageCommandHandler : IRequestHandler<CreatePortfoli
                 throw new FileException("File max size 1 mb");
             if (!request.Image.CheckFileType("image/"))
                 throw new FileException("File type must be image");
-            string newImageName = request.Image.GetRandomImagePath("Customer");
+            string newImageName = request.Image.GetRandomImagePath("PortfolioImage");
             await _env.SaveAsync(request.Image, newImageName, cancellationToken);
             entity.ImagePath = newImageName;
         }
         entity.ImageAlt = request.ImageAlt;
+        entity.ImageAltAz = request.ImageAltAz;
         entity.IsMain = request.IsMain;
         entity.PortfolioId = request.PortfolioId;
 

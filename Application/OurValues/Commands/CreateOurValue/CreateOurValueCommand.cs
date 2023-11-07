@@ -7,7 +7,9 @@ namespace Application.OurValues.Commands.CreateOurValue;
 public record CreateOurValueCommand : IRequest<int>
 {
     public string Title { get; init; } = null!;
+    public string TitleAz { get; init; }
     public string Description { get; init; }=null!;
+    public string DescriptionAz { get; init; }
 }
 public class CreateOurValueCommandHandler : IRequestHandler<CreateOurValueCommand, int>
 {
@@ -23,7 +25,9 @@ public class CreateOurValueCommandHandler : IRequestHandler<CreateOurValueComman
         var entity = new OurValue();
 
         entity.Title = request.Title;
+        entity.TitleAz = request.TitleAz;
         entity.Description = request.Description;
+        entity.DescriptionAz = request.DescriptionAz;
 
         await _unitOfWork.OurValueRepository.AddAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

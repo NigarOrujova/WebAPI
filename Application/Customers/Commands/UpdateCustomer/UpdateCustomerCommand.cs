@@ -44,6 +44,7 @@ public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerComman
 
     save:
         entity.ImageAlt = request.Customer.ImageAlt;
+        entity.ImageAltAz = request.Customer.ImageAltAz;
 
         await _unitOfWork.CustomerRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

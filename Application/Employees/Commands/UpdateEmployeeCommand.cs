@@ -11,18 +11,29 @@ namespace Application.Employees.Commands;
 public record UpdateEmployeeCommand:IRequest<EmployeesPage>
 {
     public string? Title { get; set; }
+    public string? TitleAz { get; set; }
     public string? SubTitle { get; set; }
+    public string? SubTitleAz { get; set; }
     public string? Description { get; set; }
+    public string? DescriptionAz { get; set; }
     public string? Title2 { get; set; }
+    public string? TitleAz2 { get; set; }
     public string? SubTitle2 { get; set; }
+    public string? SubTitleAz2 { get; set; }
     public string? Title3 { get; set; }
+    public string? TitleAz3 { get; set; }
     public string? Description2 { get; set; }
+    public string? DescriptionAz2 { get; set; }
     public string? FullName { get; set; }
+    public string? FullNameAz { get; set; }
     public IFormFile? Image { get; set; }
     public string? ImageAlt { get; set; }
+    public string? ImageAltAz { get; set; }
     public string? FullName2 { get; set; }
+    public string? FullNameAz2 { get; set; }
     public IFormFile? Image2 { get; set; }
     public string? ImageAlt2 { get; set; }
+    public string? ImageAltAz2 { get; set; }
 }
 public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeCommand, EmployeesPage>
 {
@@ -75,17 +86,18 @@ public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeComman
         entity.ImagePath2 = newImageName2;
 
     saveimg:
-        entity.Title = request.Title;
-        entity.SubTitle = request.SubTitle;
-        entity.Description = request.Description;
-        entity.Title2 = request.Title2;
-        entity.Title3 = request.Title3;
-        entity.SubTitle2 = request.SubTitle2;
-        entity.Description2 = request.Description2;
-        entity.FullName = request.FullName;
-        entity.ImageAlt = request.ImageAlt;
-        entity.ImageAlt2 = request.ImageAlt2;
 
+        entity.Title = request.Title;
+        entity.TitleAz = request.TitleAz;
+        entity.SubTitleAz = request.SubTitleAz;
+        entity.DescriptionAz = request.DescriptionAz;
+        entity.TitleAz2 = request.TitleAz2;
+        entity.TitleAz3 = request.TitleAz3;
+        entity.SubTitleAz2 = request.SubTitleAz2;
+        entity.DescriptionAz2 = request.DescriptionAz2;
+        entity.FullNameAz = request.FullNameAz;
+        entity.ImageAltAz = request.ImageAltAz;
+        entity.ImageAltAz2 = request.ImageAltAz2;
 
 
         await _unitOfWork.EmployeesPageRepository.UpdateAsync(entity);

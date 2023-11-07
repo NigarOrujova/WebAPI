@@ -1,10 +1,8 @@
 ﻿using Application.Abstracts.Common.Interfaces;
-using Application.Dtos.Images;
 using Application.Extensions;
 using Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Hosting;
-using System.Linq.Expressions;
 
 namespace Application.Portfolios.Commands.UpdatePortfolio;
 
@@ -28,8 +26,11 @@ public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioComm
             return null;
         }
         entity.Title = request.Portfolio.Title;
+        entity.TitleAz = request.Portfolio.TitleAz;
         entity.SubTitle = request.Portfolio.SubTitle;
+        entity.SubTitleAz = request.Portfolio.SubTitleAz;
         entity.Description = request.Portfolio.Description;
+        entity.DescriptionAz = request.Portfolio.DescriptionAz;
         entity.IsMain = request.Portfolio.IsMain;
         if (request.Portfolio.CategoryIds != null)
         {
@@ -59,6 +60,7 @@ public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioComm
 
                     image.IsMain = item.IsMain;
                     image.ImageAlt = item.ImageAlt;
+                    image.ImageAltAz = item.ImageAltAz;
 
                     entity.Images.Add(image);
                 }

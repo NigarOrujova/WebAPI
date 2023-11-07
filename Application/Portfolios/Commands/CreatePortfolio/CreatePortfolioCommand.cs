@@ -10,8 +10,11 @@ namespace Application.Portfolios.Commands.CreatePortfolio;
 public record CreatePortfolioCommand : IRequest<int>
 {
     public string? Title { get; init; }
+    public string? TitleAz { get; init; }
     public string? SubTitle { get; init; }
+    public string? SubTitleAz { get; init; }
     public string? Description { get; init; }
+    public string? DescriptionAz { get; init; }
     public bool IsMain { get; init; }
     public List<ImageDto>? Images { get; set; }
     public List<int>? CategoryIds { get; set; } = new List<int>();
@@ -32,8 +35,11 @@ public class CreatePortfolioCommandHandler : IRequestHandler<CreatePortfolioComm
         var entity = new Portfolio();
 
         entity.Title = request.Title;
+        entity.TitleAz = request.TitleAz;
         entity.SubTitle = request.SubTitle;
+        entity.SubTitleAz = request.SubTitleAz;
         entity.Description = request.Description;
+        entity.DescriptionAz = request.DescriptionAz;
         entity.IsMain = request.IsMain;
         if (request.CategoryIds != null)
         {
@@ -63,6 +69,7 @@ public class CreatePortfolioCommandHandler : IRequestHandler<CreatePortfolioComm
 
                     image.IsMain = item.IsMain;
                     image.ImageAlt = item.ImageAlt;
+                    image.ImageAltAz = item.ImageAltAz;
 
                     entity.Images.Add(image);
                 }

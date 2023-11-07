@@ -11,10 +11,13 @@ namespace Application.Teams.Commands.CreateTeam;
 public record CreateTeamCommand : IRequest<int>
 {
     public string FulllName { get; init; } = null!;
+    public string FulllNameAz { get; init; }
     public string? Job { get; init; }
+    public string? JobAz { get; init; }
     public IFormFile? Image { get; set; }
     public IFormFile? Image2 { get; set; }
     public string? ImageAlt { get; init; }
+    public string? ImageAltAz { get; init; }
 }
 public class CreateTeamCommandHandler : IRequestHandler<CreateTeamCommand, int>
 {
@@ -32,15 +35,18 @@ public class CreateTeamCommandHandler : IRequestHandler<CreateTeamCommand, int>
         var entity = new Team();
 
         entity.FulllName = request.FulllName;
+        entity.FulllNameAz = request.FulllNameAz;
         entity.Job = request.Job;
+        entity.JobAz = request.JobAz;
         entity.ImageAlt = request.ImageAlt;
+        entity.ImageAltAz = request.ImageAltAz;
         if (request.Image != null)
         {
             if (!request.Image.CheckFileSize(1000))
                 throw new FileException("File max size 1 mb");
             if (!request.Image.CheckFileType("image/"))
                 throw new FileException("File type must be image");
-            string newImageName = request.Image.GetRandomImagePath("Customer");
+            string newImageName = request.Image.GetRandomImagePath("Teams");
             await _env.SaveAsync(request.Image, newImageName, cancellationToken);
             entity.ImagePath = newImageName;
         }
@@ -50,7 +56,7 @@ public class CreateTeamCommandHandler : IRequestHandler<CreateTeamCommand, int>
                 throw new FileException("File max size 1 mb");
             if (!request.Image2.CheckFileType("image/"))
                 throw new FileException("File type must be image");
-            string newImageName2 = request.Image2.GetRandomImagePath("Customer");
+            string newImageName2 = request.Image2.GetRandomImagePath("Teams");
             await _env.SaveAsync(request.Image2, newImageName2, cancellationToken);
             entity.ImagePath2 = newImageName2;
         }

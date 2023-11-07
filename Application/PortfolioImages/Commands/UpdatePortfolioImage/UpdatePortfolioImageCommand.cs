@@ -42,6 +42,7 @@ public class UpdatePortfolioImageCommandHandler : IRequestHandler<UpdatePortfoli
 
     save:
         entity.ImageAlt = request.PortfolioImage.ImageAlt;
+        entity.ImageAltAz = request.PortfolioImage.ImageAltAz;
         entity.IsMain = request.PortfolioImage.IsMain;
         entity.PortfolioId = request.PortfolioImage.PortfolioId;
 

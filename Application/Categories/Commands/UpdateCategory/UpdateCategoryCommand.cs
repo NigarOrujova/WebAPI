@@ -20,6 +20,7 @@ public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryComman
              ?? throw new NullReferenceException();
 
         entity.Name = request.Category.Name;
+        entity.NameAz = request.Category.NameAz;
         if (request.Category.PortfolioIds != null)
         {
             entity.PortfolioCategories?.RemoveAll(x => !request.Category.PortfolioIds.Contains(x.CategoryId));
