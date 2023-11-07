@@ -13,7 +13,7 @@ public class CategoriesController : ApiControllerBase
 {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
-        => Ok(await Mediator.Send(new CategorySingleQuery(id)));
+        => Ok(await Mediator.Send(new CategoryLanguageQuery(id)));
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
         => Ok(await Mediator.Send(new CategoryAllQuery()));

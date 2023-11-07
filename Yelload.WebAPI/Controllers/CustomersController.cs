@@ -13,7 +13,7 @@ public class CustomersController : ApiControllerBase
 {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
-  => Ok(await Mediator.Send(new CustomerSingleQuery(id)));
+  => Ok(await Mediator.Send(new CustomersLanguageQuery(id)));
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
    => Ok(await Mediator.Send(new CustomerAllQuery()));

@@ -10,7 +10,7 @@ namespace Yelload.WebAPI.Controllers
     {
         [HttpGet]
         public async Task<IActionResult> GetAsync()
-        => Ok(await Mediator.Send(new EmployeeSingleQuery()));
+        => Ok(await Mediator.Send(new EmployeeLanguageQuery()));
         [HttpPut]
         [Authorize(Policy = "admin.about.put")]
         public async Task<IActionResult> UpdateAsync([FromForm] UpdateEmployeeCommand request)

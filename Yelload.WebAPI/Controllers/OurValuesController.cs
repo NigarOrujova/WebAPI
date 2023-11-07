@@ -14,7 +14,7 @@ public class OurValuesController : ApiControllerBase
 {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
-   => Ok(await Mediator.Send(new OurValueSingleQuery(id)));
+   => Ok(await Mediator.Send(new OurValueLanguageQuery(id)));
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
    => Ok(await Mediator.Send(new OurValueAllQuery()));

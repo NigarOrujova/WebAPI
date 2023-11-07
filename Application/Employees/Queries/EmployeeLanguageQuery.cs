@@ -21,37 +21,37 @@ internal class EmployeeLanguageQueryHandler : IRequestHandler<EmployeeLanguageQu
             ?? throw new NullReferenceException();
         var data = new
         {
-            employee_aze = new
-            {
-                Title = entity.Title,
-                SubTitle = entity.SubTitle,
-                Description = entity.Description,
-                Title2 = entity.Title2,
-                SubTitle2 = entity.SubTitle2,
-                Description2 = entity.Description2,
-                Title3 = entity.Title3,
-                FullName = entity.FullName,
-                ImagePath = entity.ImagePath,
-                FullName2 = entity.FullName2,
-                ImagePath2 = entity.ImagePath2,
-                ImageAlt = entity.ImageAlt,
-                ImageAlt2 = entity.ImageAlt2
-            },
             employee_eng = new
             {
-                Title = entity.Title,
-                SubTitle = entity.SubTitle,
-                Description = entity.Description,
-                Title2 = entity.Title2,
-                SubTitle2 = entity.SubTitle2,
-                Description2 = entity.Description2,
-                Title3 = entity.Title3,
-                FullName = entity.FullName,
+                entity.Title,
+                entity.SubTitle,
+                entity.Description,
+                entity.Title2,
+                entity.SubTitle2,
+                entity.Description2,
+                entity.Title3,
+                entity.FullName,
+                entity.ImagePath,
+                entity.FullName2,
+                entity.ImagePath2,
+                entity.ImageAlt,
+                entity.ImageAlt2
+            },
+            employee_aze = new
+            {
+                Title = entity.TitleAz,
+                SubTitle = entity.SubTitleAz,
+                Description = entity.DescriptionAz,
+                Title2 = entity.TitleAz2,
+                SubTitle2 = entity.SubTitleAz2,
+                Description2 = entity.DescriptionAz2,
+                Title3 = entity.TitleAz3,
+                FullName = entity.FullNameAz,
                 ImagePath = entity.ImagePath,
-                FullName2 = entity.FullName2,
+                FullName2 = entity.FullNameAz2,
                 ImagePath2 = entity.ImagePath2,
-                ImageAlt = entity.ImageAlt,
-                ImageAlt2 = entity.ImageAlt2
+                ImageAlt = entity.ImageAltAz,
+                ImageAlt2 = entity.ImageAltAz2
             }
         };
         return data;

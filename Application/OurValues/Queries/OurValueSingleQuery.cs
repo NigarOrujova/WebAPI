@@ -19,7 +19,19 @@ internal class OurValueSingleQueryHandler : IRequestHandler<OurValueSingleQuery,
     {
         OurValue entity = await _unitOfWork.OurValueRepository.GetAsync(n => n.Id == request.Id)
             ?? throw new NullReferenceException();
-
+        var data = new
+        {
+            ourvalue_eng = new
+            {
+                entity.Title,
+                entity.Description
+            },
+            ourvalue_aze = new
+            {
+                Title=entity.TitleAz,
+                Description=entity.DescriptionAz
+            }
+        };
         return entity;
     }
 }

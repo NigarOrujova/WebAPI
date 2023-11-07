@@ -37,6 +37,7 @@ public partial class YelloadDbContext : IdentityDbContext<AppUser, AppRole, int,
     public DbSet<Esc> Esc => Set<Esc>();
 
     public DbSet<Contact> Contact => Set<Contact>();
+    public DbSet<EmployeesPage> EmployeesPages => Set<EmployeesPage>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
