@@ -14,10 +14,16 @@ public class OurValuesController : ApiControllerBase
 {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
-   => Ok(await Mediator.Send(new OurValueLanguageQuery(id)));
+     => Ok(await Mediator.Send(new OurValueSingleQuery(id)));
+    [HttpGet("languages/{id}")]
+    public async Task<IActionResult> GetLanIdAsync([FromRoute] int id)
+     => Ok(await Mediator.Send(new OurValueLanguageQuery(id)));
+    [HttpGet("languages")]
+    public async Task<IActionResult> GetLanAllAsync()
+    => Ok(await Mediator.Send(new OurValueLanguageAllQuery()));
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
-   => Ok(await Mediator.Send(new OurValueAllQuery()));
+    => Ok(await Mediator.Send(new OurValueAllQuery()));
     [HttpGet("paginate")]
     public async Task<ActionResult<List<OurValue>>> GetOurValues(int page = 1, int size = 10)
     {

@@ -13,10 +13,16 @@ public class PortfoliosController : ApiControllerBase
 {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
-   => Ok(await Mediator.Send(new PortfolioSingleQuery(id)));
+    => Ok(await Mediator.Send(new PortfolioSingleQuery(id)));
+    [HttpGet("languages/{id}")]
+    public async Task<IActionResult> GetLanIdAsync([FromRoute] int id)
+    => Ok(await Mediator.Send(new PortfolioLanguageQuery(id)));
+    [HttpGet("languages")]
+    public async Task<IActionResult> GetLanAllAsync()
+    => Ok(await Mediator.Send(new PortfolioLanguageAllQuery()));
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
-   => Ok(await Mediator.Send(new PortfolioAllQuery()));
+    => Ok(await Mediator.Send(new PortfolioAllQuery()));
     [HttpGet("paginate")]
     public async Task<ActionResult<List<Portfolio>>> GetPortfolios(int page = 1, int size = 10)
     {
@@ -28,13 +34,13 @@ public class PortfoliosController : ApiControllerBase
     [HttpPost]
     [Authorize(Policy = "admin.portfolios.post")]
     public async Task<IActionResult> CreateAsync([FromForm]CreatePortfolioCommand request)
-   => Ok(await Mediator.Send(request));
+    => Ok(await Mediator.Send(request));
     [HttpPut("{id}")]
     [Authorize(Policy = "admin.portfolios.put")]
     public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromForm] Portfolio request)
-   => Ok(await Mediator.Send(new UpdatePortfolioCommand(id, request)));
+    => Ok(await Mediator.Send(new UpdatePortfolioCommand(id, request)));
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.portfolios.delete")]
     public async Task<IActionResult> DeleteAsync([FromRoute] int id)
-   => Ok(await Mediator.Send(new DeletePortfolioCommand(id)));
+    => Ok(await Mediator.Send(new DeletePortfolioCommand(id)));
 }

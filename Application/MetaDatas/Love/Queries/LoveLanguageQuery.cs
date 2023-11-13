@@ -1,5 +1,4 @@
 ﻿using Application.Abstracts.Common.Interfaces;
-using Application.MetaDatas.Home.Queries;
 using MediatR;
 
 namespace Application.MetaDatas.Love.Queries;
@@ -20,7 +19,7 @@ internal class LoveLanguageQueryHandler : IRequestHandler<LoveLanguageQuery, obj
             ?? throw new NullReferenceException();
         var data = new
         {
-            contact_eng = new
+            contact_en = new
             {
                 entity.MetaKeyword,
                 entity.MetaTitle,
@@ -31,7 +30,7 @@ internal class LoveLanguageQueryHandler : IRequestHandler<LoveLanguageQuery, obj
                 entity.MobileTitle,
                 entity.AppName
             },
-            contact_aze = new
+            contact_az = new
             {
                 MetaKeyword = entity.MetaKeywordAz,
                 MetaTitle = entity.MetaTitleAz,

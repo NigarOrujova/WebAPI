@@ -17,14 +17,38 @@ internal class PortfolioLanguageQueryHandler : IRequestHandler<PortfolioLanguage
 
     public async Task<object> Handle(PortfolioLanguageQuery request, CancellationToken cancellationToken)
     {
-        Portfolio entity = await _unitOfWork.PortfolioRepository.GetAsync(n => n.Id == request.Id,
-            includes: new Expression<Func<Portfolio, object>>[]
-            {
-                x => x.PortfolioCategories,
-                x => x.Images
-            })
-            ?? throw new NullReferenceException();
+        Expression<Func<Portfolio, object>>[] includes = new Expression<Func<Portfolio, object>>[]
+        {
+            x => x.PortfolioCategories,
+            x => x.Images
+        };
 
-        return entity;
+        Portfolio entity = await _unitOfWork.PortfolioRepository.GetAsync(
+            n => n.Id == request.Id,
+            includes: includes
+        ) ?? throw new NullReferenceException();
+
+        var data = new
+        {
+            portfolio_en = new
+            {
+                Title=entity.Title ?? "",
+                SubTitle=entity.SubTitle ?? "",
+                Description = entity.Description ?? "",
+                entity.IsMain,
+                portfolioCat = entity.PortfolioCategories?.Where(x => x != null && x.CategoryId != 0).Select(x => x.CategoryId),
+                portfolioImg=entity.Images?.Select(x=>x.ImagePath)
+            },
+            portfolio_az = new
+            {
+                Title = entity.TitleAz ?? "",
+                SubTitle = entity.SubTitleAz ?? "",
+                Description = entity.DescriptionAz ?? "",
+                entity.IsMain,
+                portfolioCat = entity.PortfolioCategories?.Where(x => x != null && x.CategoryId != 0).Select(x => x.CategoryId),
+                portfolioImg = entity.Images?.Select(x => x.ImagePath)
+            }
+        };
+        return data;
     }
 }

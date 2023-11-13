@@ -19,8 +19,19 @@ internal class OurValueLanguageQueryHandler : IRequestHandler<OurValueLanguageQu
         OurValue entity = await _unitOfWork.OurValueRepository.GetAsync(n => n.Id == request.Id)
             ?? throw new NullReferenceException();
 
-
-
-        return entity;
+        var data = new
+        {
+            ourvalue_en = new
+            {
+                Title = entity.Title ?? "",
+                Description = entity.Description ?? "",
+            },
+            ourvalue_az = new
+            {
+                TitleAz = entity.TitleAz ?? "",
+                DescriptionAz = entity.DescriptionAz ?? "",
+            }
+        };
+        return data;
     }
 }

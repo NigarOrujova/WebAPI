@@ -21,15 +21,18 @@ internal class CategoryLanguageQueryHandler : IRequestHandler<CategoryLanguageQu
             ?? throw new NullReferenceException();
         var data = new
         {
-            category_eng = new
+            category_en = new
             {
-                entity.Name
+                entity.Name,
+                portfolioCat = entity.PortfolioCategories?.Where(x => x != null && x.PortfolioId != 0).Select(x => x.PortfolioId),
+
             },
-            category_aze = new
+            category_az = new
             {
-                Name=entity.NameAz
+                Name=entity.NameAz,
+                portfolioCat = entity.PortfolioCategories?.Where(x => x != null && x.PortfolioId != 0).Select(x => x.PortfolioId),
             }
         };
-        return entity;
+        return data;
     }
 }

@@ -18,7 +18,25 @@ internal class TeamLanguageQueryHandler : IRequestHandler<TeamLanguageQuery, obj
     {
         Team entity = await _unitOfWork.TeamRepository.GetAsync(n => n.Id == request.Id)
             ?? throw new NullReferenceException();
-
-        return entity;
+        var data = new
+        {
+            team_en = new
+            {
+                entity.FulllName,
+                entity.Job,
+                entity.ImagePath,
+                entity.ImagePath2,
+                entity.ImageAlt
+            },
+            team_az = new
+            {
+                FulllName=entity.FulllNameAz,
+                Job=entity.JobAz,
+                ImagePath = entity.ImagePath,
+                ImagePath2 = entity.ImagePath2,
+                ImageAlt = entity.ImageAltAz
+            }
+        };
+        return data;
     }
 }

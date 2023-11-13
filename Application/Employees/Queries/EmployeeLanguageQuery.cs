@@ -21,7 +21,7 @@ internal class EmployeeLanguageQueryHandler : IRequestHandler<EmployeeLanguageQu
             ?? throw new NullReferenceException();
         var data = new
         {
-            employee_eng = new
+            employee_en = new
             {
                 entity.Title,
                 entity.SubTitle,
@@ -37,7 +37,7 @@ internal class EmployeeLanguageQueryHandler : IRequestHandler<EmployeeLanguageQu
                 entity.ImageAlt,
                 entity.ImageAlt2
             },
-            employee_aze = new
+            employee_az = new
             {
                 Title = entity.TitleAz,
                 SubTitle = entity.SubTitleAz,

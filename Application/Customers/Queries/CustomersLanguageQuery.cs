@@ -19,12 +19,12 @@ internal class CustomersLanguageQueryHandler : IRequestHandler<CustomersLanguage
             ?? throw new NullReferenceException();
         var data = new
         {
-            customer_eng = new
+            customer_en = new
             {
                 entity.ImagePath,
                 entity.ImageAlt
             },
-            customer_aze = new
+            customer_az = new
             {
                 entity.ImagePath,
                 ImageAlt=entity.ImageAltAz

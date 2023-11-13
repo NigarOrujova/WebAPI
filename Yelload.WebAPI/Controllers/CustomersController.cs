@@ -13,10 +13,16 @@ public class CustomersController : ApiControllerBase
 {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
-  => Ok(await Mediator.Send(new CustomersLanguageQuery(id)));
+    => Ok(await Mediator.Send(new CustomerSingleQuery(id)));
+    [HttpGet("languages/{id}")]
+    public async Task<IActionResult> GetLanIdAsync([FromRoute] int id)
+    => Ok(await Mediator.Send(new CustomersLanguageQuery(id)));
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
-   => Ok(await Mediator.Send(new CustomerAllQuery()));
+    => Ok(await Mediator.Send(new CustomerAllQuery()));
+    [HttpGet("languages")]
+    public async Task<IActionResult> GetLanAllAsync()
+    => Ok(await Mediator.Send(new CustomersLanguageAllQuery()));
     [HttpGet("paginate")]
     public async Task<ActionResult<List<Customer>>> GetCustomers(int page = 1, int size = 10)
     {

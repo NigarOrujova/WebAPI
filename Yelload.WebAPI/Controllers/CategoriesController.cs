@@ -13,10 +13,16 @@ public class CategoriesController : ApiControllerBase
 {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
-        => Ok(await Mediator.Send(new CategoryLanguageQuery(id)));
+        => Ok(await Mediator.Send(new CategorySingleQuery(id)));
+    [HttpGet("languages/{id}")]
+    public async Task<IActionResult> GetLanIdAsync([FromRoute] int id)
+       => Ok(await Mediator.Send(new CategoryLanguageQuery(id)));
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
         => Ok(await Mediator.Send(new CategoryAllQuery()));
+    [HttpGet("languages")]
+    public async Task<IActionResult> GetLanAllAsync()
+        => Ok(await Mediator.Send(new CategoryLanguageAllQuery()));
     [HttpGet("paginate")]
     public async Task<ActionResult<List<Category>>> GetCategories(int page = 1, int size = 10)
     {

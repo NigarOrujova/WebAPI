@@ -21,7 +21,7 @@ internal class WeLanguageQueryHandler : IRequestHandler<WeLanguageQuery, object>
             ?? throw new NullReferenceException();
         var data = new
         {
-            contact_eng = new
+            contact_en = new
             {
                 entity.MetaKeyword,
                 entity.MetaTitle,
@@ -32,7 +32,7 @@ internal class WeLanguageQueryHandler : IRequestHandler<WeLanguageQuery, object>
                 entity.MobileTitle,
                 entity.AppName
             },
-            contact_aze = new
+            contact_az = new
             {
                 MetaKeyword = entity.MetaKeywordAz,
                 MetaTitle = entity.MetaTitleAz,
