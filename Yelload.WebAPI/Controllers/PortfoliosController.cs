@@ -31,6 +31,14 @@ public class PortfoliosController : ApiControllerBase
 
         return Ok(result);
     }
+    [HttpGet("paginatelan")]
+    public async Task<ActionResult<List<Portfolio>>> GetPortfoliosLan(int page = 1, int size = 10)
+    {
+        var query = new PortfolioLanguageWithPaginationQuery { Page = page, Size = size };
+        var result = await Mediator.Send(query);
+
+        return Ok(result);
+    }
     [HttpPost]
     [Authorize(Policy = "admin.portfolios.post")]
     public async Task<IActionResult> CreateAsync([FromForm]CreatePortfolioCommand request)

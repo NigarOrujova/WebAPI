@@ -1,18 +1,17 @@
 ﻿using Domain.Entities.Base;
+using Microsoft.AspNetCore.Http;
 
 namespace Domain.Entities;
 
-public class Portfolio:BaseEntity
+public class Blog:BaseEntity
 {
-    public string? Title { get; set; }
-    public string? TitleAz { get; set; }
-    public string? SubTitle { get; set; }
-    public string? SubTitleAz { get; set; }
-    public string? Description { get; set; }
-    public string? DescriptionAz { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public string ImagePath { get; set; }
+    public IFormFile Image { get; set; }
+    public string ImageAlt { get; set; }
     public string Slug { get; set; }
     public string SlugAz { get; set; }
-    public bool IsMain { get; set; }
     public string? MetaKeyword { get; set; }
     public string? MetaKeywordAz { get; set; }
     public string? MetaTitle { get; set; }
@@ -25,7 +24,6 @@ public class Portfolio:BaseEntity
     public string? OgDescriptionAz { get; set; }
     public string? MobileTitle { get; set; }
     public string? MobileTitleAz { get; set; }
-    public List<int>? CategoryIds { get; set; } = new List<int>();
-    public List<PortfolioCategory>? PortfolioCategories { get; set; }
-    public ICollection<PortfolioImage>? Images { get; set; }
+    public DateTime? PublishDate { get; set; }
+    public virtual ICollection<BlogTagCloud> TagCloud { get; set; }
 }

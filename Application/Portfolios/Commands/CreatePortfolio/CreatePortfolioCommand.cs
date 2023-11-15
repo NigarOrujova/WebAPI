@@ -16,6 +16,19 @@ public record CreatePortfolioCommand : IRequest<int>
     public string? Description { get; init; }
     public string? DescriptionAz { get; init; }
     public bool IsMain { get; init; }
+    public string Slug { get; set; }
+    public string? MetaKeyword { get; set; }
+    public string? MetaKeywordAz { get; set; }
+    public string? MetaTitle { get; set; }
+    public string? MetaTitleAz { get; set; }
+    public string? OgTitle { get; set; }
+    public string? OgTitleAz { get; set; }
+    public string? MetaDescription { get; set; }
+    public string? MetaDescriptionAz { get; set; }
+    public string? OgDescription { get; set; }
+    public string? OgDescriptionAz { get; set; }
+    public string? MobileTitle { get; set; }
+    public string? MobileTitleAz { get; set; }
     public List<ImageDto>? Images { get; set; }
     public List<int>? CategoryIds { get; set; } = new List<int>();
 }
@@ -39,7 +52,19 @@ public class CreatePortfolioCommandHandler : IRequestHandler<CreatePortfolioComm
         entity.SubTitle = request.SubTitle;
         entity.SubTitleAz = request.SubTitleAz;
         entity.Description = request.Description;
-        entity.DescriptionAz = request.DescriptionAz;
+        entity.MetaKeyword = request.MetaKeyword;
+        entity.MetaKeywordAz = request.MetaKeywordAz;
+        entity.MetaTitle = request.MetaTitle;
+        entity.MetaTitleAz = request.MetaTitleAz;
+        entity.OgTitle = request.OgTitle;
+        entity.OgTitleAz = request.OgTitleAz;
+        entity.MetaDescription = request.MetaDescription;
+        entity.MetaDescriptionAz = request.MetaDescriptionAz;
+        entity.OgDescription = request.OgDescription;
+        entity.OgDescriptionAz = request.OgDescriptionAz;
+        entity.MobileTitle = request.MobileTitle;
+        entity.MobileTitleAz = request.MobileTitleAz;
+        entity.Slug = request.Slug;
         entity.IsMain = request.IsMain;
         if (request.CategoryIds != null)
         {

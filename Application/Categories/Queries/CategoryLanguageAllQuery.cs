@@ -24,12 +24,12 @@ public class CategoryLanguageAllQueryHandler : IRequestHandler<CategoryLanguageA
             {
                 c.Id,
                 c.Name,
-                portfolioCat = c.PortfolioCategories?.Where(x=>x.CategoryId==c.Id).Select(x=>x.PortfolioId),
+                portfolioCat = c.PortfolioCategories?.Select(x=>x.PortfolioId),
             }).ToList(),
             category_az = Categories.Select(c=>new 
             {
                 c.Id,
-                c.NameAz,
+                Name=c.NameAz, 
                 portfolioCat = c.PortfolioCategories?.Select(x => x.PortfolioId),
             }).ToList()
         };

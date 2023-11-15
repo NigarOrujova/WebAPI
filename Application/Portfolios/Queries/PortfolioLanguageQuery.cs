@@ -36,17 +36,41 @@ internal class PortfolioLanguageQueryHandler : IRequestHandler<PortfolioLanguage
                 SubTitle=entity.SubTitle ?? "",
                 Description = entity.Description ?? "",
                 entity.IsMain,
+                entity.Slug,
+                entity.MetaKeyword,
+                entity.MetaTitle,
+                entity.OgTitle,
+                entity.MetaDescription,
+                entity.OgDescription,
+                entity.MobileTitle,
                 portfolioCat = entity.PortfolioCategories?.Where(x => x != null && x.CategoryId != 0).Select(x => x.CategoryId),
-                portfolioImg=entity.Images?.Select(x=>x.ImagePath)
+                portfolioImg = entity.Images?.Select(y => new
+                {
+                    y.ImagePath,
+                    y.ImageAlt,
+                    y.IsMain
+                })
             },
             portfolio_az = new
             {
-                Title = entity.TitleAz ?? "",
-                SubTitle = entity.SubTitleAz ?? "",
-                Description = entity.DescriptionAz ?? "",
-                entity.IsMain,
+                Title = entity.TitleAz,
+                Description = entity.DescriptionAz,
+                SubTitle = entity.SubTitleAz,
+                Slug = entity.SlugAz,
+                IsMain = entity.IsMain,
+                MetaKeyword = entity.MetaKeywordAz,
+                MetaTitle = entity.MetaTitleAz,
+                OgTitle = entity.OgTitleAz,
+                MetaDescription = entity.MetaDescriptionAz,
+                OgDescription = entity.OgDescriptionAz,
+                MobileTitle = entity.MobileTitleAz,
                 portfolioCat = entity.PortfolioCategories?.Where(x => x != null && x.CategoryId != 0).Select(x => x.CategoryId),
-                portfolioImg = entity.Images?.Select(x => x.ImagePath)
+                portfolioImg = entity.Images?.Select(y => new
+                {
+                    y.ImagePath,
+                    y.ImageAlt,
+                    y.IsMain
+                })
             }
         };
         return data;

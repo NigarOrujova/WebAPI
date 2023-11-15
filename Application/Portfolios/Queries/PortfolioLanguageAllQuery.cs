@@ -34,18 +34,42 @@ public class PortfolioLanguageAllQueryHandler : IRequestHandler<PortfolioLanguag
                 SubTitle = p.SubTitle ?? "",
                 Description = p.Description ?? "",
                 p.IsMain,
+                p.Slug,
+                p.MetaKeyword,
+                p.MetaTitle,
+                p.OgTitle,
+                p.MetaDescription,
+                p.OgDescription,
+                p.MobileTitle,
                 portfolioCat = p.PortfolioCategories?.Where(x => x != null && x.CategoryId != 0).Select(x => x.CategoryId),
-                portfolioImg = p.Images?.Select(x => x.ImagePath)
+                portfolioImg = p.Images?.Select(y => new
+                {
+                    y.ImagePath,
+                    y.ImageAlt,
+                    y.IsMain
+                })
             }),
             portfolio_az=Portfolios.Select(p => new
             {
                 p.Id,
-                Title = p.TitleAz ?? "",
-                SubTitle = p.SubTitleAz ?? "",
-                Description = p.DescriptionAz ?? "",
-                p.IsMain,
+                Title = p.TitleAz,
+                Description = p.DescriptionAz,
+                SubTitle = p.SubTitleAz,
+                Slug = p.SlugAz,
+                IsMain = p.IsMain,
+                MetaKeyword = p.MetaKeywordAz,
+                MetaTitle = p.MetaTitleAz,
+                OgTitle = p.OgTitleAz,
+                MetaDescription = p.MetaDescriptionAz,
+                OgDescription = p.OgDescriptionAz,
+                MobileTitle = p.MobileTitleAz,
                 portfolioCat = p.PortfolioCategories?.Where(x => x != null && x.CategoryId != 0).Select(x => x.CategoryId),
-                portfolioImg = p.Images?.Select(x => x.ImagePath)
+                portfolioImg = p.Images?.Select(y => new
+                {
+                    y.ImagePath,
+                    ImageAlt=y.ImageAltAz,
+                    y.IsMain
+                })
             })
         };
 

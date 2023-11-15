@@ -14,5 +14,15 @@ public class FooterController : ApiControllerBase
     [HttpPut]
     [Authorize(Policy = "admin.footer.put")]
     public async Task<IActionResult> UpdateAsync([FromForm] UpdateFooterCommand request)
-    => Ok(await Mediator.Send(request));
+    {
+        try
+        {
+            var result = await Mediator.Send(request);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { error = ex.Message });
+        }
+    }
 }
