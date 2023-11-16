@@ -55,7 +55,7 @@ public class PortfolioLanguageAllQueryHandler : IRequestHandler<PortfolioLanguag
                 Title = p.TitleAz,
                 Description = p.DescriptionAz,
                 SubTitle = p.SubTitleAz,
-                Slug = p.SlugAz,
+                Slug = p.Slug,
                 IsMain = p.IsMain,
                 MetaKeyword = p.MetaKeywordAz,
                 MetaTitle = p.MetaTitleAz,

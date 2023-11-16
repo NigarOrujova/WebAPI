@@ -78,7 +78,7 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
                 Title = x.TitleAz,
                 Description = x.DescriptionAz,
                 SubTitle=x.SubTitleAz,
-                Slug=x.SlugAz,
+                Slug=x.Slug,
                 IsMain=x.IsMain,
                 MetaKeyword = x.MetaKeywordAz,
                 MetaTitle = x.MetaTitleAz,

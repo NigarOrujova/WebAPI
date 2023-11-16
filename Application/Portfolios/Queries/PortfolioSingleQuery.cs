@@ -26,8 +26,7 @@ internal class PortfolioSingleQueryHandler : IRequestHandler<PortfolioSingleQuer
         if (!string.IsNullOrWhiteSpace(request.Slug))
         {
             return await _unitOfWork.PortfolioRepository.GetPortfolioBySlugAsync(request.Slug);
-        }
-
+        } 
         Portfolio entity = await _unitOfWork.PortfolioRepository.GetAsync(n => n.Id == request.Id,
             includes: new Expression<Func<Portfolio, object>>[]
             {

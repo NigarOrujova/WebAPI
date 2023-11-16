@@ -56,7 +56,7 @@ internal class PortfolioLanguageQueryHandler : IRequestHandler<PortfolioLanguage
                 Title = entity.TitleAz,
                 Description = entity.DescriptionAz,
                 SubTitle = entity.SubTitleAz,
-                Slug = entity.SlugAz,
+                Slug = entity.Slug,
                 IsMain = entity.IsMain,
                 MetaKeyword = entity.MetaKeywordAz,
                 MetaTitle = entity.MetaTitleAz,
