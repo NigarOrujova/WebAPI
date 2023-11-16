@@ -3,6 +3,7 @@ using Application.Portfolios.Commands.DeletePortfolio;
 using Application.Portfolios.Commands.UpdatePortfolio;
 using Application.Portfolios.Queries;
 using Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Yelload.WebAPI.Controllers.Base;
@@ -11,9 +12,19 @@ namespace Yelload.WebAPI.Controllers;
 
 public class PortfoliosController : ApiControllerBase
 {
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
-    => Ok(await Mediator.Send(new PortfolioSingleQuery(id)));
+    [HttpGet("{slug}")]
+    public async Task<IActionResult> GetByIdAsync(string slug)
+    {
+        var query = new PortfolioSingleQuery { Slug = slug };
+        var blog = await Mediator.Send(query);
+
+        if (blog == null)
+        {
+            return NotFound("Portfolio not found");
+        }
+
+        return Ok(blog);
+    }
     [HttpGet("languages/{id}")]
     public async Task<IActionResult> GetLanIdAsync([FromRoute] int id)
     => Ok(await Mediator.Send(new PortfolioLanguageQuery(id)));

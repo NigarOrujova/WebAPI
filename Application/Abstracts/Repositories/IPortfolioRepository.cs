@@ -3,4 +3,7 @@ using Domain.Entities;
 
 namespace Application.Abstracts.Repositories;
 
-public interface IPortfolioRepository : IRepository<Portfolio> { }
+public interface IPortfolioRepository : IRepository<Portfolio> 
+{
+    Task<object> GetPortfolioBySlugAsync(string slug);
+}

@@ -16,20 +16,20 @@ public record CreatePortfolioCommand : IRequest<int>
     public string? Description { get; init; }
     public string? DescriptionAz { get; init; }
     public bool IsMain { get; init; }
-    public string? MetaKeyword { get; set; }
-    public string? MetaKeywordAz { get; set; }
-    public string? MetaTitle { get; set; }
-    public string? MetaTitleAz { get; set; }
-    public string? OgTitle { get; set; }
-    public string? OgTitleAz { get; set; }
-    public string? MetaDescription { get; set; }
-    public string? MetaDescriptionAz { get; set; }
-    public string? OgDescription { get; set; }
-    public string? OgDescriptionAz { get; set; }
-    public string? MobileTitle { get; set; }
-    public string? MobileTitleAz { get; set; }
-    public List<ImageDto>? Images { get; set; }
-    public List<int>? CategoryIds { get; set; } = new List<int>();
+    public string? MetaKeyword { get; init; }
+    public string? MetaKeywordAz { get; init; }
+    public string? MetaTitle { get; init; }
+    public string? MetaTitleAz { get; init; }
+    public string? OgTitle { get; init; }
+    public string? OgTitleAz { get; init; }
+    public string? MetaDescription { get; init; }
+    public string? MetaDescriptionAz { get; init; }
+    public string? OgDescription { get; init; }
+    public string? OgDescriptionAz { get; init; }
+    public string? MobileTitle { get; init; }
+    public string? MobileTitleAz { get; init; }
+    public List<ImageDto>? Images { get; init; }
+    public List<int>? CategoryIds { get; init; } = new List<int>();
 }
 public class CreatePortfolioCommandHandler : IRequestHandler<CreatePortfolioCommand, int>
 {
