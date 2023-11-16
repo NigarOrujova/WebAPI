@@ -2,6 +2,7 @@
 using Domain.Entities;
 using Infrastructure.Concretes.Repositories.Base;
 using Infrastructure.Persistance;
+using System.Linq.Expressions;
 
 namespace Infrastructure.Concretes.Repositories;
 
@@ -11,7 +12,11 @@ public class PortfolioRepository : Repository<Portfolio>, IPortfolioRepository
 
     public async Task<object> GetPortfolioBySlugAsync(string slug)
     {
-        var entity=await GetAsync(p => p.Slug.Equals(slug));
+        var entity=await GetAsync(p => p.Slug.Equals(slug), includes: new Expression<Func<Portfolio, object>>[]
+        {
+            x => x.PortfolioCategories,
+            x => x.Images
+        });
         var data = new
         {
             portfolio_en = new

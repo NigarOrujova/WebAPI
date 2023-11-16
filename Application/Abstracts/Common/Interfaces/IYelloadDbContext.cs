@@ -18,4 +18,7 @@ public interface IYelloadDbContext
     DbSet<Love> Love { get; }
     DbSet<Esc> Esc { get; }
     DbSet<Contact> Contact { get; }
+    DbSet<Blog> Blogs { get; }
+    DbSet<Tag> Tags { get; }
+    DbSet<BlogTagCloud> BlogTagClouds { get; }
 }

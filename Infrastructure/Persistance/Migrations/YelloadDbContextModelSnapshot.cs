@@ -109,7 +109,7 @@ namespace Infrastructure.Migrations
                     b.HasIndex("SlugAz")
                         .IsUnique();
 
-                    b.ToTable("Blog");
+                    b.ToTable("Blog", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.BlogTagCloud", b =>
@@ -132,7 +132,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("BlogTagCloud");
+                    b.ToTable("BlogTagCloud", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Category", b =>
@@ -159,7 +159,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Contact", b =>
@@ -220,7 +220,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contact");
+                    b.ToTable("Contact", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Customer", b =>
@@ -248,7 +248,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.EmployeesPage", b =>
@@ -339,7 +339,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EmployeesPages");
+                    b.ToTable("EmployeesPages", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Esc", b =>
@@ -406,7 +406,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Esc");
+                    b.ToTable("Esc", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Footer", b =>
@@ -437,7 +437,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Footers");
+                    b.ToTable("Footers", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Home", b =>
@@ -504,7 +504,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Home");
+                    b.ToTable("Home", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Love", b =>
@@ -571,7 +571,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Love");
+                    b.ToTable("Love", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Media", b =>
@@ -605,7 +605,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("FooterId");
 
-                    b.ToTable("Medias");
+                    b.ToTable("Medias", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Membership.AppRole", b =>
@@ -850,7 +850,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OurValues");
+                    b.ToTable("OurValues", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Portfolio", b =>
@@ -946,7 +946,7 @@ namespace Infrastructure.Migrations
                     b.HasIndex("SlugAz")
                         .IsUnique();
 
-                    b.ToTable("Portfolios");
+                    b.ToTable("Portfolios", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.PortfolioCategory", b =>
@@ -975,7 +975,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("PortfolioId");
 
-                    b.ToTable("PortfolioCategory");
+                    b.ToTable("PortfolioCategory", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.PortfolioImage", b =>
@@ -1011,7 +1011,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("PortfolioId");
 
-                    b.ToTable("PortfolioImages");
+                    b.ToTable("PortfolioImages", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Tag", b =>
@@ -1034,7 +1034,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tag");
+                    b.ToTable("Tag", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Team", b =>
@@ -1079,7 +1079,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teams");
+                    b.ToTable("Teams", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.We", b =>
@@ -1146,7 +1146,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("We");
+                    b.ToTable("We", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.BlogTagCloud", b =>
