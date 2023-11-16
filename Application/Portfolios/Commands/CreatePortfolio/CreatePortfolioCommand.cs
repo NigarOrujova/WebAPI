@@ -9,14 +9,13 @@ namespace Application.Portfolios.Commands.CreatePortfolio;
 
 public record CreatePortfolioCommand : IRequest<int>
 {
-    public string? Title { get; init; }
-    public string? TitleAz { get; init; }
+    public string Title { get; init; } = null!;
+    public string TitleAz { get; init; } = null!;
     public string? SubTitle { get; init; }
     public string? SubTitleAz { get; init; }
     public string? Description { get; init; }
     public string? DescriptionAz { get; init; }
     public bool IsMain { get; init; }
-    public string Slug { get; set; }
     public string? MetaKeyword { get; set; }
     public string? MetaKeywordAz { get; set; }
     public string? MetaTitle { get; set; }
@@ -52,6 +51,7 @@ public class CreatePortfolioCommandHandler : IRequestHandler<CreatePortfolioComm
         entity.SubTitle = request.SubTitle;
         entity.SubTitleAz = request.SubTitleAz;
         entity.Description = request.Description;
+        entity.DescriptionAz = request.DescriptionAz;
         entity.MetaKeyword = request.MetaKeyword;
         entity.MetaKeywordAz = request.MetaKeywordAz;
         entity.MetaTitle = request.MetaTitle;
@@ -64,7 +64,8 @@ public class CreatePortfolioCommandHandler : IRequestHandler<CreatePortfolioComm
         entity.OgDescriptionAz = request.OgDescriptionAz;
         entity.MobileTitle = request.MobileTitle;
         entity.MobileTitleAz = request.MobileTitleAz;
-        entity.Slug = request.Slug;
+        entity.Slug = request.Title.ToSlug();
+        entity.SlugAz = request.TitleAz.ToSlug();
         entity.IsMain = request.IsMain;
         if (request.CategoryIds != null)
         {

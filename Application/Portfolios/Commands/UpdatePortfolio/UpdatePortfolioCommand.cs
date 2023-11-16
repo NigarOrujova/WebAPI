@@ -32,6 +32,20 @@ public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioComm
         entity.Description = request.Portfolio.Description;
         entity.DescriptionAz = request.Portfolio.DescriptionAz;
         entity.IsMain = request.Portfolio.IsMain;
+        entity.MetaKeyword = request.Portfolio.MetaKeyword;
+        entity.MetaKeywordAz = request.Portfolio.MetaKeywordAz;
+        entity.MetaTitle = request.Portfolio.MetaTitle;
+        entity.MetaTitleAz = request.Portfolio.MetaTitleAz;
+        entity.OgTitle = request.Portfolio.OgTitle;
+        entity.OgTitleAz = request.Portfolio.OgTitleAz;
+        entity.MetaDescription = request.Portfolio.MetaDescription;
+        entity.MetaDescriptionAz = request.Portfolio.MetaDescriptionAz;
+        entity.OgDescription = request.Portfolio.OgDescription;
+        entity.OgDescriptionAz = request.Portfolio.OgDescriptionAz;
+        entity.MobileTitle = request.Portfolio.MobileTitle;
+        entity.MobileTitleAz = request.Portfolio.MobileTitleAz;
+        entity.Slug = entity.Title.ToSlug();
+        entity.SlugAz = entity.TitleAz.ToSlug();
         if (request.Portfolio.CategoryIds != null)
         {
             entity.PortfolioCategories?.RemoveAll(x => !request.Portfolio.CategoryIds.Contains(x.CategoryId));

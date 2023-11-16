@@ -14,6 +14,10 @@ public class BlogConfiguration : IEntityTypeConfiguration<Blog>
         builder.Property(t => t.Description)
             .HasMaxLength(10000)
             .IsRequired();
+        builder.HasIndex(t => t.Slug)
+               .IsUnique();
+        builder.HasIndex(t => t.SlugAz)
+               .IsUnique();
         builder.Ignore(x => x.Image);
     }
 }
