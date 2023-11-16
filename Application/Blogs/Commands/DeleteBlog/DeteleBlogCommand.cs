@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Application.Blogs.Commands.DeleteBlog;
 
-namespace Application.Blogs.Commands.DeleteBlog
+internal class DeteleBlogCommand
 {
-    internal class DeteleBlogCommand
-    {
-    }
 }

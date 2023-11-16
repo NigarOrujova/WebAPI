@@ -1,6 +1,5 @@
-﻿namespace Application.Blogs.Queries
+﻿namespace Application.Blogs.Queries;
+
+internal class BlogRecentQuery
 {
-    internal class BlogRecentQuery
-    {
-    }
 }

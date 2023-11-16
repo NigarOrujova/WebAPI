@@ -1,4 +1,5 @@
-﻿using Application.Footers.Commands.UpdateFooter;
+﻿using Application.Employees.Queries;
+using Application.Footers.Commands.UpdateFooter;
 using Application.Footers.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,9 @@ namespace Yelload.WebAPI.Controllers;
 
 public class FooterController : ApiControllerBase
 {
+    [HttpGet("languages")]
+    public async Task<IActionResult> GetLanAsync()
+        => Ok(await Mediator.Send(new FooterLanguageQuery()));
     [HttpGet]
     public async Task<IActionResult> GetAsync()
     => Ok(await Mediator.Send(new FooterSingleQuery()));

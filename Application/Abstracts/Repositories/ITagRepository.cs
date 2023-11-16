@@ -3,4 +3,4 @@ using Domain.Entities;
 
 namespace Application.Abstracts.Repositories;
 
-public interface IBlogTagCloudRepository : IRepository<BlogTagCloud> { }
+public interface ITagRepository : IRepository<Tag> { }

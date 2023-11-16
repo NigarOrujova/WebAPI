@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Abstracts.Repositories;
+using Domain.Entities;
+using Infrastructure.Concretes.Repositories.Base;
+using Infrastructure.Persistance;
 
-namespace Infrastructure.Concretes.Repositories
+namespace Infrastructure.Concretes.Repositories;
+
+public class TagRepository : Repository<Tag>, ITagRepository
 {
-    internal class TagRepository
-    {
-    }
+    public TagRepository(YelloadDbContext context) : base(context) { }
 }

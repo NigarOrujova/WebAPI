@@ -9,6 +9,7 @@ public record UpdateFooterCommand : IRequest<Footer>
     public string? Phone { get; set; }
     public string? Email { get; set; }
     public string? Address { get; set; }
+    public string? AddressAz { get; set; }
 }
 public class UpdateFooterCommandHandler : IRequestHandler<UpdateFooterCommand, Footer>
 {
@@ -27,6 +28,7 @@ public class UpdateFooterCommandHandler : IRequestHandler<UpdateFooterCommand, F
         entity.Phone = request.Phone;
         entity.Email = request.Email;
         entity.Address = request.Address;
+        entity.AddressAz = request.AddressAz;
 
         await _unitOfWork.FooterRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
