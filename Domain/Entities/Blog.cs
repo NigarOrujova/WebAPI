@@ -6,12 +6,14 @@ namespace Domain.Entities;
 public class Blog:BaseEntity
 {
     public string Title { get; set; }
+    public string TitleAz { get; set; }
     public string Description { get; set; }
+    public string DescriptionAz { get; set; }
     public string ImagePath { get; set; }
     public IFormFile Image { get; set; }
     public string ImageAlt { get; set; }
-    public string Slug { get; set; }
-    public string SlugAz { get; set; }
+    public string ImageAltAz { get; set; }
+    public string Slug { get; set; } 
     public string? MetaKeyword { get; set; }
     public string? MetaKeywordAz { get; set; }
     public string? MetaTitle { get; set; }

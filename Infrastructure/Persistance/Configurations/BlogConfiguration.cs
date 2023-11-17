@@ -16,8 +16,6 @@ public class BlogConfiguration : IEntityTypeConfiguration<Blog>
             .IsRequired();
         builder.HasIndex(t => t.Slug)
                .IsUnique();
-        builder.HasIndex(t => t.SlugAz)
-               .IsUnique();
         builder.Ignore(x => x.Image);
     }
 }

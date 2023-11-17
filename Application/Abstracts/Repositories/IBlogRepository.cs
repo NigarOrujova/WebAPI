@@ -3,4 +3,7 @@ using Domain.Entities;
 
 namespace Application.Abstracts.Repositories;
 
-public interface IBlogRepository:IRepository<Blog> { }
+public interface IBlogRepository:IRepository<Blog> 
+{
+    Task<object> GetBlogBySlugAsync(string slug);
+}
