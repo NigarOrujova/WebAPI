@@ -60,7 +60,7 @@ public class HomeUpdateCommandHandler : IRequestHandler<HomeUpdateCommand, Domai
             throw new FileException("File max size 1 mb");
         if (!request.Image.CheckFileType("image/"))
             throw new FileException("File type must be image");
-        string newImageName = request.Image.GetRandomImagePath("PortfolioImage");
+        string newImageName = request.Image.GetRandomImagePath("home");
 
         _env.ArchiveImage(entity.ImagePath);
         await _env.SaveAsync(request.Image, newImageName, cancellationToken);

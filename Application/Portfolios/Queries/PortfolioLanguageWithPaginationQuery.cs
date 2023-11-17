@@ -48,16 +48,15 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
         if (request.CategoryId > 0)
         {
             var filteredPortfolios = Portfolios
-       .Where(x => x.PortfolioCategories.Any(y => y.CategoryId == request.CategoryId))
-       .OrderByDescending(x => x.Id)
-       .Skip((pageNumber - 1) * pageSize)
-       .Take(pageSize)
-       .ToList();
+               .Where(x => x.PortfolioCategories.Any(y => y.CategoryId == request.CategoryId))
+               .OrderByDescending(x => x.Id)
+               .Skip((pageNumber - 1) * pageSize)
+               .Take(pageSize)
+               .ToList();
 
             var model = new
             {
                 project_en = filteredPortfolios
-                .OrderByDescending(x => x.Id)
                 .Select(x => new
                 {
                     x.Id,
@@ -79,10 +78,8 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
                         y.ImageAlt,
                         y.IsMain
                     })
-                }).Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize).ToList(),
+                }).ToList(),
                 project_az = filteredPortfolios
-                .OrderByDescending(x => x.Id)
                 .Select(x => new
                 {
                     x.Id,
@@ -104,8 +101,7 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
                         y.ImageAlt,
                         y.IsMain
                     })
-                }).Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize).ToList(),
+                }).ToList(),
                 totalPages = totalPages
             };
 
@@ -138,8 +134,7 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
                         y.ImageAlt,
                         y.IsMain
                     })
-                }).Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize).ToList(),
+                }).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList(),
                 project_az = Portfolios
                 .OrderByDescending(x => x.Id)
                 .Select(x => new
@@ -163,8 +158,7 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
                         y.ImageAlt,
                         y.IsMain
                     })
-                }).Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize).ToList(),
+                }).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList(),
                 totalPages = totalPages
             };
 
