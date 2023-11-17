@@ -27,6 +27,9 @@ public class UnitOfWork : IUnitOfWork
     private ILoveRepository? _loveRepository;
     private IWeRepository? _weRepository;
     private IEmployeesPageRepository? _employeesPageRepository;
+    private IBlogRepository? _blogRepository;
+    private IBlogTagCloudRepository? _blogTagCloudRepository;
+    private ITagRepository? _tagRepository;
     public IOurValueRepository OurValueRepository => _ourValueRepository ??= new OurValueRepository(_dbContext);
 
     public ICategoryRepository CategoryRepository => _categoryRepository ??= new CategoryRepository(_dbContext);
@@ -54,6 +57,12 @@ public class UnitOfWork : IUnitOfWork
     public IWeRepository WeRepository => _weRepository ??= new WeRepository(_dbContext);
 
     public IEmployeesPageRepository EmployeesPageRepository => _employeesPageRepository ??= new EmployeesPageRepository(_dbContext);
+
+    public IBlogRepository BlogRepository => _blogRepository ??=new BlogRepository(_dbContext);
+
+    public IBlogTagCloudRepository BlogTagCloudRepository => _blogTagCloudRepository ??=new BlogTagCloudRepository(_dbContext);
+
+    public ITagRepository TagRepository => _tagRepository ??= new TagRepository(_dbContext);
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) => await _dbContext.SaveChangesAsync(cancellationToken);
 }

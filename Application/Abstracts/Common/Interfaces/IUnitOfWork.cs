@@ -18,5 +18,8 @@ public interface IUnitOfWork
     ILoveRepository LoveRepository { get; }
     IWeRepository WeRepository { get; }
     IEmployeesPageRepository EmployeesPageRepository { get; }
+    IBlogRepository BlogRepository { get; }
+    IBlogTagCloudRepository BlogTagCloudRepository { get; }
+    ITagRepository TagRepository { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

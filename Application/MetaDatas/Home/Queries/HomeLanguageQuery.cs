@@ -21,6 +21,10 @@ internal class HomeLanguageQueryHandler : IRequestHandler<HomeLanguageQuery, obj
         {
             contact_en = new
             {
+                entity.Title,
+                entity.SubTitle,
+                entity.ImagePath,
+                entity.ImageAlt,
                 entity.MetaKeyword,
                 entity.MetaTitle,
                 entity.OgTitle,
@@ -32,6 +36,10 @@ internal class HomeLanguageQueryHandler : IRequestHandler<HomeLanguageQuery, obj
             },
             contact_az = new
             {
+                Title=entity.TitleAz,
+                SubTitle=entity.SubTitleAz,
+                entity.ImagePath,
+                ImageAlt=entity.ImageAltAz,
                 MetaKeyword = entity.MetaKeywordAz,
                 MetaTitle = entity.MetaTitleAz,
                 OgTitle = entity.OgTitleAz,

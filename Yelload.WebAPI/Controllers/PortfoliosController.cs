@@ -43,9 +43,9 @@ public class PortfoliosController : ApiControllerBase
         return Ok(result);
     }
     [HttpGet("paginatelan")]
-    public async Task<ActionResult<List<Portfolio>>> GetPortfoliosLan(int page = 1, int size = 10)
+    public async Task<ActionResult<List<Portfolio>>> GetPortfoliosLan(int? categoryId,int page = 1, int size = 10)
     {
-        var query = new PortfolioLanguageWithPaginationQuery { Page = page, Size = size };
+        var query = new PortfolioLanguageWithPaginationQuery { CategoryId = categoryId, Page = page, Size = size };
         var result = await Mediator.Send(query);
 
         return Ok(result);

@@ -9,6 +9,7 @@ public class PortfolioLanguageWithPaginationQuery : IRequest<object>
 {
     public int Page { get; set; }
     public int Size { get; set; }
+    public int? CategoryId { get; set; }
 }
 public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<PortfolioLanguageWithPaginationQuery, object>
 {
@@ -43,61 +44,131 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
         {
             pageNumber = 1;
         }
-        var model = new
-        {
-            project_en = Portfolios
-            .OrderByDescending(x => x.Id)
-            .Select(x => new
-            {
-                x.Id,
-                x.Title,
-                x.SubTitle,
-                x.Description,
-                x.Slug,
-                x.IsMain,
-                x.MetaKeyword,
-                x.MetaTitle,
-                x.OgTitle,
-                x.MetaDescription,
-                x.OgDescription,
-                x.MobileTitle,
-                portfolioCat = x.PortfolioCategories?.Where(y => y != null && y.CategoryId != 0).Select(x => x.CategoryId),
-                portfolioImg = x.Images?.Select(y => new
-                {
-                    y.ImagePath,
-                    y.ImageAlt,
-                    y.IsMain
-                })
-            }).Skip((pageNumber - 1) * pageSize)
-        .Take(pageSize).ToList(),
-            project_az = Portfolios
-            .OrderByDescending(x => x.Id)
-            .Select(x => new
-            {
-                x.Id,
-                Title = x.TitleAz,
-                Description = x.DescriptionAz,
-                SubTitle=x.SubTitleAz,
-                Slug=x.Slug,
-                IsMain=x.IsMain,
-                MetaKeyword = x.MetaKeywordAz,
-                MetaTitle = x.MetaTitleAz,
-                OgTitle = x.OgTitleAz,
-                MetaDescription = x.MetaDescriptionAz,
-                OgDescription = x.OgDescriptionAz,
-                MobileTitle = x.MobileTitleAz,
-                portfolioCat = x.PortfolioCategories?.Where(y => y != null && y.CategoryId != 0).Select(x => x.CategoryId),
-                portfolioImg = x.Images?.Select(y => new
-                {
-                    y.ImagePath,
-                    y.ImageAlt,
-                    y.IsMain
-                })
-            }).Skip((pageNumber - 1) * pageSize)
-        .Take(pageSize).ToList(),
-            totalPages = totalPages
-        };
 
-        return model;
+        if (request.CategoryId > 0)
+        {
+            var filteredPortfolios = Portfolios
+       .Where(x => x.PortfolioCategories.Any(y => y.CategoryId == request.CategoryId))
+       .OrderByDescending(x => x.Id)
+       .Skip((pageNumber - 1) * pageSize)
+       .Take(pageSize)
+       .ToList();
+
+            var model = new
+            {
+                project_en = filteredPortfolios
+                .OrderByDescending(x => x.Id)
+                .Select(x => new
+                {
+                    x.Id,
+                    x.Title,
+                    x.SubTitle,
+                    x.Description,
+                    x.Slug,
+                    x.IsMain,
+                    x.MetaKeyword,
+                    x.MetaTitle,
+                    x.OgTitle,
+                    x.MetaDescription,
+                    x.OgDescription,
+                    x.MobileTitle,
+                    portfolioCat = x.PortfolioCategories?.Where(y => y != null && y.CategoryId != 0).Select(x => x.CategoryId),
+                    portfolioImg = x.Images?.Select(y => new
+                    {
+                        y.ImagePath,
+                        y.ImageAlt,
+                        y.IsMain
+                    })
+                }).Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize).ToList(),
+                project_az = filteredPortfolios
+                .OrderByDescending(x => x.Id)
+                .Select(x => new
+                {
+                    x.Id,
+                    Title = x.TitleAz,
+                    Description = x.DescriptionAz,
+                    SubTitle = x.SubTitleAz,
+                    Slug = x.Slug,
+                    IsMain = x.IsMain,
+                    MetaKeyword = x.MetaKeywordAz,
+                    MetaTitle = x.MetaTitleAz,
+                    OgTitle = x.OgTitleAz,
+                    MetaDescription = x.MetaDescriptionAz,
+                    OgDescription = x.OgDescriptionAz,
+                    MobileTitle = x.MobileTitleAz,
+                    portfolioCat = x.PortfolioCategories?.Where(y => y != null && y.CategoryId != 0).Select(x => x.CategoryId),
+                    portfolioImg = x.Images?.Select(y => new
+                    {
+                        y.ImagePath,
+                        y.ImageAlt,
+                        y.IsMain
+                    })
+                }).Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize).ToList(),
+                totalPages = totalPages
+            };
+
+            return model;
+        }
+        else
+        {
+            var model = new
+            {
+                project_en = Portfolios
+                .OrderByDescending(x => x.Id)
+                .Select(x => new
+                {
+                    x.Id,
+                    x.Title,
+                    x.SubTitle,
+                    x.Description,
+                    x.Slug,
+                    x.IsMain,
+                    x.MetaKeyword,
+                    x.MetaTitle,
+                    x.OgTitle,
+                    x.MetaDescription,
+                    x.OgDescription,
+                    x.MobileTitle,
+                    portfolioCat = x.PortfolioCategories?.Where(y => y != null && y.CategoryId != 0).Select(x => x.CategoryId),
+                    portfolioImg = x.Images?.Select(y => new
+                    {
+                        y.ImagePath,
+                        y.ImageAlt,
+                        y.IsMain
+                    })
+                }).Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize).ToList(),
+                project_az = Portfolios
+                .OrderByDescending(x => x.Id)
+                .Select(x => new
+                {
+                    x.Id,
+                    Title = x.TitleAz,
+                    Description = x.DescriptionAz,
+                    SubTitle = x.SubTitleAz,
+                    Slug = x.Slug,
+                    IsMain = x.IsMain,
+                    MetaKeyword = x.MetaKeywordAz,
+                    MetaTitle = x.MetaTitleAz,
+                    OgTitle = x.OgTitleAz,
+                    MetaDescription = x.MetaDescriptionAz,
+                    OgDescription = x.OgDescriptionAz,
+                    MobileTitle = x.MobileTitleAz,
+                    portfolioCat = x.PortfolioCategories?.Where(y => y != null && y.CategoryId != 0).Select(x => x.CategoryId),
+                    portfolioImg = x.Images?.Select(y => new
+                    {
+                        y.ImagePath,
+                        y.ImageAlt,
+                        y.IsMain
+                    })
+                }).Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize).ToList(),
+                totalPages = totalPages
+            };
+
+            return model;
+        }
     }
 }
