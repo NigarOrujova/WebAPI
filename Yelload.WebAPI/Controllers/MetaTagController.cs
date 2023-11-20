@@ -7,8 +7,8 @@ using Application.MetaDatas.Home.Commands;
 using Application.MetaDatas.Home.Queries;
 using Application.MetaDatas.Love.Commands;
 using Application.MetaDatas.Love.Queries;
-using Application.MetaDatas.We.Commands;
-using Application.MetaDatas.We.Queries;
+using Application.MetaDatas.Wes.Commands;
+using Application.MetaDatas.Wes.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Yelload.WebAPI.Controllers.Base;
@@ -64,5 +64,9 @@ public class MetaTagController : ApiControllerBase
     [HttpPut("we")]
     [Authorize(Policy = "admin.we.put")]
     public async Task<IActionResult> UpdateAsync([FromForm] WeUpdateCommand request)
-    => Ok(await Mediator.Send(request));
+    {
+        var response= await Mediator.Send(request);
+        var test = "";
+        return Ok(response);
+    }
 }

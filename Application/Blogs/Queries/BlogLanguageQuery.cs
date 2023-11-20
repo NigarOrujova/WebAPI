@@ -34,12 +34,14 @@ internal class BlogLanguageQueryHandler : IRequestHandler<BlogLanguageQuery, obj
                 Title = entity.Title ?? "",
                 Description = entity.Description ?? "",
                 entity.Slug,
+                entity.ImagePath,
                 entity.MetaKeyword,
                 entity.MetaTitle,
                 entity.OgTitle,
                 entity.MetaDescription,
                 entity.OgDescription,
                 entity.MobileTitle,
+                PublishDate = entity.PublishDate?.ToString("MMMM dd, yyyy") ?? "",
                 BlogCat = entity.TagCloud?.Where(x => x != null && x.TagId != 0).Select(x => x.TagId)
             },
             Blog_az = new
@@ -47,12 +49,14 @@ internal class BlogLanguageQueryHandler : IRequestHandler<BlogLanguageQuery, obj
                 Title = entity.TitleAz,
                 Description = entity.DescriptionAz,
                 Slug = entity.Slug,
+                entity.ImagePath,
                 MetaKeyword = entity.MetaKeywordAz,
                 MetaTitle = entity.MetaTitleAz,
                 OgTitle = entity.OgTitleAz,
                 MetaDescription = entity.MetaDescriptionAz,
                 OgDescription = entity.OgDescriptionAz,
                 MobileTitle = entity.MobileTitleAz,
+                PublishDate = entity.PublishDate?.ToString("MMMM dd, yyyy") ?? "",
                 BlogCat = entity.TagCloud?.Where(x => x != null && x.TagId != 0).Select(x => x.TagId)
             }
         };

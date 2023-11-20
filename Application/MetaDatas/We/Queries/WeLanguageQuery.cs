@@ -1,8 +1,7 @@
 ﻿using Application.Abstracts.Common.Interfaces;
-using Application.MetaDatas.Love.Queries;
 using MediatR;
 
-namespace Application.MetaDatas.We.Queries;
+namespace Application.MetaDatas.Wes.Queries;
 
 public record WeLanguageQuery:IRequest<object>;
 

@@ -1,9 +1,10 @@
 ﻿using Application.Abstracts.Common.Interfaces;
+using Domain.Entities;
 using MediatR;
 
-namespace Application.MetaDatas.We.Commands;
+namespace Application.MetaDatas.Wes.Commands;
 
-public record WeUpdateCommand : IRequest<Domain.Entities.We>
+public record WeUpdateCommand : IRequest<We>
 {
     public string? MetaKeyword { get; set; }
     public string? MetaKeywordAz { get; set; }
@@ -22,7 +23,7 @@ public record WeUpdateCommand : IRequest<Domain.Entities.We>
     public string? AppName { get; set; }
     public string? AppNameAz { get; set; }
 }
-public class WeUpdateCommandHandler : IRequestHandler<WeUpdateCommand, Domain.Entities.We>
+public class WeUpdateCommandHandler : IRequestHandler<WeUpdateCommand,We>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -30,7 +31,7 @@ public class WeUpdateCommandHandler : IRequestHandler<WeUpdateCommand, Domain.En
     {
         _unitOfWork = unitOfWork;
     }
-    public async Task<Domain.Entities.We> Handle(WeUpdateCommand request, CancellationToken cancellationToken)
+    public async Task<We> Handle(WeUpdateCommand request, CancellationToken cancellationToken)
     {
         var entity = await _unitOfWork.WeRepository.GetAsync()
         ?? throw new NotImplementedException();

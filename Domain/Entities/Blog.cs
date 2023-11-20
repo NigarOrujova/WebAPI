@@ -27,5 +27,6 @@ public class Blog:BaseEntity
     public string? MobileTitle { get; set; }
     public string? MobileTitleAz { get; set; }
     public DateTime? PublishDate { get; set; }
-    public virtual ICollection<BlogTagCloud> TagCloud { get; set; }
+    public virtual List<BlogTagCloud> TagCloud { get; set; }
+    public List<int>? TagIds { get; set; } = new List<int>();
 }

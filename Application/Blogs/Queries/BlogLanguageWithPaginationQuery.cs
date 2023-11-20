@@ -5,37 +5,33 @@ using System.Linq.Expressions;
 
 namespace Application.Blogs.Queries;
 
-internal class BlogLanguageWithPaginationQuery
-{
-}
-public class PortfolioLanguageWithPaginationQuery : IRequest<object>
+public class BlogLanguageWithPaginationQuery : IRequest<object>
 {
     public int Page { get; set; }
     public int Size { get; set; }
-    public int? CategoryId { get; set; }
+    public int? TagId { get; set; }
 }
-public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<PortfolioLanguageWithPaginationQuery, object>
+public class BlogLanguageWithPaginationQueryHandler : IRequestHandler<BlogLanguageWithPaginationQuery, object>
 {
     private readonly IUnitOfWork _unitOfWork;
 
-    public PortfolioLanguageWithPaginationQueryHandler(IUnitOfWork unitOfWork)
+    public BlogLanguageWithPaginationQueryHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<object> Handle(PortfolioLanguageWithPaginationQuery request, CancellationToken cancellationToken)
+    public async Task<object> Handle(BlogLanguageWithPaginationQuery request, CancellationToken cancellationToken)
     {
         int pageSize = request.Size;
         int pageNumber = request.Page;
 
-        var totalCount = await _unitOfWork.PortfolioRepository.GetTotalCountAsync();
+        var totalCount = await _unitOfWork.BlogRepository.GetTotalCountAsync();
         var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
 
-        IEnumerable<Portfolio> Portfolios = await _unitOfWork.PortfolioRepository.GetAllAsync(
-        includes: new Expression<Func<Portfolio, object>>[]
+        IEnumerable<Blog> Blogs = await _unitOfWork.BlogRepository.GetAllAsync(
+        includes: new Expression<Func<Blog, object>>[]
         {
-            x => x.PortfolioCategories,
-            x => x.Images
+            x => x.TagCloud
         })
             ?? throw new NullReferenceException();
 
@@ -48,10 +44,10 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
             pageNumber = 1;
         }
 
-        if (request.CategoryId > 0)
+        if (request.TagId > 0)
         {
-            var filteredPortfolios = Portfolios
-               .Where(x => x.PortfolioCategories.Any(y => y.CategoryId == request.CategoryId))
+            var filteredBlogs = Blogs
+               .Where(x => x.TagCloud.Any(y => y.TagId == request.TagId))
                .OrderByDescending(x => x.Id)
                .Skip((pageNumber - 1) * pageSize)
                .Take(pageSize)
@@ -59,51 +55,39 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
 
             var model = new
             {
-                project_en = filteredPortfolios
+                project_en = filteredBlogs
                 .Select(x => new
                 {
                     x.Id,
                     x.Title,
-                    x.SubTitle,
                     x.Description,
+                    x.ImagePath,
                     x.Slug,
-                    x.IsMain,
                     x.MetaKeyword,
                     x.MetaTitle,
                     x.OgTitle,
                     x.MetaDescription,
                     x.OgDescription,
                     x.MobileTitle,
-                    portfolioCat = x.PortfolioCategories?.Where(y => y != null && y.CategoryId != 0).Select(x => x.CategoryId),
-                    portfolioImg = x.Images?.Select(y => new
-                    {
-                        y.ImagePath,
-                        y.ImageAlt,
-                        y.IsMain
-                    })
+                    PublishDate = x.PublishDate?.ToString("MMMM dd, yyyy") ?? "",
+                    BlogCat = x.TagCloud?.Where(y => y != null && y.TagId != 0).Select(x => x.TagId)
                 }).ToList(),
-                project_az = filteredPortfolios
+                project_az = filteredBlogs
                 .Select(x => new
                 {
                     x.Id,
                     Title = x.TitleAz,
                     Description = x.DescriptionAz,
-                    SubTitle = x.SubTitleAz,
                     Slug = x.Slug,
-                    IsMain = x.IsMain,
+                    x.ImagePath,
                     MetaKeyword = x.MetaKeywordAz,
                     MetaTitle = x.MetaTitleAz,
                     OgTitle = x.OgTitleAz,
                     MetaDescription = x.MetaDescriptionAz,
                     OgDescription = x.OgDescriptionAz,
                     MobileTitle = x.MobileTitleAz,
-                    portfolioCat = x.PortfolioCategories?.Where(y => y != null && y.CategoryId != 0).Select(x => x.CategoryId),
-                    portfolioImg = x.Images?.Select(y => new
-                    {
-                        y.ImagePath,
-                        y.ImageAlt,
-                        y.IsMain
-                    })
+                    PublishDate = x.PublishDate?.ToString("MMMM dd, yyyy") ?? "",
+                    BlogCat = x.TagCloud?.Where(y => y != null && y.TagId != 0).Select(x => x.TagId)
                 }).ToList(),
                 totalPages = totalPages
             };
@@ -114,53 +98,41 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
         {
             var model = new
             {
-                project_en = Portfolios
+                project_en = Blogs
                 .OrderByDescending(x => x.Id)
                 .Select(x => new
                 {
                     x.Id,
                     x.Title,
-                    x.SubTitle,
                     x.Description,
+                    x.ImagePath,
                     x.Slug,
-                    x.IsMain,
                     x.MetaKeyword,
                     x.MetaTitle,
                     x.OgTitle,
                     x.MetaDescription,
                     x.OgDescription,
                     x.MobileTitle,
-                    portfolioCat = x.PortfolioCategories?.Where(y => y != null && y.CategoryId != 0).Select(x => x.CategoryId),
-                    portfolioImg = x.Images?.Select(y => new
-                    {
-                        y.ImagePath,
-                        y.ImageAlt,
-                        y.IsMain
-                    })
+                    PublishDate = x.PublishDate?.ToString("MMMM dd, yyyy") ?? "",
+                    BlogCat = x.TagCloud?.Where(y => y != null && y.TagId != 0).Select(x => x.TagId)
                 }).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList(),
-                project_az = Portfolios
+                project_az = Blogs
                 .OrderByDescending(x => x.Id)
                 .Select(x => new
                 {
                     x.Id,
                     Title = x.TitleAz,
                     Description = x.DescriptionAz,
-                    SubTitle = x.SubTitleAz,
+                    x.ImagePath,
                     Slug = x.Slug,
-                    IsMain = x.IsMain,
                     MetaKeyword = x.MetaKeywordAz,
                     MetaTitle = x.MetaTitleAz,
                     OgTitle = x.OgTitleAz,
                     MetaDescription = x.MetaDescriptionAz,
                     OgDescription = x.OgDescriptionAz,
                     MobileTitle = x.MobileTitleAz,
-                    portfolioCat = x.PortfolioCategories?.Where(y => y != null && y.CategoryId != 0).Select(x => x.CategoryId),
-                    portfolioImg = x.Images?.Select(y => new
-                    {
-                        y.ImagePath,
-                        y.ImageAlt,
-                        y.IsMain
-                    })
+                    PublishDate = x.PublishDate?.ToString("MMMM dd, yyyy") ?? "",
+                    BlogCat = x.TagCloud?.Where(y => y != null && y.TagId != 0).Select(x => x.TagId)
                 }).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList(),
                 totalPages = totalPages
             };

@@ -1,10 +1,11 @@
 ﻿using Application.Abstracts.Common.Interfaces;
+using Domain.Entities;
 using MediatR;
 
-namespace Application.MetaDatas.We.Queries;
+namespace Application.MetaDatas.Wes.Queries;
 
-public record WeSingleQuery : IRequest<Domain.Entities.We>;
-internal class WeSingleQueryHandler : IRequestHandler<WeSingleQuery, Domain.Entities.We>
+public record WeSingleQuery : IRequest<We>;
+internal class WeSingleQueryHandler : IRequestHandler<WeSingleQuery, We>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -13,7 +14,7 @@ internal class WeSingleQueryHandler : IRequestHandler<WeSingleQuery, Domain.Enti
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Domain.Entities.We> Handle(WeSingleQuery request, CancellationToken cancellationToken)
+    public async Task<We> Handle(WeSingleQuery request, CancellationToken cancellationToken)
     {
         var entity = await _unitOfWork.WeRepository.GetAsync()
             ?? throw new NullReferenceException();
