@@ -17,5 +17,6 @@ public class BlogConfiguration : IEntityTypeConfiguration<Blog>
         builder.HasIndex(t => t.Slug)
                .IsUnique();
         builder.Ignore(x => x.Image);
+        builder.Ignore(x => x.TagIds);
     }
 }

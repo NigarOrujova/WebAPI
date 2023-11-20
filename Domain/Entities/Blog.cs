@@ -9,11 +9,11 @@ public class Blog:BaseEntity
     public string TitleAz { get; set; }
     public string Description { get; set; }
     public string DescriptionAz { get; set; }
-    public string ImagePath { get; set; }
+    public string? ImagePath { get; set; }
     public IFormFile Image { get; set; }
     public string ImageAlt { get; set; }
     public string ImageAltAz { get; set; }
-    public string Slug { get; set; } 
+    public string? Slug { get; set; } 
     public string? MetaKeyword { get; set; }
     public string? MetaKeywordAz { get; set; }
     public string? MetaTitle { get; set; }
@@ -27,6 +27,6 @@ public class Blog:BaseEntity
     public string? MobileTitle { get; set; }
     public string? MobileTitleAz { get; set; }
     public DateTime? PublishDate { get; set; }
-    public virtual List<BlogTagCloud> TagCloud { get; set; }
+    public virtual List<BlogTagCloud>? TagCloud { get; set; }
     public List<int>? TagIds { get; set; } = new List<int>();
 }
