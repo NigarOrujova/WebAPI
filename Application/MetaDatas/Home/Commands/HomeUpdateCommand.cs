@@ -92,7 +92,7 @@ public class HomeUpdateCommandHandler : IRequestHandler<HomeUpdateCommand, Domai
         entity.AppName = request.AppName;
         entity.AppNameAz = request.AppNameAz;
 
-        await _unitOfWork.HomeRepository.AddAsync(entity);
+        await _unitOfWork.HomeRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return entity;
     }

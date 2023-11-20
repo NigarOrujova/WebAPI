@@ -48,7 +48,7 @@ public class ContactUpdateCommandHandler : IRequestHandler<ContactUpdateCommand,
         entity.AppName= request.AppName;
         entity.AppNameAz= request.AppNameAz;
 
-        await _unitOfWork.ContactRepository.AddAsync(entity);
+        await _unitOfWork.ContactRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return entity;
     }

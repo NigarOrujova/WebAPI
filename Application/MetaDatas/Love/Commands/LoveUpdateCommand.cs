@@ -52,7 +52,7 @@ public class LoveUpdateCommandHandler : IRequestHandler<LoveUpdateCommand, Domai
         entity.AppName = request.AppName;
         entity.AppNameAz = request.AppNameAz;
 
-        await _unitOfWork.LoveRepository.AddAsync(entity);
+        await _unitOfWork.LoveRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return entity;
     }

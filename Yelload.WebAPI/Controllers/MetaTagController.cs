@@ -65,8 +65,14 @@ public class MetaTagController : ApiControllerBase
     [Authorize(Policy = "admin.we.put")]
     public async Task<IActionResult> UpdateAsync([FromForm] WeUpdateCommand request)
     {
-        var response= await Mediator.Send(request);
-        var test = "";
-        return Ok(response);
+        try
+        {
+            var result = await Mediator.Send(request);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { error = ex.Message });
+        }
     }
 }

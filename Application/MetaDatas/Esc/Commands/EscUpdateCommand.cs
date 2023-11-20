@@ -53,7 +53,7 @@ public class EscUpdateCommandHandler : IRequestHandler<EscUpdateCommand, Domain.
         entity.AppName = request.AppName;
         entity.AppNameAz = request.AppNameAz;
 
-        await _unitOfWork.EscRepository.AddAsync(entity);
+        await _unitOfWork.EscRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return entity;
     }

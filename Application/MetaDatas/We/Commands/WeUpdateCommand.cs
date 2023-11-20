@@ -53,7 +53,7 @@ public class WeUpdateCommandHandler : IRequestHandler<WeUpdateCommand,We>
         entity.AppName = request.AppName;
         entity.AppNameAz = request.AppNameAz;
 
-        await _unitOfWork.WeRepository.AddAsync(entity);
+        await _unitOfWork.WeRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return entity;
     }
