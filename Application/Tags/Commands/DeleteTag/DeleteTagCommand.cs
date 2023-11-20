@@ -1,12 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Abstracts.Common.Interfaces;
+using Domain.Entities;
+using MediatR;
+using System.Linq.Expressions;
 
-namespace Application.Tags.Commands.DeleteTag
+namespace Application.Tags.Commands.DeleteTag;
+
+public record DeteleTagCommand(int Id) : IRequest<bool>;
+
+internal class DeteleTagCommandHandler : IRequestHandler<DeteleTagCommand, bool>
 {
-    internal class DeleteTagCommand
+    private readonly IUnitOfWork _unitOfWork;
+
+    public DeteleTagCommandHandler(IUnitOfWork unitOfWork)
     {
+        _unitOfWork = unitOfWork;
+    }
+
+    public async Task<bool> Handle(DeteleTagCommand request, CancellationToken cancellationToken)
+    {
+        Tag tag = await _unitOfWork.TagRepository.GetAsync(n => n.Id == request.Id, includes: new Expression<Func<Tag, object>>[]
+        {
+            x => x.TagCloud
+        })
+        ?? throw new NullReferenceException();
+
+        await _unitOfWork.TagRepository.DeleteAsync(tag);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        return true;
     }
 }

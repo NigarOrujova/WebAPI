@@ -1,12 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Abstracts.Common.Interfaces;
+using Domain.Entities;
+using MediatR;
+using System.Linq.Expressions;
 
-namespace Application.Tags.Queries
+namespace Application.Tags.Queries;
+
+public record TagAllQuery : IRequest<IEnumerable<Tag>>;
+public class TagAllQueryHandler : IRequestHandler<TagAllQuery, IEnumerable<Tag>>
 {
-    internal class TagAllQuery
+    private readonly IUnitOfWork _unitOfWork;
+
+    public TagAllQueryHandler(IUnitOfWork unitOfWork)
     {
+        _unitOfWork = unitOfWork;
+    }
+
+    public async Task<IEnumerable<Tag>> Handle(TagAllQuery request, CancellationToken cancellationToken)
+    {
+        IEnumerable<Tag> Tags = await _unitOfWork.TagRepository.GetAllAsync(
+        includes: new Expression<Func<Tag, object>>[]
+        {
+            x => x.TagCloud
+        })
+            ?? throw new NullReferenceException();
+
+        return Tags;
     }
 }
