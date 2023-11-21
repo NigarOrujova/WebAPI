@@ -1,4 +1,6 @@
-﻿using Application.MetaDatas.Contact.Commands;
+﻿using Application.MetaDatas.Blogs.Commands;
+using Application.MetaDatas.Blogs.Queries;
+using Application.MetaDatas.Contact.Commands;
 using Application.MetaDatas.Contact.Queries;
 using Application.MetaDatas.Contacts.Queries;
 using Application.MetaDatas.Esc.Commands;
@@ -15,6 +17,16 @@ using Yelload.WebAPI.Controllers.Base;
 namespace Yelload.WebAPI.Controllers;
 public class MetaTagController : ApiControllerBase
 {
+    [HttpGet("blogmeta")]
+    public async Task<IActionResult> GetBlogMetaAsync()
+   => Ok(await Mediator.Send(new BlogMetaSingleQuery()));
+    [HttpGet("blogmeta/languages")]
+    public async Task<IActionResult> GetLanBlogMetaAsync()
+    => Ok(await Mediator.Send(new BlogMetaLanguageQuery()));
+    [HttpPut("blogmeta")]
+    [Authorize(Policy = "admin.blogmeta.put")]
+    public async Task<IActionResult> UpdateAsync([FromForm] BlogMetaUpdateCommand request)
+    => Ok(await Mediator.Send(request));
     [HttpGet("home")]
     public async Task<IActionResult> GetHomeAsync()
     => Ok(await Mediator.Send(new HomeSingleQuery()));

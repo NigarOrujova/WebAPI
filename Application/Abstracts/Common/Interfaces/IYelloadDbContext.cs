@@ -21,4 +21,5 @@ public interface IYelloadDbContext
     DbSet<Blog> Blogs { get; }
     DbSet<Tag> Tags { get; }
     DbSet<BlogTagCloud> BlogTagClouds { get; }
+    DbSet<BlogMeta> blogMeta { get; }
 }

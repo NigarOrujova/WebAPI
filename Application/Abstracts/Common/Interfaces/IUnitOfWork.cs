@@ -21,5 +21,6 @@ public interface IUnitOfWork
     IBlogRepository BlogRepository { get; }
     IBlogTagCloudRepository BlogTagCloudRepository { get; }
     ITagRepository TagRepository { get; }
+    IBlogMetaRepository BlogMetaRepository { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

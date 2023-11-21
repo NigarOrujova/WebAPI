@@ -1,6 +1,5 @@
 ﻿using Application.Abstracts.Common.Interfaces;
 using MediatR;
-using System.Net;
 
 namespace Application.Footers.Queries;
 

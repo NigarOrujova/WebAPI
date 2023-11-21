@@ -30,6 +30,7 @@ public class UnitOfWork : IUnitOfWork
     private IBlogRepository? _blogRepository;
     private IBlogTagCloudRepository? _blogTagCloudRepository;
     private ITagRepository? _tagRepository;
+    private IBlogMetaRepository? _blogMetaRepository;
     public IOurValueRepository OurValueRepository => _ourValueRepository ??= new OurValueRepository(_dbContext);
 
     public ICategoryRepository CategoryRepository => _categoryRepository ??= new CategoryRepository(_dbContext);
@@ -63,6 +64,7 @@ public class UnitOfWork : IUnitOfWork
     public IBlogTagCloudRepository BlogTagCloudRepository => _blogTagCloudRepository ??=new BlogTagCloudRepository(_dbContext);
 
     public ITagRepository TagRepository => _tagRepository ??= new TagRepository(_dbContext);
+    public IBlogMetaRepository BlogMetaRepository => _blogMetaRepository ??= new BlogMetaRepository(_dbContext);
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) => await _dbContext.SaveChangesAsync(cancellationToken);
 }

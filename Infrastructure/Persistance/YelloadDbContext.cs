@@ -45,6 +45,8 @@ public partial class YelloadDbContext : IdentityDbContext<AppUser, AppRole, int,
 
     public DbSet<BlogTagCloud> BlogTagClouds => Set<BlogTagCloud>();
 
+    public DbSet<BlogMeta> blogMeta => Set<BlogMeta>();
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
