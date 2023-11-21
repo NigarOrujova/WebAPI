@@ -103,6 +103,6 @@ public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeComman
         await _unitOfWork.EmployeesPageRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return null;
+        return entity;
     }
 }
