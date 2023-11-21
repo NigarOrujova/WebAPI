@@ -10,14 +10,14 @@ namespace Application.MetaDatas.Home.Commands;
 
 public record HomeUpdateCommand:IRequest<Domain.Entities.Home>
 {
-    public string Title { get; set; }
-    public string TitleAz { get; set; }
-    public string SubTitle { get; set; }
-    public string SubTitleAz { get; set; }
+    public string? Title { get; set; }
+    public string? TitleAz { get; set; }
+    public string? SubTitle { get; set; }
+    public string? SubTitleAz { get; set; }
     [NotMapped]
-    public IFormFile Image { get; set; }
-    public string ImageAlt { get; set; }
-    public string ImageAltAz { get; set; }
+    public IFormFile? Image { get; set; }
+    public string? ImageAlt { get; set; }
+    public string? ImageAltAz { get; set; }
     public string? MetaKeyword { get; set; }
     public string? MetaKeywordAz { get; set; }
     public string? MetaTitle { get; set; }

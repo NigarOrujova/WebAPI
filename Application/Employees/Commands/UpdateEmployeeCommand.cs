@@ -89,14 +89,25 @@ public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeComman
 
         entity.Title = request.Title;
         entity.TitleAz = request.TitleAz;
+        entity.SubTitle = request.SubTitle;
         entity.SubTitleAz = request.SubTitleAz;
+        entity.Description = request.Description;
         entity.DescriptionAz = request.DescriptionAz;
+        entity.Title2 = request.Title2;
         entity.TitleAz2 = request.TitleAz2;
-        entity.TitleAz3 = request.TitleAz3;
+        entity.SubTitle2 = request.SubTitle2;
         entity.SubTitleAz2 = request.SubTitleAz2;
+        entity.Title3 = request.Title3;
+        entity.TitleAz2 = request.TitleAz2;
+        entity.Description2 = request.Description2;
         entity.DescriptionAz2 = request.DescriptionAz2;
+        entity.FullName = request.FullName;
         entity.FullNameAz = request.FullNameAz;
+        entity.ImageAlt = request.ImageAlt;
         entity.ImageAltAz = request.ImageAltAz;
+        entity.FullName2 = request.FullName2;
+        entity.FullNameAz2 = request.FullNameAz2;
+        entity.ImageAlt2 = request.ImageAlt2;
         entity.ImageAltAz2 = request.ImageAltAz2;
 
 
