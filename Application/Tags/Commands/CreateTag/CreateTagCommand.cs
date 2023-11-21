@@ -1,5 +1,33 @@
-﻿namespace Application.Tags.Commands.CreateTag;
+﻿using Application.Abstracts.Common.Interfaces;
+using Domain.Entities;
+using MediatR;
 
-internal class CreateTagCommand
+namespace Application.Tags.Commands.CreateTag;
+
+public record CreateTagCommand : IRequest<int>
 {
+    public string? Name { get; init; }
+    public string? NameAz { get; init; }
+}
+public class CreateTagCommandHandler : IRequestHandler<CreateTagCommand, int>
+{
+    private readonly IUnitOfWork _unitOfWork;
+
+    public CreateTagCommandHandler(IUnitOfWork unitOfWork)
+    {
+        _unitOfWork = unitOfWork;
+    }
+
+    public async Task<int> Handle(CreateTagCommand request, CancellationToken cancellationToken)
+    {
+        var entity = new Tag();
+
+        entity.Name = request.Name;
+        entity.NameAz = request.NameAz;
+
+        await _unitOfWork.TagRepository.AddAsync(entity);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        return entity.Id;
+    }
 }

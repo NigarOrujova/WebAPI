@@ -6,10 +6,10 @@ namespace Domain.Entities;
 
 public class Home:BaseEntity
 {
-    public string Title { get; set; }
-    public string TitleAz { get; set; }
-    public string SubTitle { get; set; }
-    public string SubTitleAz { get; set; }
+    public string? Title { get; set; }
+    public string? TitleAz { get; set; }
+    public string? SubTitle { get; set; }
+    public string? SubTitleAz { get; set; }
     [NotMapped]
     public IFormFile? Image { get; set; }
     public string? ImagePath { get; set; }
