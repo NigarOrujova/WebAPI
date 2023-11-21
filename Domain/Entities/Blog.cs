@@ -10,7 +10,7 @@ public class Blog:BaseEntity
     public string Description { get; set; }
     public string DescriptionAz { get; set; }
     public string? ImagePath { get; set; }
-    public IFormFile Image { get; set; }
+    public IFormFile? Image { get; set; }
     public string ImageAlt { get; set; }
     public string ImageAltAz { get; set; }
     public string? Slug { get; set; } 

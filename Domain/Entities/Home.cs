@@ -11,10 +11,10 @@ public class Home:BaseEntity
     public string SubTitle { get; set; }
     public string SubTitleAz { get; set; }
     [NotMapped]
-    public IFormFile Image { get; set; }
-    public string ImagePath { get; set; }
-    public string ImageAlt { get; set; }
-    public string ImageAltAz { get; set; }
+    public IFormFile? Image { get; set; }
+    public string? ImagePath { get; set; }
+    public string? ImageAlt { get; set; }
+    public string? ImageAltAz { get; set; }
     public string? MetaKeyword { get; set; }
     public string? MetaKeywordAz { get; set; }
     public string? MetaTitle { get; set; }
