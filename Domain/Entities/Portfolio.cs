@@ -10,8 +10,8 @@ public class Portfolio:BaseEntity
     public string? SubTitleAz { get; set; }
     public string? Description { get; set; }
     public string? DescriptionAz { get; set; }
-    public string Slug { get; set; }
-    public string SlugAz { get; set; }
+    public string? Slug { get; set; }
+    public string? SlugAz { get; set; }
     public bool IsMain { get; set; }
     public string? MetaKeyword { get; set; }
     public string? MetaKeywordAz { get; set; }
