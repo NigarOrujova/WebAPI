@@ -29,11 +29,10 @@ public class BlogLanguageWithPaginationQueryHandler : IRequestHandler<BlogLangua
         var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
 
         IEnumerable<Blog> Blogs = await _unitOfWork.BlogRepository.GetAllAsync(
-        includes: new Expression<Func<Blog, object>>[]
-        {
-            x => x.TagCloud
-        })
+        includes: x => x.TagCloud)
             ?? throw new NullReferenceException();
+
+        
 
         if (pageNumber > totalPages)
         {
@@ -70,7 +69,13 @@ public class BlogLanguageWithPaginationQueryHandler : IRequestHandler<BlogLangua
                     x.OgDescription,
                     x.MobileTitle,
                     PublishDate = x.PublishDate?.ToString("MMMM dd, yyyy") ?? "",
-                    BlogCat = x.TagCloud?.Where(y => y != null && y.TagId != 0).Select(x => x.TagId)
+                    BlogCat = x.TagCloud?.Where(y => y != null && y.TagId != 0).Select(x => new
+                    {
+                        Tags = new
+                        {
+                            
+                        }
+                    })
                 }).ToList(),
                 project_az = filteredBlogs
                 .Select(x => new
@@ -87,7 +92,7 @@ public class BlogLanguageWithPaginationQueryHandler : IRequestHandler<BlogLangua
                     OgDescription = x.OgDescriptionAz,
                     MobileTitle = x.MobileTitleAz,
                     PublishDate = x.PublishDate?.ToString("MMMM dd, yyyy") ?? "",
-                    BlogCat = x.TagCloud?.Where(y => y != null && y.TagId != 0).Select(x => x.TagId)
+                    BlogCat = x.TagCloud?.Where(y => y != null && y.TagId != 0).Select(x => x.Tag)
                 }).ToList(),
                 totalPages = totalPages
             };

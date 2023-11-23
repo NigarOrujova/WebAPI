@@ -12,10 +12,8 @@ public class BlogRepository : Repository<Blog>, IBlogRepository
 
     public async Task<object> GetBlogBySlugAsync(string slug)
     {
-        var entity = await GetAsync(p => p.Slug.Equals(slug), includes: new Expression<Func<Blog, object>>[]
-        {
-            x => x.TagCloud
-        });
+        var entity = await GetAsync(p => p.Slug.Equals(slug), includes: x => x.TagCloud);
+
         var data = new
         {
             portfolio_en = new

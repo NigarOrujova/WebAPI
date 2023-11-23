@@ -19,10 +19,7 @@ public class BlogLanguageAllQueryHandler : IRequestHandler<BlogLanguageAllQuery,
     public async Task<object> Handle(BlogLanguageAllQuery request, CancellationToken cancellationToken)
     {
         IEnumerable<Blog> Blogs = await _unitOfWork.BlogRepository.GetAllAsync(
-        includes: new Expression<Func<Blog, object>>[]
-        {
-            x => x.TagCloud
-        })
+        includes: x => x.TagCloud)
             ?? throw new NullReferenceException();
 
         var data = new
