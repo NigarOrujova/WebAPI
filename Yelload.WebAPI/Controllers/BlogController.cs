@@ -1,7 +1,10 @@
-﻿using Application.Blogs.Commands.CreateBlog;
+﻿using Application.Abstracts.Common.Exceptions;
+using Application.Abstracts.Repositories;
+using Application.Blogs.Commands.CreateBlog;
 using Application.Blogs.Commands.DeleteBlog;
 using Application.Blogs.Commands.UpdateBlog;
 using Application.Blogs.Queries;
+using Domain.Dtos;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -52,7 +55,17 @@ public class BlogController : ApiControllerBase
     [HttpPost]
     [Authorize(Policy = "admin.Blogs.post")]
     public async Task<IActionResult> CreateAsync([FromForm] CreateBlogCommand request)
-    => Ok(await Mediator.Send(request));
+    {
+        try
+        {
+            var result = await Mediator.Send(request);
+            return Ok(result);
+        }
+             catch (FileException ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new JsonResponse { Status = "Error", Message = ex.Message });
+        }
+    }
     [HttpPut("{id}")]
     [Authorize(Policy = "admin.Blogs.put")]
     public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromForm] Blog request)

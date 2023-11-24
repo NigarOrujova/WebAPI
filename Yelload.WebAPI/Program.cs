@@ -1,11 +1,17 @@
 using Application;
+using Application.Abstracts.Common.Interfaces;
+using Application.Abstracts.Repositories;
+using Application.Blogs.Commands.CreateBlog;
 using Application.Extensions;
 using FluentValidation;
 using Infrastructure;
+using Infrastructure.Concretes.Common;
+using Infrastructure.Concretes.Repositories;
 using Infrastructure.Identity.Providers;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.Management.Storage.Fluent.Models;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -27,6 +33,7 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 });
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 var assemblies = AppDomain.CurrentDomain
     .GetAssemblies()
@@ -48,9 +55,8 @@ AppClaimProvider.principals = types
     )
     .Where(a => !string.IsNullOrWhiteSpace(a.Policy))
     .SelectMany(a => a.Policy.Split(new[] { "," }, System.StringSplitOptions.RemoveEmptyEntries))
-    .Distinct()
-    .ToArray();
-
+.Distinct()
+.ToArray();
 
 builder.Services.AddAuthorization(cfg =>
 {

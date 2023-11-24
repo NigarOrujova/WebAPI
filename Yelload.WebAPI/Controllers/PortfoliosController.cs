@@ -1,7 +1,9 @@
-﻿using Application.Portfolios.Commands.CreatePortfolio;
+﻿using Application.Abstracts.Common.Exceptions;
+using Application.Portfolios.Commands.CreatePortfolio;
 using Application.Portfolios.Commands.DeletePortfolio;
 using Application.Portfolios.Commands.UpdatePortfolio;
 using Application.Portfolios.Queries;
+using Domain.Dtos;
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -52,8 +54,18 @@ public class PortfoliosController : ApiControllerBase
     }
     [HttpPost]
     [Authorize(Policy = "admin.portfolios.post")]
-    public async Task<IActionResult> CreateAsync([FromForm]CreatePortfolioCommand request)
-    => Ok(await Mediator.Send(request));
+    public async Task<IActionResult> CreateAsync([FromForm] CreatePortfolioCommand request)
+    {
+        try
+        {
+            var result = await Mediator.Send(request);
+            return Ok(result);
+        }
+        catch (FileException ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new JsonResponse { Status = "Error", Message = ex.Message });
+        }
+    }
     [HttpPut("{id}")]
     [Authorize(Policy = "admin.portfolios.put")]
     public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromForm] Portfolio request)

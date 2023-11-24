@@ -1,4 +1,5 @@
-﻿using Application.Abstracts.Common.Interfaces;
+﻿using Application.Abstracts.Common.Exceptions;
+using Application.Abstracts.Common.Interfaces;
 using Application.Extensions;
 using Domain.Entities;
 using MediatR;
@@ -20,11 +21,13 @@ public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioComm
 
     public async Task<Portfolio> Handle(UpdatePortfolioCommand request, CancellationToken cancellationToken)
     {
+        if (await _unitOfWork.PortfolioRepository.IsExistAsync(x => x.Title == request.Portfolio.Title))
+            throw new FileException("Portfolio with the same title already exists.");
         Portfolio entity = await _unitOfWork.PortfolioRepository.GetAsync(n => n.Id == request.Id);
+
         if (entity == null)
-        {
-            return null;
-        }
+            throw new FileException("Portfolio Not Fount");
+
         entity.Title = request.Portfolio.Title;
         entity.TitleAz = request.Portfolio.TitleAz;
         entity.SubTitle = request.Portfolio.SubTitle;

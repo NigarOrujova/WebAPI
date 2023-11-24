@@ -1,7 +1,6 @@
 ﻿using Application.Abstracts.Common.Interfaces;
 using Domain.Entities;
 using MediatR;
-using System.Linq.Expressions;
 
 namespace Application.Blogs.Queries;
 
@@ -69,13 +68,7 @@ public class BlogLanguageWithPaginationQueryHandler : IRequestHandler<BlogLangua
                     x.OgDescription,
                     x.MobileTitle,
                     PublishDate = x.PublishDate?.ToString("MMMM dd, yyyy") ?? "",
-                    BlogCat = x.TagCloud?.Where(y => y != null && y.TagId != 0).Select(x => new
-                    {
-                        Tags = new
-                        {
-                            
-                        }
-                    })
+                    BlogCat = x.TagCloud?.Where(y => y != null && y.TagId != 0).Select(x => x.TagId)
                 }).ToList(),
                 project_az = filteredBlogs
                 .Select(x => new
@@ -92,7 +85,7 @@ public class BlogLanguageWithPaginationQueryHandler : IRequestHandler<BlogLangua
                     OgDescription = x.OgDescriptionAz,
                     MobileTitle = x.MobileTitleAz,
                     PublishDate = x.PublishDate?.ToString("MMMM dd, yyyy") ?? "",
-                    BlogCat = x.TagCloud?.Where(y => y != null && y.TagId != 0).Select(x => x.Tag)
+                    BlogCat = x.TagCloud?.Where(y => y != null && y.TagId != 0).Select(x => x.TagId)
                 }).ToList(),
                 totalPages = totalPages
             };

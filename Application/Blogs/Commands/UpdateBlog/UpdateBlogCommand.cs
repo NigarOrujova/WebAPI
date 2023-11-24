@@ -22,11 +22,14 @@ public class UpdateBlogCommandHandler : IRequestHandler<UpdateBlogCommand, Blog>
 
     public async Task<Blog> Handle(UpdateBlogCommand request, CancellationToken cancellationToken)
     {
+        if (await _unitOfWork.BlogRepository.IsExistAsync(x => x.Title == request.Blog.Title))
+            throw new FileException("Blog with the same title already exists.");
+
         Blog entity = await _unitOfWork.BlogRepository.GetAsync(n => n.Id == request.Id);
+
         if (entity == null)
-        {
-            return null;
-        }
+            throw new FileException("Blog Not fount");
+
         if (request.Blog.Image == null)
         {
             request.Blog.Image = entity.Image;
@@ -45,6 +48,8 @@ public class UpdateBlogCommandHandler : IRequestHandler<UpdateBlogCommand, Blog>
         entity.ImagePath = newImageName;
 
     save:
+        entity.ImageAlt = request.Blog.ImageAlt;
+        entity.ImageAltAz = request.Blog.ImageAltAz;
         entity.Title = request.Blog.Title;
         entity.TitleAz = request.Blog.TitleAz;
         entity.Description = request.Blog.Description;

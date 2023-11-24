@@ -1,10 +1,11 @@
 ﻿using Application.Abstracts.Common.Interfaces;
+using Application.Blogs.Commands.CreateBlog;
 using Domain.Entities.Membership;
+using FluentValidation;
 using Infrastructure.Concretes.Common;
 using Infrastructure.Identity.Providers;
 using Infrastructure.Persistance;
 using Infrastructure.Services;
-using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -34,6 +35,8 @@ public static class DependencyInjection
                         .AddEntityFrameworkStores<YelloadDbContext>()
                         .AddDefaultTokenProviders()
                         .AddErrorDescriber<YelloadIdentityErrorDescriber>();
+        services.AddScoped<IValidator<CreateBlogCommand>, CreateBlogCommandValidator>();
+
         services.AddAuthentication(cfg =>
         {
             cfg.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

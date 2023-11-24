@@ -1,6 +1,7 @@
 ﻿using Application.Abstracts.Common.Exceptions;
 using Application.Abstracts.Common.Interfaces;
 using Application.Extensions;
+using Domain.Dtos;
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -45,6 +46,9 @@ public class CreateBlogCommandHandler : IRequestHandler<CreateBlogCommand, int>
 
     public async Task<int> Handle(CreateBlogCommand request, CancellationToken cancellationToken)
     {
+        if (await _unitOfWork.BlogRepository.IsExistAsync(x => x.Title == request.Title)) 
+            throw new FileException("Blog with the same title already exists.");
+
         var entity = new Blog();
 
         entity.Title = request.Title;

@@ -1,4 +1,5 @@
-﻿using Application.Abstracts.Common.Interfaces;
+﻿using Application.Abstracts.Common.Exceptions;
+using Application.Abstracts.Common.Interfaces;
 using Application.Dtos.Images;
 using Application.Extensions;
 using Domain.Entities;
@@ -44,6 +45,9 @@ public class CreatePortfolioCommandHandler : IRequestHandler<CreatePortfolioComm
 
     public async Task<int> Handle(CreatePortfolioCommand request, CancellationToken cancellationToken)
     {
+        if (await _unitOfWork.PortfolioRepository.IsExistAsync(x => x.Title == request.Title))
+            throw new FileException("Portfolio with the same title already exists.");
+
         var entity = new Portfolio();
 
         entity.Title = request.Title;
