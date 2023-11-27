@@ -21,6 +21,9 @@ public class BlogLanguageAllQueryHandler : IRequestHandler<BlogLanguageAllQuery,
         IEnumerable<Blog> Blogs = await _unitOfWork.BlogRepository.GetAllAsync(
         includes: x => x.TagCloud)
             ?? throw new NullReferenceException();
+        IEnumerable<Tag> Tags = await _unitOfWork.TagRepository.GetAllAsync(
+       includes: x => x.TagCloud)
+           ?? throw new NullReferenceException();
 
         var data = new
         {
@@ -38,7 +41,7 @@ public class BlogLanguageAllQueryHandler : IRequestHandler<BlogLanguageAllQuery,
                 p.OgDescription,
                 p.MobileTitle,
                 PublishDate = p.PublishDate?.ToString("MMMM dd, yyyy") ?? "",
-                BlogCat = p.TagCloud?.Where(x => x != null && x.TagId != 0).Select(x => x.TagId)
+                BlogCat = p.TagCloud?.Select(x => x.Tag.Name)
             }),
             Blog_az = Blogs.Select(p => new
             {
@@ -54,7 +57,7 @@ public class BlogLanguageAllQueryHandler : IRequestHandler<BlogLanguageAllQuery,
                 OgDescription = p.OgDescriptionAz,
                 MobileTitle = p.MobileTitleAz,
                 PublishDate = p.PublishDate?.ToString("MMMM dd, yyyy") ?? "",
-                BlogCat = p.TagCloud?.Where(x => x != null && x.TagId != 0).Select(x => x.TagId)
+                BlogCat = p.TagCloud?.Select(x => x.Tag.NameAz)
             })
         };
 

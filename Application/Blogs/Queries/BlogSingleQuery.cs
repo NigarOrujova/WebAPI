@@ -27,11 +27,12 @@ internal class BlogSingleQueryHandler : IRequestHandler<BlogSingleQuery, object>
         {
             return await _unitOfWork.BlogRepository.GetBlogBySlugAsync(request.Slug);
         }
+        IEnumerable<Tag> Tags = await _unitOfWork.TagRepository.GetAllAsync(
+        includes: x => x.TagCloud)
+           ?? throw new NullReferenceException();
+
         Blog entity = await _unitOfWork.BlogRepository.GetAsync(n => n.Id == request.Id,
-            includes: new Expression<Func<Blog, object>>[]
-            {
-                x => x.TagCloud
-            })
+            includes: x => x.TagCloud)
             ?? throw new NullReferenceException();
 
         return entity;
