@@ -68,7 +68,17 @@ public class BlogController : ApiControllerBase
     [HttpPut("{id}")]
     [Authorize(Policy = "admin.Blogs.put")]
     public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromForm] Blog request)
-    => Ok(await Mediator.Send(new UpdateBlogCommand(id, request)));
+    {
+        try
+        {
+            var result = await Mediator.Send(new UpdateBlogCommand(id, request));
+            return Ok(result);
+        }
+        catch (FileException ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new JsonResponse { Status = "Error", Message = ex.Message });
+        }
+    }
     [HttpPut("publish/{id}")]
     [Authorize(Policy = "admin.Blogs.publish")]
     public async Task<IActionResult> BlogPublish([FromRoute] int id)

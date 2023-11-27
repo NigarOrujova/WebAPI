@@ -23,6 +23,7 @@ public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioComm
     {
         if (await _unitOfWork.PortfolioRepository.IsExistAsync(x => x.Title == request.Portfolio.Title))
             throw new FileException("Portfolio with the same title already exists.");
+
         Portfolio entity = await _unitOfWork.PortfolioRepository.GetAsync(n => n.Id == request.Id);
 
         if (entity == null)

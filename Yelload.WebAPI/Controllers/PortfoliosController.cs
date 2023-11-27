@@ -69,7 +69,17 @@ public class PortfoliosController : ApiControllerBase
     [HttpPut("{id}")]
     [Authorize(Policy = "admin.portfolios.put")]
     public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromForm] Portfolio request)
-    => Ok(await Mediator.Send(new UpdatePortfolioCommand(id, request)));
+    {
+        try
+        {
+            var result = await Mediator.Send(new UpdatePortfolioCommand(id, request));
+            return Ok(result);
+        }
+        catch (FileException ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new FileException (ex.Message ));
+        }
+    }
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.portfolios.delete")]
     public async Task<IActionResult> DeleteAsync([FromRoute] int id)
