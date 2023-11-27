@@ -31,8 +31,6 @@ public class BlogLanguageWithPaginationQueryHandler : IRequestHandler<BlogLangua
         includes: x => x.TagCloud)
             ?? throw new NullReferenceException();
 
-        
-
         if (pageNumber > totalPages)
         {
             pageNumber = totalPages;

@@ -1,5 +1,4 @@
 ﻿using Application.Abstracts.Common.Exceptions;
-using Application.Abstracts.Repositories;
 using Application.Blogs.Commands.CreateBlog;
 using Application.Blogs.Commands.DeleteBlog;
 using Application.Blogs.Commands.UpdateBlog;
