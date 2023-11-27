@@ -84,6 +84,7 @@ public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioComm
                 }
             }
         }
+
         await _unitOfWork.PortfolioRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 

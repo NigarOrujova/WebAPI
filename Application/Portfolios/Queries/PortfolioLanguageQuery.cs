@@ -28,6 +28,10 @@ internal class PortfolioLanguageQueryHandler : IRequestHandler<PortfolioLanguage
             includes: includes
         ) ?? throw new NullReferenceException();
 
+
+        IEnumerable<Category> categories = await _unitOfWork.CategoryRepository.GetAllAsync(includes: x => x.PortfolioCategories)
+           ?? throw new NullReferenceException();
+
         var data = new
         {
             portfolio_en = new
@@ -43,7 +47,7 @@ internal class PortfolioLanguageQueryHandler : IRequestHandler<PortfolioLanguage
                 entity.MetaDescription,
                 entity.OgDescription,
                 entity.MobileTitle,
-                portfolioCat = entity.PortfolioCategories?.Where(x => x != null && x.CategoryId != 0).Select(x => x.CategoryId),
+                portfolioCat = entity.PortfolioCategories?.Select(x => x.Category.Name),
                 portfolioImg = entity.Images?.Select(y => new
                 {
                     y.ImagePath,
@@ -64,7 +68,7 @@ internal class PortfolioLanguageQueryHandler : IRequestHandler<PortfolioLanguage
                 MetaDescription = entity.MetaDescriptionAz,
                 OgDescription = entity.OgDescriptionAz,
                 MobileTitle = entity.MobileTitleAz,
-                portfolioCat = entity.PortfolioCategories?.Where(x => x != null && x.CategoryId != 0).Select(x => x.CategoryId),
+                portfolioCat = entity.PortfolioCategories?.Select(x => x.Category.NameAz),
                 portfolioImg = entity.Images?.Select(y => new
                 {
                     y.ImagePath,

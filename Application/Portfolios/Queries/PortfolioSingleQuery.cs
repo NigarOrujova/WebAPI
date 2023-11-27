@@ -35,6 +35,9 @@ internal class PortfolioSingleQueryHandler : IRequestHandler<PortfolioSingleQuer
             })
             ?? throw new NullReferenceException();
 
+        IEnumerable<Category> categories = await _unitOfWork.CategoryRepository.GetAllAsync(includes: x => x.PortfolioCategories)
+           ?? throw new NullReferenceException();
+
         return entity;
     }
 }

@@ -36,6 +36,9 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
         })
             ?? throw new NullReferenceException();
 
+        IEnumerable<Category> categories = await _unitOfWork.CategoryRepository.GetAllAsync(includes: x => x.PortfolioCategories)
+            ?? throw new NullReferenceException();
+
         if (pageNumber > totalPages)
         {
             pageNumber = totalPages;
@@ -71,7 +74,7 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
                     x.MetaDescription,
                     x.OgDescription,
                     x.MobileTitle,
-                    portfolioCat = x.PortfolioCategories?.Where(y => y != null && y.CategoryId != 0).Select(x => x.CategoryId),
+                    portfolioCat = x.PortfolioCategories?.Select(x => x.Category.Name),
                     portfolioImg = x.Images?.Select(y => new
                     {
                         y.ImagePath,
@@ -94,7 +97,7 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
                     MetaDescription = x.MetaDescriptionAz,
                     OgDescription = x.OgDescriptionAz,
                     MobileTitle = x.MobileTitleAz,
-                    portfolioCat = x.PortfolioCategories?.Where(y => y != null && y.CategoryId != 0).Select(x => x.CategoryId),
+                    portfolioCat = x.PortfolioCategories?.Select(x => x.Category.NameAz),
                     portfolioImg = x.Images?.Select(y => new
                     {
                         y.ImagePath,

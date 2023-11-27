@@ -1,6 +1,7 @@
 ﻿using Application.Abstracts.Common.Interfaces;
 using Domain.Entities;
 using MediatR;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Application.Portfolios.Queries;
@@ -25,6 +26,10 @@ public class PortfolioLanguageAllQueryHandler : IRequestHandler<PortfolioLanguag
         })
             ?? throw new NullReferenceException();
 
+        IEnumerable<Category> categories = await _unitOfWork.CategoryRepository.GetAllAsync(includes:x=> x.PortfolioCategories)
+           ?? throw new NullReferenceException();
+
+
         var data = new
         {
             portfolio_en= Portfolios.Select(p => new
@@ -41,7 +46,7 @@ public class PortfolioLanguageAllQueryHandler : IRequestHandler<PortfolioLanguag
                 p.MetaDescription,
                 p.OgDescription,
                 p.MobileTitle,
-                portfolioCat = p.PortfolioCategories?.Where(x => x != null && x.CategoryId != 0).Select(x => x.CategoryId),
+                portfolioCat = p.PortfolioCategories?.Select(x=>x.Category.Name),
                 portfolioImg = p.Images?.Select(y => new
                 {
                     y.ImagePath,
@@ -63,7 +68,7 @@ public class PortfolioLanguageAllQueryHandler : IRequestHandler<PortfolioLanguag
                 MetaDescription = p.MetaDescriptionAz,
                 OgDescription = p.OgDescriptionAz,
                 MobileTitle = p.MobileTitleAz,
-                portfolioCat = p.PortfolioCategories?.Where(x => x != null && x.CategoryId != 0).Select(x => x.CategoryId),
+                portfolioCat = p.PortfolioCategories?.Select(x => x.Category.NameAz),
                 portfolioImg = p.Images?.Select(y => new
                 {
                     y.ImagePath,

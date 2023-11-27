@@ -25,6 +25,9 @@ public class PortfolioAllQueryHandler : IRequestHandler<PortfolioAllQuery, IEnum
         })
             ?? throw new NullReferenceException();
 
+        IEnumerable<Category> categories = await _unitOfWork.CategoryRepository.GetAllAsync(includes: x => x.PortfolioCategories)
+           ?? throw new NullReferenceException();
+
         return Portfolios;
     }
 }

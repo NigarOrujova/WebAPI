@@ -1,6 +1,7 @@
 ﻿using Application.Abstracts.Common.Interfaces;
 using Domain.Entities;
 using MediatR;
+using System.Linq.Expressions;
 
 namespace Application.Categories.Queries;
 
@@ -17,6 +18,15 @@ internal class CategorySingleQueryHandler : IRequestHandler<CategorySingleQuery,
 
     public async Task<Category> Handle(CategorySingleQuery request, CancellationToken cancellationToken)
     {
+
+        IEnumerable<Portfolio> Portfolios = await _unitOfWork.PortfolioRepository.GetAllAsync(
+          includes: new Expression<Func<Portfolio, object>>[]
+          {
+                x => x.PortfolioCategories,
+                x => x.Images
+          })
+              ?? throw new NullReferenceException();
+
         Category entity = await _unitOfWork.CategoryRepository.GetAsync(n => n.Id == request.Id,includes: x => x.PortfolioCategories)
             ?? throw new NullReferenceException();
 
