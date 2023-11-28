@@ -22,7 +22,7 @@ public class UpdateBlogCommandHandler : IRequestHandler<UpdateBlogCommand, Blog>
 
     public async Task<Blog> Handle(UpdateBlogCommand request, CancellationToken cancellationToken)
     {
-        if (await _unitOfWork.BlogRepository.IsExistAsync(x => x.Title == request.Blog.Title))
+        if (await _unitOfWork.BlogRepository.IsExistAsync(x => x.Title == request.Blog.Title && x.Id != request.Id))
             throw new FileException("Blog with the same title already exists.");
 
         Blog entity = await _unitOfWork.BlogRepository.GetAsync(n => n.Id == request.Id);

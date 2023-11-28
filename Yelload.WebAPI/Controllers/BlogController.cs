@@ -76,7 +76,7 @@ public class BlogController : ApiControllerBase
         }
         catch (FileException ex)
         {
-            return StatusCode(StatusCodes.Status502BadGateway, new JsonResponse { Status = "Error", Message = ex.Message });
+            return StatusCode(StatusCodes.Status502BadGateway, new FileException( ex.Message ));
         }
     }
     [HttpPut("publish/{id}")]
