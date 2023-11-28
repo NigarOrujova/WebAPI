@@ -52,6 +52,10 @@ public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioComm
         entity.SlugAz = entity.TitleAz.ToSlug();
         if (request.Portfolio.CategoryIds != null)
         {
+            if (entity.PortfolioCategories == null)
+            {
+                entity.PortfolioCategories = new List<PortfolioCategory>();
+            }
             entity.PortfolioCategories?.RemoveAll(x => !request.Portfolio.CategoryIds.Contains(x.CategoryId));
             foreach (var categoryId in request.Portfolio.CategoryIds.Where(x => !entity.PortfolioCategories.Any(rc => rc.CategoryId == x)))
             {

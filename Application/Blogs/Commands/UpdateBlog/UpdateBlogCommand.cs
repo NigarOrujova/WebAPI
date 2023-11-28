@@ -70,6 +70,11 @@ public class UpdateBlogCommandHandler : IRequestHandler<UpdateBlogCommand, Blog>
 
         if (request.Blog.TagIds != null)
         {
+            if (entity.TagCloud == null)
+            {
+                entity.TagCloud = new List<BlogTagCloud>();
+            }
+
             entity.TagCloud?.RemoveAll(x => !request.Blog.TagIds.Contains(x.TagId));
             foreach (var categoryId in request.Blog.TagIds.Where(x => !entity.TagCloud.Any(rc => rc.TagId == x)))
             {
