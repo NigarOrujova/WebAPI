@@ -77,6 +77,7 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
                     portfolioCat = x.PortfolioCategories?.Select(x => x.Category.Name),
                     portfolioImg = x.Images?.Select(y => new
                     {
+                        y.Id,
                         y.ImagePath,
                         y.ImageAlt,
                         y.IsMain
@@ -100,6 +101,7 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
                     portfolioCat = x.PortfolioCategories?.Select(x => x.Category.NameAz),
                     portfolioImg = x.Images?.Select(y => new
                     {
+                        y.Id,
                         y.ImagePath,
                         y.ImageAlt,
                         y.IsMain

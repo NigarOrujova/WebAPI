@@ -27,17 +27,51 @@ internal class TagLanguageQueryHandler : IRequestHandler<TagLanguageQuery, objec
             includes: includes
         ) ?? throw new NullReferenceException();
 
+        IEnumerable<Blog> Blogs = await _unitOfWork.BlogRepository.GetAllAsync(
+        includes: x => x.TagCloud)
+            ?? throw new NullReferenceException();
+
         var data = new
         {
             Tag_en = new
             {
                 Name = entity.Name ?? "",
-                BlogCat = entity.TagCloud?.Where(x => x != null && x.BlogId != 0).Select(x => x.BlogId)
+                BlogCat = entity.TagCloud?.Select(x => new
+                {
+                    x.BlogId,
+                    Title = x.Blog.Title ?? "",
+                    Description = x.Blog.Description ?? "",
+                    x.Blog.ImagePath,
+                    x.Blog.Slug,
+                    x.Blog.MetaKeyword,
+                    x.Blog.MetaTitle,
+                    x.Blog.OgTitle,
+                    x.Blog.MetaDescription,
+                    x.Blog.OgDescription,
+                    x.Blog.MobileTitle,
+                    PublishDate = x.Blog.PublishDate?.ToString("MMMM dd, yyyy") ?? "",
+                    BlogCat = x.Blog.TagCloud?.Select(x => x.Tag.Name)
+                })
             },
             Tag_az = new
             {
                 Name = entity.NameAz,
-                BlogCat = entity.TagCloud?.Where(x => x != null && x.BlogId != 0).Select(x => x.BlogId)
+                BlogCat = entity.TagCloud?.Select(x => new
+                {
+                    x.BlogId,
+                    Title = x.Blog.TitleAz ?? "",
+                    Description = x.Blog.DescriptionAz ?? "",
+                    x.Blog.ImagePath,
+                    x.Blog.Slug,
+                    x.Blog.MetaKeywordAz,
+                    x.Blog.MetaTitleAz,
+                    x.Blog.OgTitleAz,
+                    x.Blog.MetaDescriptionAz,
+                    x.Blog.OgDescriptionAz,
+                    x.Blog.MobileTitleAz,
+                    PublishDate = x.Blog.PublishDate?.ToString("MMMM dd, yyyy") ?? "",
+                    BlogCat = x.Blog.TagCloud?.Select(x => x.Tag.NameAz)
+                }),
             }
         };
         return data;

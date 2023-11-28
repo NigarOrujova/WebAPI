@@ -50,6 +50,7 @@ internal class PortfolioLanguageQueryHandler : IRequestHandler<PortfolioLanguage
                 portfolioCat = entity.PortfolioCategories?.Select(x => x.Category.Name),
                 portfolioImg = entity.Images?.Select(y => new
                 {
+                    y.Id,
                     y.ImagePath,
                     y.ImageAlt,
                     y.IsMain
@@ -71,6 +72,7 @@ internal class PortfolioLanguageQueryHandler : IRequestHandler<PortfolioLanguage
                 portfolioCat = entity.PortfolioCategories?.Select(x => x.Category.NameAz),
                 portfolioImg = entity.Images?.Select(y => new
                 {
+                    y.Id,
                     y.ImagePath,
                     y.ImageAlt,
                     y.IsMain

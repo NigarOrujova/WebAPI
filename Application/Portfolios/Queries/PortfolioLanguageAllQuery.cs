@@ -49,6 +49,7 @@ public class PortfolioLanguageAllQueryHandler : IRequestHandler<PortfolioLanguag
                 portfolioCat = p.PortfolioCategories?.Select(x=>x.Category.Name),
                 portfolioImg = p.Images?.Select(y => new
                 {
+                    y.Id,
                     y.ImagePath,
                     y.ImageAlt,
                     y.IsMain
@@ -71,6 +72,7 @@ public class PortfolioLanguageAllQueryHandler : IRequestHandler<PortfolioLanguag
                 portfolioCat = p.PortfolioCategories?.Select(x => x.Category.NameAz),
                 portfolioImg = p.Images?.Select(y => new
                 {
+                    y.Id,
                     y.ImagePath,
                     ImageAlt=y.ImageAltAz,
                     y.IsMain
