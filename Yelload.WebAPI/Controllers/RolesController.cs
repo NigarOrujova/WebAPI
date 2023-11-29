@@ -27,7 +27,10 @@ public class RolesController : ApiControllerBase
     [Authorize(Roles = "sa")]
     public async Task<IActionResult> RoleSorting([FromForm] RoleSortCommand request)
   => Ok(await Mediator.Send(request));
-    [HttpDelete]
-    public async Task<IActionResult> DeleteAsync([FromForm] RoleDeleteCommand request)
-  => Ok(await Mediator.Send(request));
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAsync([FromRoute] int id)
+    {
+        var data = id.ToString();
+        return Ok(await Mediator.Send(new RoleDeleteCommand(data)));
+    }
 }

@@ -16,7 +16,10 @@ public class UsersController : ApiControllerBase
     [HttpPost("setprincipal")]
     public async Task<IActionResult> SetPrincipalAsync([FromForm] UserSetPrincipalCommand request)
    => Ok(await Mediator.Send(request));
-    [HttpDelete]
-    public async Task<IActionResult> DeleteAsync([FromForm] UserDeleteCommand request)
-   => Ok(await Mediator.Send(request));
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAsync([FromRoute] int id)
+    {
+        var data=id.ToString();
+       return Ok(await Mediator.Send(new UserDeleteCommand(data)));
+    }
 }

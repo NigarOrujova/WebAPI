@@ -5,9 +5,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Identity.Users.Commands;
 
-public class UserDeleteCommand:IRequest<JsonResponse>
+public record UserDeleteCommand(string Id):IRequest<JsonResponse>
 {
-    public string Id { get; set; }
     public class UserDeleteCommandHandler : IRequestHandler<UserDeleteCommand, JsonResponse>
     {
         private readonly UserManager<AppUser> userManager;

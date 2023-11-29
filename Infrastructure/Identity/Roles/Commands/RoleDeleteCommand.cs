@@ -5,9 +5,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Identity.Roles.Commands;
 
-public class RoleDeleteCommand : IRequest<JsonResponse>
+public record RoleDeleteCommand(string Id) : IRequest<JsonResponse>
 {
-    public string Id { get; set; }
     public class RoleDeleteCommandHandler : IRequestHandler<RoleDeleteCommand, JsonResponse>
     {
         private readonly RoleManager<AppRole> roleManager;
