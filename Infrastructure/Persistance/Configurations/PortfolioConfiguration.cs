@@ -26,5 +26,6 @@ public class PortfolioConfiguration : IEntityTypeConfiguration<Portfolio>
         builder.Property(t => t.SlugAz)
                 .IsRequired();
         builder.Ignore(x => x.CategoryIds); 
+        builder.Ignore(x => x.ImageIds);
     }
 }

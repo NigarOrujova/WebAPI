@@ -27,5 +27,6 @@ public class Portfolio:BaseEntity
     public string? MobileTitleAz { get; set; }
     public List<int>? CategoryIds { get; set; } = new List<int>();
     public List<PortfolioCategory>? PortfolioCategories { get; set; }
-    public ICollection<PortfolioImage>? Images { get; set; }
+    public List<int>? ImageIds { get; set; } = new List<int>();
+    public List<PortfolioImage>? Images { get; set; }
 }

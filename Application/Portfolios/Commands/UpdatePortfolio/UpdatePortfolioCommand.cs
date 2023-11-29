@@ -18,13 +18,12 @@ public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioComm
         _unitOfWork = unitOfWork;
         _env = env;
     }
-
     public async Task<Portfolio> Handle(UpdatePortfolioCommand request, CancellationToken cancellationToken)
     {
         if (await _unitOfWork.PortfolioRepository.IsExistAsync(x => x.Title == request.Portfolio.Title && x.Id!=request.Id))
             throw new FileException("Portfolio with the same title already exists.");
 
-        Portfolio entity = await _unitOfWork.PortfolioRepository.GetAsync(n => n.Id == request.Id);
+        Portfolio entity = await _unitOfWork.PortfolioRepository.GetAsync(n => n.Id == request.Id,includes: x=>x.Images);
 
         if (entity == null)
             throw new FileException("Portfolio Not Fount");
@@ -70,6 +69,7 @@ public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioComm
         entity.Images = new List<PortfolioImage>();
         if (request.Portfolio.Images != null)
         {
+            entity.Images?.RemoveAll(x => !request.Portfolio.ImageIds.Contains(x.Id));
             foreach (var item in request.Portfolio.Images)
             {
                 if (item != null)
