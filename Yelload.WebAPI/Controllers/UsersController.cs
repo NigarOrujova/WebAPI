@@ -1,5 +1,7 @@
 ﻿using Infrastructure.Identity.Users.Commands;
 using Infrastructure.Identity.Users.Queries;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Yelload.WebAPI.Controllers.Base;
 
@@ -22,4 +24,18 @@ public class UsersController : ApiControllerBase
         var data=id.ToString();
        return Ok(await Mediator.Send(new UserDeleteCommand(data)));
     }
+    [HttpGet("details")]
+    public async Task<IActionResult> GetDetails([FromQuery] UserDetailQuery query)
+    {
+        var availableRoles = await Mediator.Send(new UserAvailableRolesQuery() { UserId = query.Id });
+
+        var data = await Mediator.Send(query);
+
+        return Ok(new
+        {
+            Data = data,
+            AvailableRoles = availableRoles
+        });
+    }
+
 }
