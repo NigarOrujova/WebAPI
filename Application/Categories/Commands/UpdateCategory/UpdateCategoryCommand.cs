@@ -23,6 +23,10 @@ public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryComman
         entity.NameAz = request.Category.NameAz;
         if (request.Category.PortfolioIds != null)
         {
+            if (entity.PortfolioCategories == null)
+            {
+                entity.PortfolioCategories = new List<PortfolioCategory>();
+            }
             entity.PortfolioCategories?.RemoveAll(x => !request.Category.PortfolioIds.Contains(x.CategoryId));
             foreach (var portfolioId in request.Category.PortfolioIds.Where(x => !entity.PortfolioCategories.Any(rc => rc.CategoryId == x)))
             {

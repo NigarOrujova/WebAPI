@@ -22,12 +22,12 @@ public class UsersController : ApiControllerBase
         var data=id.ToString();
        return Ok(await Mediator.Send(new UserDeleteCommand(data)));
     }
-    [HttpGet("details")]
-    public async Task<IActionResult> GetDetails([FromQuery] UserDetailQuery query)
+    [HttpGet("details/{id}")]
+    public async Task<IActionResult> GetDetails([FromRoute] int id)
     {
-        var availableRoles = await Mediator.Send(new UserAvailableRolesQuery() { UserId = query.Id });
+        var availableRoles = await Mediator.Send(new UserAvailableRolesQuery() { UserId = id });
 
-        var data = await Mediator.Send(query);
+        var data = await Mediator.Send(new UserDetailQuery() { Id = id });
 
         return Ok(new
         {

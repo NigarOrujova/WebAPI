@@ -24,6 +24,10 @@ public class TagAllQueryHandler : IRequestHandler<TagAllQuery, IEnumerable<Tag>>
         })
             ?? throw new NullReferenceException();
 
+        IEnumerable<Blog> Blogs = await _unitOfWork.BlogRepository.GetAllAsync(
+        includes: x => x.TagCloud)
+           ?? throw new NullReferenceException();
+
         return Tags;
     }
 }

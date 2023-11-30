@@ -73,6 +73,7 @@ public class CreatePortfolioCommandHandler : IRequestHandler<CreatePortfolioComm
         entity.IsMain = request.IsMain;
         if (request.CategoryIds != null)
         {
+
             entity.PortfolioCategories = new List<PortfolioCategory>();
             foreach (var id in request.CategoryIds)
             {
