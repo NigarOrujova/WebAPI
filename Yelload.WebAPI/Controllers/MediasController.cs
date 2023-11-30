@@ -1,7 +1,9 @@
-﻿using Application.Medias.Commands.CreateMedia;
+﻿using Application.Abstracts.Common.Exceptions;
+using Application.Medias.Commands.CreateMedia;
 using Application.Medias.Commands.DeleteMedia;
 using Application.Medias.Commands.UpdateMedia;
 using Application.Medias.Queries;
+using Domain.Dtos;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,11 +30,31 @@ public class MediasController : ApiControllerBase
     [HttpPost]
     [Authorize(Policy = "admin.medias.post")]
     public async Task<IActionResult> CreateAsync([FromForm] CreateMediaCommand request)
-   => Ok(await Mediator.Send(request));
+    {
+        try
+        {
+            var result = await Mediator.Send(request);
+            return Ok(result);
+        }
+        catch (FileException ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new JsonResponse { Status = "Error", Message = ex.Message });
+        }
+    }
     [HttpPut("{id}")]
     [Authorize(Policy = "admin.medias.put")]
     public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromForm] Media request)
-   => Ok(await Mediator.Send(new UpdateMediaCommand(id,request)));
+    {
+        try
+        {
+            var result = await Mediator.Send(new UpdateMediaCommand(id, request));
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new Exception(ex.Message));
+        }
+    }
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.medias.delete")]
     public async Task<IActionResult> DeleteAsync([FromRoute] int id)

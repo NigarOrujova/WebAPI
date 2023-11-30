@@ -1,7 +1,10 @@
-﻿using Application.Customers.Commands.CreateCustomer;
+﻿using Application.Abstracts.Common.Exceptions;
+using Application.Customers.Commands.CreateCustomer;
 using Application.Customers.Commands.DeleteCustomer;
 using Application.Customers.Commands.UpdateCustomer;
 using Application.Customers.Queries;
+using Application.PortfolioImages.Commands.UpdatePortfolioImage;
+using Domain.Dtos;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -34,11 +37,31 @@ public class CustomersController : ApiControllerBase
     [HttpPost]
     [Authorize(Policy = "admin.customers.post")]
     public async Task<IActionResult> CreateAsync([FromForm] CreateCustomerCommand request)
-   => Ok(await Mediator.Send(request));
+    {
+        try
+        {
+            var result = await Mediator.Send(request);
+            return Ok(result);
+        }
+        catch (FileException ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new JsonResponse { Status = "Error", Message = ex.Message });
+        }
+    }
     [HttpPut("{id}")]
     [Authorize(Policy = "admin.customers.put")]
     public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromForm] Customer request)
-        => Ok(await Mediator.Send(new UpdateCustomerCommand(id, request)));
+    {
+        try
+        {
+            var result = await Mediator.Send(new UpdateCustomerCommand(id, request));
+            return Ok(result);
+        }
+        catch (FileException ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new FileException(ex.Message));
+        }
+    }
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.customers.delete")]
     public async Task<IActionResult> DeleteAsync([FromRoute] int id)

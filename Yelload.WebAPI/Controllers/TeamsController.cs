@@ -1,8 +1,11 @@
-﻿using Application.Portfolios.Commands.UpdatePortfolio;
+﻿using Application.Abstracts.Common.Exceptions;
+using Application.Blogs.Commands.UpdateBlog;
+using Application.Portfolios.Commands.UpdatePortfolio;
 using Application.Teams.Commands.CreateTeam;
 using Application.Teams.Commands.DeleteTeam;
 using Application.Teams.Commands.UpdateTeam;
 using Application.Teams.Queries;
+using Domain.Dtos;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,11 +38,31 @@ public class TeamsController : ApiControllerBase
     [HttpPost]
     [Authorize(Policy = "admin.teams.post")]
     public async Task<IActionResult> CreateAsync([FromForm] CreateTeamCommand request)
-    => Ok(await Mediator.Send(request));
+    {
+        try
+        {
+            var result = await Mediator.Send(request);
+            return Ok(result);
+        }
+        catch (FileException ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new JsonResponse { Status = "Error", Message = ex.Message });
+        }
+    }
     [HttpPut("{id}")]
     [Authorize(Policy = "admin.teams.put")]
     public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromForm] Team request)
-    => Ok(await Mediator.Send(new UpdateTeamCommand(id, request)));
+    {
+        try
+        {
+            var result = await Mediator.Send(new UpdateTeamCommand(id, request));
+            return Ok(result);
+        }
+        catch (FileException ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new FileException(ex.Message));
+        }
+    }
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.teams.delete")]
     public async Task<IActionResult> DeleteAsync([FromRoute] int id)

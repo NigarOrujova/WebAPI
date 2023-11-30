@@ -1,8 +1,11 @@
-﻿using Application.Medias.Commands.UpdateMedia;
+﻿using Application.Abstracts.Common.Exceptions;
+using Application.Medias.Commands.UpdateMedia;
 using Application.OurValues.Commands.CreateOurValue;
 using Application.OurValues.Commands.DeleteOurValue;
 using Application.OurValues.Commands.UpdateOurValue;
 using Application.OurValues.Queries;
+using Application.PortfolioImages.Commands.UpdatePortfolioImage;
+using Domain.Dtos;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,11 +38,31 @@ public class OurValuesController : ApiControllerBase
     [HttpPost]
     [Authorize(Policy = "admin.ourvalues.post")]
     public async Task<IActionResult> CreateAsync([FromForm] CreateOurValueCommand request)
-   => Ok(await Mediator.Send(request));
+    {
+        try
+        {
+            var result = await Mediator.Send(request);
+            return Ok(result);
+        }
+        catch (FileException ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new JsonResponse { Status = "Error", Message = ex.Message });
+        }
+    }
     [HttpPut("{id}")]
     [Authorize(Policy = "admin.ourvalues.put")]
     public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromForm] OurValue request)
-   => Ok(await Mediator.Send(new UpdateOurValueCommand(id, request)));
+    {
+        try
+        {
+            var result = await Mediator.Send(new UpdateOurValueCommand(id, request));
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new Exception(ex.Message));
+        }
+    }
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.ourvalues.delete")]
     public async Task<IActionResult> DeleteAsync([FromRoute] int id)

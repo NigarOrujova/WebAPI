@@ -1,12 +1,13 @@
-﻿using Application.OurValues.Queries;
+﻿using Application.Portfolios.Commands.UpdatePortfolio;
 using Application.Tags.Commands.CreateTag;
 using Application.Tags.Commands.DeleteTag;
 using Application.Tags.Commands.UpdateTag;
 using Application.Tags.Queries;
-using Application.Teams.Queries;
+using Domain.Dtos;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Asn1.Ocsp;
 using Yelload.WebAPI.Controllers.Base;
 
 namespace Yelload.WebAPI.Controllers;
@@ -36,11 +37,31 @@ public class TagsController : ApiControllerBase
     [HttpPost]
     [Authorize(Policy = "admin.Tags.post")]
     public async Task<IActionResult> CreateAsync([FromForm] CreateTagCommand request)
-    => Ok(await Mediator.Send(request));
+    {
+        try
+        {
+            var result = await Mediator.Send(request);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new JsonResponse { Status = "Error", Message = ex.Message });
+        }
+    }
     [HttpPut("{id}")]
     [Authorize(Policy = "admin.Tags.put")]
     public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromForm] Tag request)
-    => Ok(await Mediator.Send(new UpdateTagCommand(id, request)));
+    {
+        try
+        {
+            var result = await Mediator.Send(new UpdateTagCommand(id, request));
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new Exception(ex.Message ));
+        }
+    }
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.Tags.delete")]
     public async Task<IActionResult> DeleteAsync([FromRoute] int id)

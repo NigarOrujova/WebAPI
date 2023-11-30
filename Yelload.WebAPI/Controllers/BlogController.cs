@@ -7,6 +7,7 @@ using Domain.Dtos;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Asn1.Ocsp;
 using Yelload.WebAPI.Controllers.Base;
 
 namespace Yelload.WebAPI.Controllers;
@@ -82,7 +83,17 @@ public class BlogController : ApiControllerBase
     [HttpPut("publish/{id}")]
     [Authorize(Policy = "admin.Blogs.publish")]
     public async Task<IActionResult> BlogPublish([FromRoute] int id)
-    => Ok(await Mediator.Send(new BlogPublishQuery(id)));
+    {
+        try
+        {
+            var result = await Mediator.Send(new BlogPublishQuery(id));
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new Exception(ex.Message));
+        }
+    }
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.Blogs.delete")]
     public async Task<IActionResult> DeleteAsync([FromRoute] int id)
