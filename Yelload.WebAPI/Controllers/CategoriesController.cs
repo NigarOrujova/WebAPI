@@ -2,6 +2,7 @@
 using Application.Categories.Commands.DeleteCategory;
 using Application.Categories.Commands.UpdateCategory;
 using Application.Categories.Queries;
+using Domain.Dtos;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -34,11 +35,31 @@ public class CategoriesController : ApiControllerBase
     [HttpPost]
     [Authorize(Policy = "admin.categories.post")]
     public async Task<IActionResult> CreateAsync([FromForm] CreateCategoryCommand request)
-        => Ok(await Mediator.Send(request));
+    {
+        try
+        {
+            var result = await Mediator.Send(request);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new JsonResponse { Status = "Error", Message = ex.Message });
+        }
+    }
     [HttpPut("{id}")]
     [Authorize(Policy = "admin.categories.put")]
     public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromForm] Category request)
-        => Ok(await Mediator.Send(new UpdateCategoryCommand(id,request)));
+    {
+        try
+        {
+            var result = await Mediator.Send(new UpdateCategoryCommand(id, request));
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new Exception(ex.Message));
+        }
+    }
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.categories.delete")]
     public async Task<IActionResult> DeleteAsync([FromRoute] int id)

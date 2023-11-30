@@ -25,19 +25,23 @@ public class UpdateTagCommandHandler : IRequestHandler<UpdateTagCommand, Tag>
         entity.Name = request.Tag.Name;
         entity.NameAz = request.Tag.NameAz;
 
-        //if (request.Tag.TagIds != null)
-        //{
-        //    entity.TagCloud?.RemoveAll(x => !request.Tag.TagIds.Contains(x.TagId));
-        //    foreach (var categoryId in request.Tag.TagIds.Where(x => !entity.TagCloud.Any(rc => rc.TagId == x)))
-        //    {
-        //        TagTagCloud TagCategory = new TagTagCloud
-        //        {
-        //            TagId = request.Id,
-        //            TagId = categoryId
-        //        };
-        //        entity.TagCloud.Add(TagCategory);
-        //    }
-        //}
+        if (request.Tag.BlogIds != null)
+        {
+            if (entity.TagCloud == null)
+            {
+                entity.TagCloud = new List<BlogTagCloud>();
+            }
+            entity.TagCloud?.RemoveAll(x => !request.Tag.BlogIds.Contains(x.TagId));
+            foreach (var blogid in request.Tag.BlogIds.Where(x => !entity.TagCloud.Any(rc => rc.TagId == x)))
+            {
+                BlogTagCloud TagCategory = new BlogTagCloud
+                {
+                    TagId = request.Id,
+                    BlogId = blogid
+                };
+                entity.TagCloud.Add(TagCategory);
+            }
+        }
         await _unitOfWork.TagRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
