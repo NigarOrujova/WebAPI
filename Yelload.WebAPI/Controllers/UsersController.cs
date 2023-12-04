@@ -1,10 +1,12 @@
 ﻿using Infrastructure.Identity.Users.Commands;
 using Infrastructure.Identity.Users.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Yelload.WebAPI.Controllers.Base;
 
 namespace Yelload.WebAPI.Controllers;
 
+[Authorize(Roles = "sa")]
 public class UsersController : ApiControllerBase
 {
     [HttpGet]
