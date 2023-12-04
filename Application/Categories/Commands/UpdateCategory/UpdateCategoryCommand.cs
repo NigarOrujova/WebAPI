@@ -16,7 +16,7 @@ public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryComman
 
     public async Task<Category> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
     {
-        Category entity = await _unitOfWork.CategoryRepository.GetAsync(n => n.Id == request.Id)
+        Category entity = await _unitOfWork.CategoryRepository.GetAsync(n => n.Id == request.Id,includes:c=>c.PortfolioCategories)
              ?? throw new NullReferenceException();
 
         entity.Name = request.Category.Name;
