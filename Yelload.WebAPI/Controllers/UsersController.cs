@@ -6,19 +6,21 @@ using Yelload.WebAPI.Controllers.Base;
 
 namespace Yelload.WebAPI.Controllers;
 
-[Authorize(Roles = "sa")]
 public class UsersController : ApiControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
         => Ok(await Mediator.Send(new UserAllQuery()));
     [HttpPost("setrole")]
+    [Authorize(Roles = "sa")]
     public async Task<IActionResult> SetRoleAsync([FromForm]UserSetRoleCommand request)
    => Ok(await Mediator.Send(request));
     [HttpPost("setprincipal")]
+    [Authorize(Roles = "sa")]
     public async Task<IActionResult> SetPrincipalAsync([FromForm] UserSetPrincipalCommand request)
    => Ok(await Mediator.Send(request));
     [HttpDelete("{id}")]
+    [Authorize(Roles = "sa")]
     public async Task<IActionResult> DeleteAsync([FromRoute] int id)
     {
         var data=id.ToString();
