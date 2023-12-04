@@ -34,6 +34,7 @@ public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioComm
             throw new FileException("Portfolio Not Fount");
 
         entity.Title = request.Portfolio.Title;
+        entity.Link = request.Portfolio.Link;
         entity.TitleAz = request.Portfolio.TitleAz;
         entity.SubTitle = request.Portfolio.SubTitle;
         entity.SubTitleAz = request.Portfolio.SubTitleAz;

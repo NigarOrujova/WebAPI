@@ -4,6 +4,7 @@ namespace Domain.Entities;
 
 public class Portfolio:BaseEntity
 {
+    public string? Link { get; set; }
     public string Title { get; set; }
     public string TitleAz { get; set; }
     public string? SubTitle { get; set; }
