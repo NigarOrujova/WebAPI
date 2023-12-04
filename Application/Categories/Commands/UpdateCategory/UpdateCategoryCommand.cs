@@ -27,8 +27,8 @@ public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryComman
             {
                 entity.PortfolioCategories = new List<PortfolioCategory>();
             }
-            entity.PortfolioCategories?.RemoveAll(x => !request.Category.PortfolioIds.Contains(x.CategoryId));
-            foreach (var portfolioId in request.Category.PortfolioIds.Where(x => !entity.PortfolioCategories.Any(rc => rc.CategoryId == x)))
+            entity.PortfolioCategories?.RemoveAll(x => !request.Category.PortfolioIds.Contains(x.PortfolioId));
+            foreach (var portfolioId in request.Category.PortfolioIds.Where(x => !entity.PortfolioCategories.Any(rc => rc.PortfolioId == x)))
             {
                 PortfolioCategory portfolioCategory = new PortfolioCategory
                 {

@@ -20,7 +20,7 @@ public class UpdateTagCommandHandler : IRequestHandler<UpdateTagCommand, Tag>
 
     public async Task<Tag> Handle(UpdateTagCommand request, CancellationToken cancellationToken)
     {
-        Tag entity = await _unitOfWork.TagRepository.GetAsync(n => n.Id == request.Id);
+        Tag entity = await _unitOfWork.TagRepository.GetAsync(n => n.Id == request.Id, includes:x=>x.TagCloud);
        
         entity.Name = request.Tag.Name;
         entity.NameAz = request.Tag.NameAz;
@@ -31,8 +31,8 @@ public class UpdateTagCommandHandler : IRequestHandler<UpdateTagCommand, Tag>
             {
                 entity.TagCloud = new List<BlogTagCloud>();
             }
-            entity.TagCloud?.RemoveAll(x => !request.Tag.BlogIds.Contains(x.TagId));
-            foreach (var blogid in request.Tag.BlogIds.Where(x => !entity.TagCloud.Any(rc => rc.TagId == x)))
+            entity.TagCloud?.RemoveAll(x => !request.Tag.BlogIds.Contains(x.BlogId));
+            foreach (var blogid in request.Tag.BlogIds.Where(x => !entity.TagCloud.Any(rc => rc.BlogId == x)))
             {
                 BlogTagCloud TagCategory = new BlogTagCloud
                 {

@@ -25,7 +25,7 @@ public class UpdateBlogCommandHandler : IRequestHandler<UpdateBlogCommand, Blog>
         if (await _unitOfWork.BlogRepository.IsExistAsync(x => x.Title == request.Blog.Title && x.Id != request.Id))
             throw new FileException("Blog with the same title already exists.");
 
-        Blog entity = await _unitOfWork.BlogRepository.GetAsync(n => n.Id == request.Id);
+        Blog entity = await _unitOfWork.BlogRepository.GetAsync(n => n.Id == request.Id,includes:x=>x.TagCloud);
 
         if (entity == null)
             throw new FileException("Blog Not fount");
