@@ -4,6 +4,7 @@ using Application.Extensions;
 using Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Hosting;
+using System.Linq.Expressions;
 
 namespace Application.Portfolios.Commands.UpdatePortfolio;
 
@@ -23,7 +24,11 @@ public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioComm
         if (await _unitOfWork.PortfolioRepository.IsExistAsync(x => x.Title == request.Portfolio.Title && x.Id!=request.Id))
             throw new FileException("Portfolio with the same title already exists.");
 
-        Portfolio entity = await _unitOfWork.PortfolioRepository.GetAsync(n => n.Id == request.Id,includes: x=>x.Images);
+        Portfolio entity = await _unitOfWork.PortfolioRepository.GetAsync(n => n.Id == request.Id, includes: new Expression<Func<Portfolio, object>>[]
+        {
+            x => x.PortfolioCategories,
+            x => x.Images
+        });
 
         if (entity == null)
             throw new FileException("Portfolio Not Fount");

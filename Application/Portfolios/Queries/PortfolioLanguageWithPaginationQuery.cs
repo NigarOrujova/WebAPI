@@ -34,10 +34,10 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
             x => x.PortfolioCategories,
             x => x.Images
         })
-            ?? throw new NullReferenceException();
+            ?? throw new InvalidOperationException("Portfolio entity is null");
 
         IEnumerable<Category> categories = await _unitOfWork.CategoryRepository.GetAllAsync(includes: x => x.PortfolioCategories)
-            ?? throw new NullReferenceException();
+            ?? throw new InvalidOperationException("Categories is null");
 
         if (pageNumber > totalPages)
         {
