@@ -8,7 +8,7 @@ namespace Infrastructure.Identity.Roles.Commands;
 public class RoleSortCommand : IRequest<JsonResponse>
 {
     public int EntityId { get; set; }
-    public int AboveEntityId { get; set; }
+    public byte NewRank { get; set; }
 
 
     public class RoleSortCommandHandler : IRequestHandler<RoleSortCommand, JsonResponse>
@@ -22,33 +22,37 @@ public class RoleSortCommand : IRequest<JsonResponse>
 
         public async Task<JsonResponse> Handle(RoleSortCommand request, CancellationToken cancellationToken)
         {
-            var firstRoleEntry = await db.Roles
-                .FirstOrDefaultAsync(m => m.Id == request.AboveEntityId, cancellationToken);
-
-            byte rank = firstRoleEntry.Rank;
-
-
             var movedRoleEntry = await db.Roles.FirstOrDefaultAsync(m => m.Id == request.EntityId, cancellationToken);
-            movedRoleEntry.Rank = Convert.ToByte(rank >= 1 ? --rank : rank);
 
-            rank = movedRoleEntry.Rank;
-
-            var anotherRoles = await db.Roles
-                .Where(m => m.Id != request.AboveEntityId && m.Id != request.EntityId && m.Rank <= rank)
-                .OrderByDescending(m => m.Rank)
-                .ToListAsync(cancellationToken);
-
-            foreach (var item in anotherRoles)
+            if (movedRoleEntry != null)
             {
-                item.Rank = rank >= 1 ? --rank : rank;
-            }
+                // Update the rank of the moved entity
+                movedRoleEntry.Rank = request.NewRank;
 
-            await db.SaveChangesAsync(cancellationToken);
+                // Adjust the ranks of other entities
+                var otherRoles = await db.Roles
+                    .Where(m => m.Id != request.EntityId && m.Rank <= request.NewRank)
+                    .OrderByDescending(m => m.Rank)
+                    .ToListAsync(cancellationToken);
+
+                foreach (var item in otherRoles)
+                {
+                    item.Rank = request.NewRank >= 1 ? --request.NewRank : request.NewRank;
+                }
+
+                await db.SaveChangesAsync(cancellationToken);
+
+                return new JsonResponse
+                {
+                    Error = false,
+                    Message = "Sorted!"
+                };
+            }
 
             return new JsonResponse
             {
-                Error = false,
-                Message = "Sorted!"
+                Error = true,
+                Message = "Entity not found!"
             };
         }
     }
