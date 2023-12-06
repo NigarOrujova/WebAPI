@@ -9,4 +9,5 @@ public class Customer:BaseEntity
     public IFormFile? Image { get; set; } 
     public string? ImageAlt { get; set; }
     public string? ImageAltAz { get; set; }
+    public byte? Rank { get; set; }
 }

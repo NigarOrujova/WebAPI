@@ -15,4 +15,5 @@ public class Team:BaseEntity
     public IFormFile? Image2 { get; set; }
     public string? ImageAlt { get; set; }
     public string? ImageAltAz { get; set; }
+    public byte? Rank { get; set; }
 }

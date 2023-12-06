@@ -1,9 +1,9 @@
 ﻿using Application.Abstracts.Common.Exceptions;
 using Application.Customers.Commands.CreateCustomer;
 using Application.Customers.Commands.DeleteCustomer;
+using Application.Customers.Commands.SortCustomer;
 using Application.Customers.Commands.UpdateCustomer;
 using Application.Customers.Queries;
-using Application.PortfolioImages.Commands.UpdatePortfolioImage;
 using Domain.Dtos;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -33,6 +33,20 @@ public class CustomersController : ApiControllerBase
         var result = await Mediator.Send(query);
 
         return Ok(result);
+    }
+    [HttpPost("customersort")]
+    [Authorize(Policy = "admin.customers.sort")]
+    public async Task<IActionResult> SortCustomer([FromForm] CustomerSortCommand request)
+    {
+        try
+        {
+            var result = await Mediator.Send(request);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new JsonResponse { Status = "Error", Message = ex.Message });
+        }
     }
     [HttpPost]
     [Authorize(Policy = "admin.customers.post")]

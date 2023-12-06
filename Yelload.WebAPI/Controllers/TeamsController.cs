@@ -3,6 +3,7 @@ using Application.Blogs.Commands.UpdateBlog;
 using Application.Portfolios.Commands.UpdatePortfolio;
 using Application.Teams.Commands.CreateTeam;
 using Application.Teams.Commands.DeleteTeam;
+using Application.Teams.Commands.SortTeam;
 using Application.Teams.Commands.UpdateTeam;
 using Application.Teams.Queries;
 using Domain.Dtos;
@@ -45,6 +46,20 @@ public class TeamsController : ApiControllerBase
             return Ok(result);
         }
         catch (FileException ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new JsonResponse { Status = "Error", Message = ex.Message });
+        }
+    }
+    [HttpPost("teamsort")]
+    [Authorize(Policy = "admin.teams.sort")]
+    public async Task<IActionResult> SortTeam([FromForm]  TeamSortCommand request)
+    {
+        try
+        {
+            var result = await Mediator.Send(request);
+            return Ok(result);
+        }
+        catch (Exception ex)
         {
             return StatusCode(StatusCodes.Status502BadGateway, new JsonResponse { Status = "Error", Message = ex.Message });
         }
