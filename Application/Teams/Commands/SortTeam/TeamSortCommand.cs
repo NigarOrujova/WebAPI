@@ -31,7 +31,7 @@ public class TeamSortCommand: IRequest<JsonResponse>
                 // Adjust the ranks of other entities
                 var otherRoles = await _unitOfWork.TeamRepository
                     .GetAllAsync(m => m.Id != request.EntityId && m.Rank <= request.NewRank);
-
+                otherRoles.OrderByDescending(m => m.Rank);
                 foreach (var item in otherRoles)
                 {
                     item.Rank = request.NewRank >= 1 ? --request.NewRank : request.NewRank;

@@ -22,12 +22,14 @@ internal class CustomersLanguageQueryHandler : IRequestHandler<CustomersLanguage
             customer_en = new
             {
                 entity.ImagePath,
-                entity.ImageAlt
+                entity.ImageAlt,
+                entity.Rank
             },
             customer_az = new
             {
                 entity.ImagePath,
-                ImageAlt=entity.ImageAltAz
+                ImageAlt=entity.ImageAltAz,
+                entity.Rank
             }
         };
         return data;

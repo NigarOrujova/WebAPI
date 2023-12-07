@@ -23,6 +23,7 @@ internal class TeamLanguageQueryHandler : IRequestHandler<TeamLanguageQuery, obj
             team_en = new
             {
                 entity.FulllName,
+                entity.Rank,
                 entity.Job,
                 entity.ImagePath,
                 entity.ImagePath2,
@@ -31,6 +32,7 @@ internal class TeamLanguageQueryHandler : IRequestHandler<TeamLanguageQuery, obj
             team_az = new
             {
                 FulllName=entity.FulllNameAz,
+                Rank=entity.Rank,
                 Job=entity.JobAz,
                 ImagePath = entity.ImagePath,
                 ImagePath2 = entity.ImagePath2,

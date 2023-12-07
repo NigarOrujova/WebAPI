@@ -5,4 +5,5 @@ namespace Domain.Entities;
 public class Header:BaseEntity
 {
     public string Title { get; set; }
+    public string TitleAz { get; set; }
 }

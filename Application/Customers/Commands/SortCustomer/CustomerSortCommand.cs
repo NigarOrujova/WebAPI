@@ -1,5 +1,4 @@
 ﻿using Application.Abstracts.Common.Interfaces;
-using Application.Customers.Commands.SortCustomer;
 using Domain.Dtos;
 using MediatR;
 
@@ -32,6 +31,7 @@ public class CustomerSortCommand : IRequest<JsonResponse>
                 // Adjust the ranks of other entities
                 var otherRoles = await _unitOfWork.CustomerRepository
                     .GetAllAsync(m => m.Id != request.EntityId && m.Rank <= request.NewRank);
+                otherRoles.OrderByDescending(m => m.Rank);
 
                 foreach (var item in otherRoles)
                 {

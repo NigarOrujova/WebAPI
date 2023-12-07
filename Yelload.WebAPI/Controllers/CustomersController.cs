@@ -79,5 +79,5 @@ public class CustomersController : ApiControllerBase
     [HttpDelete("{id}")]
     [Authorize(Policy = "admin.customers.delete")]
     public async Task<IActionResult> DeleteAsync([FromRoute] int id)
-   => Ok(await Mediator.Send(new DeleteCustomerCommand(id)));
+    => Ok(await Mediator.Send(new DeleteCustomerCommand(id)));
 }

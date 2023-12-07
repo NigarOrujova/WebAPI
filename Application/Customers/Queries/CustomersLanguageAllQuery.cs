@@ -24,13 +24,15 @@ public class CustomersLanguageAllQueryHandler : IRequestHandler<CustomersLanguag
             {
                 c.Id,
                 c.ImagePath,
-                c.ImageAlt
+                c.ImageAlt,
+                c.Rank
             }).ToList(),
             customer_az=Customers.Select(c => new
             {
                 c.Id,
                 c.ImagePath,
-                ImageAlt = c.ImageAltAz
+                ImageAlt = c.ImageAltAz,
+                c.Rank
             }).ToList()
         };
         return data;

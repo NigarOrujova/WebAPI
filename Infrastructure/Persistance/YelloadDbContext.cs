@@ -46,6 +46,7 @@ public partial class YelloadDbContext : IdentityDbContext<AppUser, AppRole, int,
     public DbSet<BlogTagCloud> BlogTagClouds => Set<BlogTagCloud>();
 
     public DbSet<BlogMeta> blogMeta => Set<BlogMeta>();
+    public DbSet<Header> Headers => Set<Header>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
