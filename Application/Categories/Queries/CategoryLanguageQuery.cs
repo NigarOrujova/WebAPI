@@ -1,7 +1,6 @@
 ﻿using Application.Abstracts.Common.Interfaces;
 using Domain.Entities;
 using MediatR;
-using System.Linq.Expressions;
 
 namespace Application.Categories.Queries;
 
@@ -18,16 +17,11 @@ internal class CategoryLanguageQueryHandler : IRequestHandler<CategoryLanguageQu
 
     public async Task<object> Handle(CategoryLanguageQuery request, CancellationToken cancellationToken)
     {
-        IEnumerable<Portfolio> Portfolios = await _unitOfWork.PortfolioRepository.GetAllAsync(
-          includes: new Expression<Func<Portfolio, object>>[]
-          {
-                x => x.PortfolioCategories,
-                x => x.Images
-          })
-              ?? throw new NullReferenceException();
+        IEnumerable<Portfolio> Portfolios = await _unitOfWork.PortfolioRepository.GetAllAsync()
+              ?? throw new NullReferenceException("portfolio is null");
 
         Category entity = await _unitOfWork.CategoryRepository.GetAsync(n => n.Id == request.Id, includes: x => x.PortfolioCategories)
-            ?? throw new NullReferenceException();
+            ?? throw new NullReferenceException("category is null");
         var data = new
         {
             category_en = new

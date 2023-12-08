@@ -18,17 +18,11 @@ internal class CategorySingleQueryHandler : IRequestHandler<CategorySingleQuery,
 
     public async Task<Category> Handle(CategorySingleQuery request, CancellationToken cancellationToken)
     {
-
-        IEnumerable<Portfolio> Portfolios = await _unitOfWork.PortfolioRepository.GetAllAsync(
-          includes: new Expression<Func<Portfolio, object>>[]
-          {
-                x => x.PortfolioCategories,
-                x => x.Images
-          })
-              ?? throw new NullReferenceException();
-
         Category entity = await _unitOfWork.CategoryRepository.GetAsync(n => n.Id == request.Id,includes: x => x.PortfolioCategories)
-            ?? throw new NullReferenceException();
+            ?? throw new InvalidOperationException("Categories is null");
+
+        IEnumerable<Portfolio> portfolio = await _unitOfWork.PortfolioRepository.GetAllAsync()
+            ?? throw new InvalidOperationException("Portfolio entity is null");
 
         return entity;
     }
