@@ -93,6 +93,11 @@ public class CreatePortfolioCommandHandler : IRequestHandler<CreatePortfolioComm
             {
                 if (item != null)
                 {
+                    if (!item.Image.CheckFileSize(1000))
+                        throw new FileException("File max size 1 mb");
+                    if (!item.Image.CheckFileType("image/"))
+                        throw new FileException("File type must be image");
+
                     var image = new PortfolioImage();
 
                     image.ImagePath = item.Image.GetRandomImagePath("portfolio");
@@ -102,7 +107,7 @@ public class CreatePortfolioCommandHandler : IRequestHandler<CreatePortfolioComm
                     image.IsMain = item.IsMain;
                     image.ImageAlt = item.ImageAlt;
                     image.ImageAltAz = item.ImageAltAz;
-
+                
                     entity.Images.Add(image);
                 }
             }

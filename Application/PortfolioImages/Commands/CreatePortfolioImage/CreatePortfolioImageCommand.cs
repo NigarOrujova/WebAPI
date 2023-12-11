@@ -36,6 +36,7 @@ public class CreatePortfolioImageCommandHandler : IRequestHandler<CreatePortfoli
                 throw new FileException("File max size 1 mb");
             if (!request.Image.CheckFileType("image/"))
                 throw new FileException("File type must be image");
+
             string newImageName = request.Image.GetRandomImagePath("PortfolioImage");
             await _env.SaveAsync(request.Image, newImageName, cancellationToken);
             entity.ImagePath = newImageName;

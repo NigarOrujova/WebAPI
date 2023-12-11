@@ -75,7 +75,7 @@ public class PortfoliosController : ApiControllerBase
             var result = await Mediator.Send(new UpdatePortfolioCommand(id, request));
             return Ok(result);
         }
-        catch (FileException ex)
+        catch (Exception ex)
         {
             return StatusCode(StatusCodes.Status502BadGateway, new FileException (ex.Message ));
         }

@@ -80,6 +80,10 @@ public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioComm
             {
                 if (item != null)
                 {
+                    if (!item.Image.CheckFileSize(1000))
+                        throw new FileException("File max size 1 mb");
+                    if (!item.Image.CheckFileType("image/"))
+                        throw new FileException("File type must be image");
                     var image = new PortfolioImage();
 
                     image.ImagePath = item.Image.GetRandomImagePath("portfolio");
