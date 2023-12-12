@@ -25,7 +25,14 @@ internal class BlogSingleQueryHandler : IRequestHandler<BlogSingleQuery, object>
     {
         if (!string.IsNullOrWhiteSpace(request.Slug))
         {
-            return await _unitOfWork.BlogRepository.GetBlogBySlugAsync(request.Slug);
+            if (await _unitOfWork.BlogRepository.IsExistAsync(x => x.Slug == request.Slug))
+            {
+                return await _unitOfWork.BlogRepository.GetBlogBySlugAsync(request.Slug);
+            }
+            else
+            {
+                throw new InvalidOperationException("slug is null");
+            }
         }
         IEnumerable<Tag> Tags = await _unitOfWork.TagRepository.GetAllAsync(
         includes: x => x.TagCloud)

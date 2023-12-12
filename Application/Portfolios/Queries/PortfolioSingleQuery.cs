@@ -12,7 +12,7 @@ public record PortfolioSingleQuery: IRequest<object>
 
 }
 
-internal class PortfolioSingleQueryHandler : IRequestHandler<PortfolioSingleQuery, object>
+public class PortfolioSingleQueryHandler : IRequestHandler<PortfolioSingleQuery, object>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -25,7 +25,14 @@ internal class PortfolioSingleQueryHandler : IRequestHandler<PortfolioSingleQuer
     {
         if (!string.IsNullOrWhiteSpace(request.Slug))
         {
-            return await _unitOfWork.PortfolioRepository.GetPortfolioBySlugAsync(request.Slug);
+            if (await _unitOfWork.PortfolioRepository.IsExistAsync(x=>x.Slug==request.Slug))
+            {
+                return await _unitOfWork.PortfolioRepository.GetPortfolioBySlugAsync(request.Slug);
+            }
+            else
+            {
+                throw new InvalidOperationException("slug is null");
+            }
         } 
         Portfolio entity = await _unitOfWork.PortfolioRepository.GetAsync(n => n.Id == request.Id,
             includes: new Expression<Func<Portfolio, object>>[]

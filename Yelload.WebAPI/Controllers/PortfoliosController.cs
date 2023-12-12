@@ -5,7 +5,6 @@ using Application.Portfolios.Commands.UpdatePortfolio;
 using Application.Portfolios.Queries;
 using Domain.Dtos;
 using Domain.Entities;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Yelload.WebAPI.Controllers.Base;
@@ -17,15 +16,22 @@ public class PortfoliosController : ApiControllerBase
     [HttpGet("{slug}")]
     public async Task<IActionResult> GetByIdAsync(string slug)
     {
-        var query = new PortfolioSingleQuery { Slug = slug };
-        var blog = await Mediator.Send(query);
-
-        if (blog == null)
+        try
         {
-            return NotFound("Portfolio not found");
-        }
+            var query = new PortfolioSingleQuery { Slug = slug };
+            var portfolio = await Mediator.Send(query);
 
-        return Ok(blog);
+            if (portfolio == null)
+            {
+                return NotFound("Portfolio not found");
+            }
+
+            return Ok(portfolio);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new JsonResponse { Status = "Error", Message = ex.Message });
+        }
     }
     [HttpGet("languages/{id}")]
     public async Task<IActionResult> GetLanIdAsync([FromRoute] int id)

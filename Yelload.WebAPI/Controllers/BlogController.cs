@@ -7,7 +7,6 @@ using Domain.Dtos;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Org.BouncyCastle.Asn1.Ocsp;
 using Yelload.WebAPI.Controllers.Base;
 
 namespace Yelload.WebAPI.Controllers;
@@ -17,15 +16,22 @@ public class BlogController : ApiControllerBase
     [HttpGet("{slug}")]
     public async Task<IActionResult> GetByIdAsync(string slug)
     {
-        var query = new BlogSingleQuery { Slug = slug };
-        var blog = await Mediator.Send(query);
-
-        if (blog == null)
+        try
         {
-            return NotFound("Blog not found");
-        }
+            var query = new BlogSingleQuery { Slug = slug };
+            var blog = await Mediator.Send(query);
 
-        return Ok(blog);
+            if (blog == null)
+            {
+                return NotFound("Blog not found");
+            }
+
+            return Ok(blog);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status502BadGateway, new JsonResponse { Status = "Error", Message = ex.Message });
+        }
     }
     [HttpGet("languages/{id}")]
     public async Task<IActionResult> GetLanIdAsync([FromRoute] int id)
