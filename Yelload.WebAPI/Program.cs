@@ -1,17 +1,11 @@
 using Application;
-using Application.Abstracts.Common.Interfaces;
-using Application.Abstracts.Repositories;
-using Application.Blogs.Commands.CreateBlog;
 using Application.Extensions;
 using FluentValidation;
 using Infrastructure;
-using Infrastructure.Concretes.Common;
-using Infrastructure.Concretes.Repositories;
 using Infrastructure.Identity.Providers;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.Management.Storage.Fluent.Models;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -22,9 +16,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(cfg => {
     cfg.AddPolicy("allowAll", p =>
     {
-        p.AllowAnyHeader()
-        .AllowAnyMethod()
-        .AllowAnyOrigin();
+        p.WithOrigins("https://yelload.com")
+         .AllowAnyMethod()
+         .AllowAnyHeader();
     });
 });
 builder.Services.AddApplicationServices();
