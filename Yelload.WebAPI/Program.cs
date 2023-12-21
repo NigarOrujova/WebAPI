@@ -18,8 +18,7 @@ builder.Services.AddCors(cfg => {
     {
         p.AllowAnyOrigin()
          .AllowAnyMethod()
-         .AllowAnyHeader()
-         .AllowCredentials();
+         .AllowAnyHeader();
     });
 });
 builder.Services.AddApplicationServices();
