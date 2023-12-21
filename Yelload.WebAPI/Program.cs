@@ -16,9 +16,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(cfg => {
     cfg.AddPolicy("allowAll", p =>
     {
-        p.WithOrigins("https://yelload.com", "https://admin.yelload.com", "http://209.38.196.194:3000", "http://209.38.196.194")
+        p.WithOrigins("https://yelload.com", "https://admin.yelload.com", "http://209.38.196.194:3000", "http://209.38.196.194", "https://cms.yelload.com", "http://164.90.216.81:7228", "http://164.90.216.81")
          .AllowAnyMethod()
-         .AllowAnyHeader();
+         .AllowAnyHeader()
+         .AllowCredentials();
     });
 });
 builder.Services.AddApplicationServices();
@@ -28,7 +29,6 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 });
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 var assemblies = AppDomain.CurrentDomain
     .GetAssemblies()
     .ToArray();
