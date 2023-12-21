@@ -16,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(cfg => {
     cfg.AddPolicy("allowAll", p =>
     {
-        p.WithOrigins("https://yelload.com", "https://admin.yelload.com", "http://209.38.196.194:3000", "http://209.38.196.194", "https://cms.yelload.com", "http://164.90.216.81:7228", "http://164.90.216.81")
+        p.AllowAnyOrigin()
          .AllowAnyMethod()
          .AllowAnyHeader()
          .AllowCredentials();
