@@ -66,24 +66,24 @@ public class BlogMetaUpdateCommandHandler : IRequestHandler<BlogMetaUpdateComman
         entity.ImagePath = newImageName;
 
     save:
-        entity.ImageAlt = request.ImageAlt;
-        entity.ImageAltAz = request.ImageAltAz;
-        entity.MetaKeyword = request.MetaKeyword;
-        entity.MetaKeywordAz = request.MetaKeywordAz;
-        entity.MetaTitle = request.MetaTitle;
-        entity.MetaTitleAz = request.MetaTitleAz;
-        entity.OgTitle = request.OgTitle;
-        entity.OgTitleAz = request.OgTitleAz;
-        entity.MetaDescription = request.MetaDescription;
-        entity.MetaDescriptionAz = request.MetaDescriptionAz;
-        entity.OgDescription = request.OgDescription;
-        entity.OgDescriptionAz = request.OgDescriptionAz;
-        entity.OgSiteName = request.OgSiteName;
-        entity.OgSiteNameAz = request.OgSiteNameAz;
-        entity.MobileTitle = request.MobileTitle;
-        entity.MobileTitleAz = request.MobileTitleAz;
-        entity.AppName = request.AppName;
-        entity.AppNameAz = request.AppNameAz;
+        entity.ImageAlt = request.ImageAlt ?? entity.ImageAlt;
+        entity.ImageAltAz = request.ImageAltAz ?? entity.ImageAltAz;
+        entity.MetaKeyword = request.MetaKeyword ?? entity.MetaKeyword;
+        entity.MetaKeywordAz = request.MetaKeywordAz ?? entity.MetaKeywordAz;
+        entity.MetaTitle = request.MetaTitle ?? entity.MetaTitle;
+        entity.MetaTitleAz = request.MetaTitleAz ?? entity.MetaTitleAz;
+        entity.OgTitle = request.OgTitle ?? entity.OgTitle;
+        entity.OgTitleAz = request.OgTitleAz ?? entity.OgTitleAz;
+        entity.MetaDescription = request.MetaDescription ?? entity.MetaDescription;
+        entity.MetaDescriptionAz = request.MetaDescriptionAz ?? entity.MetaDescriptionAz;
+        entity.OgDescription = request.OgDescription ?? entity.OgDescription;
+        entity.OgDescriptionAz = request.OgDescriptionAz ?? entity.OgDescriptionAz;
+        entity.OgSiteName = request.OgSiteName ?? entity.OgSiteName;
+        entity.OgSiteNameAz = request.OgSiteNameAz ?? entity.OgSiteNameAz;
+        entity.MobileTitle = request.MobileTitle ?? entity.MobileTitle;
+        entity.MobileTitleAz = request.MobileTitleAz ?? entity.MobileTitleAz;
+        entity.AppName = request.AppName ?? entity.AppName;
+        entity.AppNameAz = request.AppNameAz ?? entity.AppNameAz;
 
         await _unitOfWork.BlogMetaRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
