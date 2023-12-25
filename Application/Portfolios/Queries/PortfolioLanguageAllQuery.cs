@@ -47,7 +47,11 @@ public class PortfolioLanguageAllQueryHandler : IRequestHandler<PortfolioLanguag
                 p.MetaDescription,
                 p.OgDescription,
                 p.MobileTitle,
-                portfolioCat = p.PortfolioCategories?.Select(x=>x.Category.Name),
+                portfolioCat = p.PortfolioCategories?.Select(x=>new
+                {
+                    CategoryId = x.CategoryId,
+                    CategoryName=x.Category.Name
+                }),
                 portfolioImg = p.Images?.Select(y => new
                 {
                     y.Id,
@@ -71,7 +75,11 @@ public class PortfolioLanguageAllQueryHandler : IRequestHandler<PortfolioLanguag
                 MetaDescription = p.MetaDescriptionAz,
                 OgDescription = p.OgDescriptionAz,
                 MobileTitle = p.MobileTitleAz,
-                portfolioCat = p.PortfolioCategories?.Select(x => x.Category.NameAz),
+                portfolioCat = p.PortfolioCategories?.Select(x => new
+                {
+                    CategoryId = x.CategoryId,
+                    CategoryName = x.Category.NameAz
+                }),
                 portfolioImg = p.Images?.Select(y => new
                 {
                     y.Id,
