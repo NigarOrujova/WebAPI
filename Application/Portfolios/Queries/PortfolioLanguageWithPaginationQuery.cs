@@ -25,9 +25,6 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
         int pageSize = request.Size;
         int pageNumber = request.Page;
 
-        var totalCount = await _unitOfWork.PortfolioRepository.GetTotalCountAsync();
-        var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
-
         IEnumerable<Portfolio> Portfolios = await _unitOfWork.PortfolioRepository.GetAllAsync(
         includes: new Expression<Func<Portfolio, object>>[]
         {
@@ -39,15 +36,6 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
         IEnumerable<Category> categories = await _unitOfWork.CategoryRepository.GetAllAsync(includes: x => x.PortfolioCategories)
             ?? throw new InvalidOperationException("Categories is null");
 
-        if (pageNumber > totalPages)
-        {
-            pageNumber = totalPages;
-        }
-        else if (pageNumber < 1)
-        {
-            pageNumber = 1;
-        }
-
         if (request.CategoryId > 0)
         {
             var filteredPortfolios = Portfolios
@@ -56,6 +44,16 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
                .Skip((pageNumber - 1) * pageSize)
                .Take(pageSize)
                .ToList();
+            var totalCount = filteredPortfolios.Count();
+            var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+            if (pageNumber > totalPages)
+            {
+                pageNumber = totalPages;
+            }
+            else if (pageNumber < 1)
+            {
+                pageNumber = 1;
+            }
 
             var model = new
             {
@@ -67,6 +65,7 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
                     x.SubTitle,
                     x.Description,
                     x.Link,
+                    x.Sound,
                     x.Slug,
                     x.IsMain,
                     x.MetaKeyword,
@@ -92,6 +91,7 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
                     Description = x.DescriptionAz,
                     SubTitle = x.SubTitleAz,
                     x.Link,
+                    x.Sound,
                     Slug = x.Slug,
                     IsMain = x.IsMain,
                     MetaKeyword = x.MetaKeywordAz,
@@ -116,6 +116,16 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
         }
         else
         {
+            var totalCount = await _unitOfWork.PortfolioRepository.GetTotalCountAsync();
+            var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+            if (pageNumber > totalPages)
+            {
+                pageNumber = totalPages;
+            }
+            else if (pageNumber < 1)
+            {
+                pageNumber = 1;
+            }
             var model = new
             {
                 project_en = Portfolios
@@ -127,6 +137,7 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
                     x.SubTitle,
                     x.Description,
                     x.Link,
+                    x.Sound,
                     x.Slug,
                     x.IsMain,
                     x.MetaKeyword,
@@ -152,6 +163,7 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
                     Description = x.DescriptionAz,
                     SubTitle = x.SubTitleAz,
                     x.Link,
+                    x.Sound,
                     Slug = x.Slug,
                     IsMain = x.IsMain,
                     MetaKeyword = x.MetaKeywordAz,

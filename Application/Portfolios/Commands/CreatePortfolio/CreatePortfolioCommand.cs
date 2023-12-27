@@ -11,6 +11,7 @@ namespace Application.Portfolios.Commands.CreatePortfolio;
 public record CreatePortfolioCommand : IRequest<int>
 {
     public string? Link { get; init; }
+    public int? Sound { get; set; }
     public string Title { get; init; } = null!;
     public string TitleAz { get; init; } = null!;
     public string? SubTitle { get; init; }
@@ -72,6 +73,8 @@ public class CreatePortfolioCommandHandler : IRequestHandler<CreatePortfolioComm
         entity.Slug = request.Title.ToSlug();
         entity.SlugAz = request.TitleAz.ToSlug();
         entity.IsMain = request.IsMain;
+        entity.Link= request.Link;
+        entity.Sound = request.Sound;
         if (request.CategoryIds != null)
         {
 

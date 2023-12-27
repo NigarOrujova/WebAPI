@@ -35,6 +35,7 @@ public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioComm
 
         entity.Title = request.Portfolio.Title;
         entity.Link = request.Portfolio.Link;
+        entity.Sound = request.Portfolio.Sound;
         entity.TitleAz = request.Portfolio.TitleAz;
         entity.SubTitle = request.Portfolio.SubTitle;
         entity.SubTitleAz = request.Portfolio.SubTitleAz;
