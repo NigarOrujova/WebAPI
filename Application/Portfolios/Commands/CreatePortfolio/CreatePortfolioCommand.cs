@@ -11,7 +11,7 @@ namespace Application.Portfolios.Commands.CreatePortfolio;
 public record CreatePortfolioCommand : IRequest<int>
 {
     public string? Link { get; init; }
-    public int? Sound { get; set; }
+    public string? Sound { get; set; }
     public string Title { get; init; } = null!;
     public string TitleAz { get; init; } = null!;
     public string? SubTitle { get; init; }
