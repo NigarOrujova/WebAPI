@@ -5,6 +5,7 @@ using Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Hosting;
 using System.Linq.Expressions;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Application.Portfolios.Commands.UpdatePortfolio;
 
@@ -29,7 +30,8 @@ public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioComm
             x => x.PortfolioCategories,
             x => x.Images
         });
-
+        IEnumerable<PortfolioImage> PortfolioImages = await _unitOfWork.PortfolioImageRepository.GetAllAsync()
+            ?? throw new NullReferenceException();
         if (entity == null)
             throw new FileException("Portfolio Not Fount");
 
@@ -73,9 +75,9 @@ public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioComm
                 entity.PortfolioCategories.Add(portfolioCategory);
             }
         }
-        entity.Images = new List<PortfolioImage>();
         if (request.Portfolio.Images != null)
         {
+            entity.Images = new List<PortfolioImage>();
             entity.Images?.RemoveAll(x => !request.Portfolio.ImageIds.Contains(x.Id));
             foreach (var item in request.Portfolio.Images)
             {
@@ -99,6 +101,18 @@ public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioComm
                 }
             }
         }
+        else
+        {
+            entity.Images = entity.Images;
+        }
+
+        //if (request.Portfolio.Images?.FirstOrDefault()?.ImagePath != null)
+        //{
+        //    foreach (var item in request.Portfolio.Images)
+        //    {
+        //        entity.ImagePath = item.ImagePath;
+        //    }
+        //}
 
         await _unitOfWork.PortfolioRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
