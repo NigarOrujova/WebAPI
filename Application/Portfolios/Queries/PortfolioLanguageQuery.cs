@@ -49,7 +49,11 @@ internal class PortfolioLanguageQueryHandler : IRequestHandler<PortfolioLanguage
                 entity.MetaDescription,
                 entity.OgDescription,
                 entity.MobileTitle,
-                portfolioCat = entity.PortfolioCategories?.Select(x => x.Category.Name),
+                portfolioCat = entity.PortfolioCategories?.Select(x => new
+                {
+                    CategoryId = x.CategoryId,
+                    CategoryName = x.Category.Name
+                }),
                 portfolioImg = entity.Images?.Select(y => new
                 {
                     y.Id,
@@ -73,7 +77,7 @@ internal class PortfolioLanguageQueryHandler : IRequestHandler<PortfolioLanguage
                 MetaDescription = entity.MetaDescriptionAz,
                 OgDescription = entity.OgDescriptionAz,
                 MobileTitle = entity.MobileTitleAz,
-                portfolioCat = entity.PortfolioCategories?.Select(x => x.Category.NameAz),
+                portfolioCat = entity.PortfolioCategories?.Select(x => new { CategoryId = x.CategoryId, CategoryName = x.Category.NameAz }),
                 portfolioImg = entity.Images?.Select(y => new
                 {
                     y.Id,

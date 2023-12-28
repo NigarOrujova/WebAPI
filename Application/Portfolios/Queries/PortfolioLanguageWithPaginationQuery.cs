@@ -74,7 +74,11 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
                     x.MetaDescription,
                     x.OgDescription,
                     x.MobileTitle,
-                    portfolioCat = x.PortfolioCategories?.Select(x => x.Category.Name),
+                    portfolioCat = x.PortfolioCategories?.Select(x => new
+                    {
+                        CategoryId = x.CategoryId,
+                        CategoryName = x.Category.Name
+                    }),
                     portfolioImg = x.Images?.Select(y => new
                     {
                         y.Id,
@@ -100,7 +104,11 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
                     MetaDescription = x.MetaDescriptionAz,
                     OgDescription = x.OgDescriptionAz,
                     MobileTitle = x.MobileTitleAz,
-                    portfolioCat = x.PortfolioCategories?.Select(x => x.Category.NameAz),
+                    portfolioCat = x.PortfolioCategories?.Select(z => new
+                    {
+                        CategoryId = z.CategoryId,
+                        CategoryName = z.Category.NameAz
+                    }),
                     portfolioImg = x.Images?.Select(y => new
                     {
                         y.Id,
@@ -146,7 +154,11 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
                     x.MetaDescription,
                     x.OgDescription,
                     x.MobileTitle,
-                    portfolioCat = x.PortfolioCategories?.Select(x => x.Category.Name),
+                    portfolioCat = x.PortfolioCategories?.Select(x => new
+                    {
+                        CategoryId = x.CategoryId,
+                        CategoryName = x.Category.Name
+                    }),
                     portfolioImg = x.Images?.Select(y => new
                     {
                         y.ImagePath,
@@ -172,7 +184,11 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
                     MetaDescription = x.MetaDescriptionAz,
                     OgDescription = x.OgDescriptionAz,
                     MobileTitle = x.MobileTitleAz,
-                    portfolioCat = x.PortfolioCategories?.Select(x => x.Category.NameAz),
+                    portfolioCat = x.PortfolioCategories?.Select(x => new
+                    {
+                        CategoryId = x.CategoryId,
+                        CategoryName = x.Category.NameAz
+                    }),
                     portfolioImg = x.Images?.Select(y => new
                     {
                         y.ImagePath,
