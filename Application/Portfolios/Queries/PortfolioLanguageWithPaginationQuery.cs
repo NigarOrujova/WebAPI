@@ -44,7 +44,7 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
                .Skip((pageNumber - 1) * pageSize)
                .Take(pageSize)
                .ToList();
-            var totalCount = filteredPortfolios.Count();
+            var totalCount = Portfolios.Where(x => x.PortfolioCategories.Any(y => y.CategoryId == request.CategoryId)).Count();
             var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
             if (pageNumber > totalPages)
             {
