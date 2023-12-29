@@ -106,14 +106,6 @@ public class UpdatePortfolioCommandHandler : IRequestHandler<UpdatePortfolioComm
             entity.Images = entity.Images;
         }
 
-        //if (request.Portfolio.Images?.FirstOrDefault()?.ImagePath != null)
-        //{
-        //    foreach (var item in request.Portfolio.Images)
-        //    {
-        //        entity.ImagePath = item.ImagePath;
-        //    }
-        //}
-
         await _unitOfWork.PortfolioRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
