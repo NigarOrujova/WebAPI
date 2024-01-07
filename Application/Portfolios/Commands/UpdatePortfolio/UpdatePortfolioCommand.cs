@@ -5,7 +5,6 @@ using Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Hosting;
 using System.Linq.Expressions;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Application.Portfolios.Commands.UpdatePortfolio;
 
