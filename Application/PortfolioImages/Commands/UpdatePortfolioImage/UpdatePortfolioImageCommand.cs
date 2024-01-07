@@ -43,24 +43,25 @@ public class UpdatePortfolioImageCommandHandler : IRequestHandler<UpdatePortfoli
         entity.ImagePath = newImageName;
 
     save:
+        entity.ImageAlt = request.PortfolioImage.ImageAlt;
+        entity.ImageAltAz = request.PortfolioImage.ImageAltAz;
+        entity.PortfolioId = request.PortfolioImage.PortfolioId;
         if (request.PortfolioImage.IsMain)
         {
             foreach (var item in portfolios)
             {
                 item.IsMain = false;
             }
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
-        entity.ImageAlt = request.PortfolioImage.ImageAlt;
-        entity.ImageAltAz = request.PortfolioImage.ImageAltAz;
         entity.IsMain = request.PortfolioImage.IsMain;
-        entity.PortfolioId = request.PortfolioImage.PortfolioId;
         var count = 0;
         foreach ( var portfolio in portfolios)
         {
             if(!portfolio.IsMain) count++;
         }
         
-        if(count == 0)
+        if(count!=1)
             throw new FileException("Major image not found. 1 image must be isMain");
 
         await _unitOfWork.PortfolioImageRepository.UpdateAsync(entity);
