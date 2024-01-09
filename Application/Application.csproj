@@ -23,4 +23,9 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Awards\Queries\" />
+    <Folder Include="Counters\Queries\" />
+  </ItemGroup>
+
 </Project>

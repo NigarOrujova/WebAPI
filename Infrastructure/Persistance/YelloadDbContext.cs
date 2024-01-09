@@ -37,6 +37,7 @@ public partial class YelloadDbContext : IdentityDbContext<AppUser, AppRole, int,
     public DbSet<Esc> Esc => Set<Esc>();
 
     public DbSet<Contact> Contact => Set<Contact>();
+
     public DbSet<EmployeesPage> EmployeesPages => Set<EmployeesPage>();
 
     public DbSet<Blog> Blogs => Set<Blog>();
@@ -46,7 +47,12 @@ public partial class YelloadDbContext : IdentityDbContext<AppUser, AppRole, int,
     public DbSet<BlogTagCloud> BlogTagClouds => Set<BlogTagCloud>();
 
     public DbSet<BlogMeta> blogMeta => Set<BlogMeta>();
+
     public DbSet<Header> Headers => Set<Header>();
+
+    public DbSet<Award> Awards => Set<Award>();
+
+    public DbSet<Counter> Counters => Set<Counter>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
