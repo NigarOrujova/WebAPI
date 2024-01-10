@@ -12,8 +12,11 @@ public record CreateAwardCommand : IRequest<int>
 {
     public int Year { get; set; }
     public string AwardName { get; set; }
+    public string AwardNameAz { get; set; }
     public string Contest { get; set; }
+    public string ContestAz { get; set; }
     public string Project { get; set; }
+    public string ProjectAz { get; set; }
     public IFormFile Image { get; init; }
     public string ImageAlt { get; init; }
 }
@@ -35,8 +38,11 @@ public class CreateAwardCommandHandler : IRequestHandler<CreateAwardCommand, int
 
         entity.Year = request.Year;
         entity.AwardName = request.AwardName;
+        entity.AwardNameAz = request.AwardNameAz;
         entity.Contest = request.Contest;
+        entity.ContestAz = request.ContestAz;
         entity.Project = request.Project;
+        entity.ProjectAz = request.ProjectAz;
         entity.ImageAlt = request.ImageAlt;
 
         if (request.Image != null)

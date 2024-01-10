@@ -6,4 +6,5 @@ public class Counter:BaseEntity
 {
     public int Year { get; set; }
     public string? YearText { get; set; }
+    public string? YearTextAz { get; set; }
 }

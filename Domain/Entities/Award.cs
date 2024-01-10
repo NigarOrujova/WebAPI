@@ -8,8 +8,11 @@ public class Award:BaseEntity
 {
     public int Year { get; set; }
     public string? AwardName { get; set; }
+    public string? AwardNameAz { get; set; }
     public string? Contest { get; set; }
+    public string? ContestAz { get; set; }
     public string? Project { get; set; }
+    public string? ProjectAz { get; set; }
     [NotMapped]
     public IFormFile? Image { get; set; }
     public string? ImagePath { get; set; }

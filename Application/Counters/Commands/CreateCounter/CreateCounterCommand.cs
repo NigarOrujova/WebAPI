@@ -8,6 +8,7 @@ public record CreateCounterCommand : IRequest<int>
 {
     public int Year { get; init; }
     public string? YearText { get; init; }
+    public string? YearTextAz { get; init; }
 }
 public class CreateCounterCommandHandler : IRequestHandler<CreateCounterCommand, int>
 {
@@ -24,6 +25,7 @@ public class CreateCounterCommandHandler : IRequestHandler<CreateCounterCommand,
 
         entity.Year = request.Year;
         entity.YearText = request.YearText;
+        entity.YearTextAz = request.YearTextAz;
 
         await _unitOfWork.CounterRepository.AddAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

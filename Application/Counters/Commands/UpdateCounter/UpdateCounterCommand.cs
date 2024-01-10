@@ -20,6 +20,7 @@ public class UpdateCounterCommandHandler : IRequestHandler<UpdateCounterCommand,
              ?? throw new NullReferenceException();
 
         entity.YearText = request.Counter.YearText;
+        entity.YearTextAz = request.Counter.YearTextAz;
         entity.Year = request.Counter.Year;
 
         await _unitOfWork.CounterRepository.UpdateAsync(entity);

@@ -46,9 +46,12 @@ public class UpdateAwardCommandHandler : IRequestHandler<UpdateAwardCommand, Awa
     save:
         entity.ImageAlt = request.Award.ImageAlt;
         entity.AwardName=request.Award.AwardName;
+        entity.AwardNameAz=request.Award.AwardNameAz;
         entity.Year= request.Award.Year;
         entity.Project= request.Award.Project;
+        entity.ProjectAz= request.Award.ProjectAz;
         entity.Contest= request.Award.Contest;
+        entity.ContestAz = request.Award.ContestAz;
 
         await _unitOfWork.AwardRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

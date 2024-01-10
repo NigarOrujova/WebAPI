@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(YelloadDbContext))]
-    [Migration("20240109123328_CreateAwardAndCounter")]
-    partial class CreateAwardAndCounter
+    [Migration("20240110062920_CreateAwardandCounter")]
+    partial class CreateAwardandCounter
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,7 +36,13 @@ namespace Infrastructure.Migrations
                     b.Property<string>("AwardName")
                         .HasColumnType("text");
 
+                    b.Property<string>("AwardNameAz")
+                        .HasColumnType("text");
+
                     b.Property<string>("Contest")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ContestAz")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedDate")
@@ -52,6 +58,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Project")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProjectAz")
                         .HasColumnType("text");
 
                     b.Property<int>("Year")
@@ -360,6 +369,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("YearText")
+                        .HasColumnType("text");
+
+                    b.Property<string>("YearTextAz")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
