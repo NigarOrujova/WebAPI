@@ -38,14 +38,9 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
 
         if (request.CategoryId > 0)
         {
-            var filteredPortfolios = Portfolios
-               .Where(x => x.PortfolioCategories.Any(y => y.CategoryId == request.CategoryId))
-               .OrderByDescending(x => x.Id)
-               .Skip((pageNumber - 1) * pageSize)
-               .Take(pageSize)
-               .ToList();
             var totalCount = Portfolios.Where(x => x.PortfolioCategories.Any(y => y.CategoryId == request.CategoryId)).Count();
             var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+
             if (pageNumber > totalPages)
             {
                 pageNumber = totalPages;
@@ -54,6 +49,13 @@ public class PortfolioLanguageWithPaginationQueryHandler : IRequestHandler<Portf
             {
                 pageNumber = 1;
             }
+
+            var filteredPortfolios = Portfolios
+               .Where(x => x.PortfolioCategories.Any(y => y.CategoryId == request.CategoryId))
+               .OrderByDescending(x => x.Id)
+               .Skip((pageNumber - 1) * pageSize)
+               .Take(pageSize)
+               .ToList();
 
             var model = new
             {
