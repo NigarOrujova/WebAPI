@@ -7,7 +7,7 @@ namespace Application.Teams.Commands.SortTeam;
 public class TeamSortCommand: IRequest<JsonResponse>
 {
     public int EntityId { get; set; }
-    public byte NewRank { get; set; }
+    public int AboveEntityId { get; set; }
 
 
     public class RoleSortCommandHandler : IRequestHandler<TeamSortCommand, JsonResponse>
@@ -21,33 +21,30 @@ public class TeamSortCommand: IRequest<JsonResponse>
 
         public async Task<JsonResponse> Handle(TeamSortCommand request, CancellationToken cancellationToken)
         {
+            var firstRoleEntry = await _unitOfWork.TeamRepository.GetAsync(m => m.Id == request.AboveEntityId);
+
+            byte rank = (byte)firstRoleEntry.Rank;
+
             var movedRoleEntry = await _unitOfWork.TeamRepository.GetAsync(m => m.Id == request.EntityId);
 
-            if (movedRoleEntry != null)
+            movedRoleEntry.Rank = Convert.ToByte(rank >= 1 ? --rank : rank);
+
+            rank = (byte)movedRoleEntry.Rank;
+
+            var anotherRoles = await _unitOfWork.TeamRepository
+                    .GetAllAsync(m => m.Id != request.AboveEntityId && m.Id != request.EntityId && m.Rank <= rank);
+
+            foreach (var item in anotherRoles)
             {
-                // Update the rank of the moved entity
-                movedRoleEntry.Rank = request.NewRank;
-
-                // Adjust the ranks of other entities
-                var otherRoles = await _unitOfWork.TeamRepository
-                    .GetAllAsync(m => m.Id != request.EntityId && m.Rank <= request.NewRank);
-                otherRoles.OrderByDescending(m => m.Rank);
-                foreach (var item in otherRoles)
-                {
-                    item.Rank = request.NewRank >= 1 ? --request.NewRank : request.NewRank;
-                }
-
-                await _unitOfWork.SaveChangesAsync(cancellationToken);
-
-                return new JsonResponse
-                {
-                    Message = "Sorted!"
-                };
+                item.Rank = rank >= 1 ? --rank : rank;
             }
+
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             return new JsonResponse
             {
-                Message = "Entity not found!"
+                Status = "false",
+                Message = "Sorted!"
             };
         }
     }
