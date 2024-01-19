@@ -38,7 +38,10 @@ public class UpdateAwardCommandHandler : IRequestHandler<UpdateAwardCommand, Awa
             throw new FileException("File type must be image");
         string newImageName = request.Award.Image.GetRandomImagePath("Award");
 
-        _env.ArchiveImage(entity.ImagePath);
+        if (entity.ImagePath != null)
+        {
+            _env.ArchiveImage(entity.ImagePath);
+        }
         await _env.SaveAsync(request.Award.Image, newImageName, cancellationToken);
 
         entity.ImagePath = newImageName;

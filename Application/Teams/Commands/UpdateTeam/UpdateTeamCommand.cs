@@ -35,7 +35,10 @@ public class UpdateTeamCommandHandler : IRequestHandler<UpdateTeamCommand, Team>
             throw new FileException("File type must be image");
         string newImageName = request.Team.Image.GetRandomImagePath("Teams");
 
-        _env.ArchiveImage(entity.ImagePath);
+        if (entity.ImagePath != null)
+        {
+            _env.ArchiveImage(entity.ImagePath);
+        }
         await _env.SaveAsync(request.Team.Image, newImageName, cancellationToken);
 
         entity.ImagePath = newImageName;
@@ -53,7 +56,10 @@ public class UpdateTeamCommandHandler : IRequestHandler<UpdateTeamCommand, Team>
             throw new FileException("File type must be image");
         string newImageName2 = request.Team.Image2.GetRandomImagePath("Teams");
 
-        _env.ArchiveImage(entity.ImagePath2);
+        if (entity.ImagePath2 != null)
+        {
+            _env.ArchiveImage(entity.ImagePath2);
+        }
         await _env.SaveAsync(request.Team.Image2, newImageName2, cancellationToken);
 
         entity.ImagePath2 = newImageName2;

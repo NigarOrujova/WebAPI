@@ -42,7 +42,10 @@ public class UpdateBlogCommandHandler : IRequestHandler<UpdateBlogCommand, Blog>
             throw new FileException("File type must be image");
         string newImageName = request.Blog.Image.GetRandomImagePath("Blog");
 
-        _env.ArchiveImage(entity.ImagePath);
+        if (entity.ImagePath != null)
+        {
+            _env.ArchiveImage(entity.ImagePath);
+        }
         await _env.SaveAsync(request.Blog.Image, newImageName, cancellationToken);
 
         entity.ImagePath = newImageName;

@@ -37,7 +37,10 @@ public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerComman
             throw new FileException("File type must be image");
         string newImageName = request.Customer.Image.GetRandomImagePath("customer");
 
-        _env.ArchiveImage(entity.ImagePath);
+        if (entity.ImagePath != null)
+        {
+            _env.ArchiveImage(entity.ImagePath);
+        }
         await _env.SaveAsync(request.Customer.Image, newImageName, cancellationToken);
 
         entity.ImagePath = newImageName;

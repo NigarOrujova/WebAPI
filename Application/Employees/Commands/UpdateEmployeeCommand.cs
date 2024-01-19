@@ -62,7 +62,10 @@ public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeComman
             throw new FileException("File type must be image");
         string newImageName = request.Image.GetRandomImagePath("about");
 
-        _env.ArchiveImage(entity.ImagePath);
+        if (entity.ImagePath != null)
+        {
+            _env.ArchiveImage(entity.ImagePath);
+        }
         await _env.SaveAsync(request.Image, newImageName, cancellationToken);
 
         entity.ImagePath = newImageName;
@@ -80,7 +83,10 @@ public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeComman
             throw new FileException("File type must be image");
         string newImageName2 = request.Image2.GetRandomImagePath("about");
 
-        _env.ArchiveImage(entity.ImagePath2);
+        if (entity.ImagePath2 != null)
+        {
+            _env.ArchiveImage(entity.ImagePath2);
+        }
         await _env.SaveAsync(request.Image2, newImageName2, cancellationToken);
 
         entity.ImagePath2 = newImageName2;
