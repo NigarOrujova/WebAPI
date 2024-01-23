@@ -64,8 +64,7 @@ public class UpdatePortfolioImageCommandHandler : IRequestHandler<UpdatePortfoli
             {
                 if (portfolio.IsMain) count++;
             }
-            if (count < 1)
-                throw new FileException("1 image must be isMain");
+            if (count < 2) throw new FileException("1 image must be isMain");
             entity.IsMain = false;
             await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
