@@ -23,7 +23,7 @@ public class UpdatePortfolioImageCommandHandler : IRequestHandler<UpdatePortfoli
     {
         PortfolioImage entity = await _unitOfWork.PortfolioImageRepository.GetAsync(n => n.Id == request.Id)
              ?? throw new NullReferenceException("Portfolio image not found");
-        var portfolios = await _unitOfWork.PortfolioImageRepository.GetAllAsync(x => x.PortfolioId == request.PortfolioImage.PortfolioId);
+        var portfolios = await _unitOfWork.PortfolioImageRepository.GetAllAsync(x => x.PortfolioId == entity.PortfolioId);
 
         if (request.PortfolioImage.Image == null)
         {
@@ -48,14 +48,13 @@ public class UpdatePortfolioImageCommandHandler : IRequestHandler<UpdatePortfoli
     save:
         entity.ImageAlt = request.PortfolioImage.ImageAlt;
         entity.ImageAltAz = request.PortfolioImage.ImageAltAz;
-        entity.PortfolioId = request.PortfolioImage.PortfolioId;
         if (request.PortfolioImage.IsMain)
         {
             foreach (var item in portfolios)
             {
                 item.IsMain = false;
             }
-            entity.IsMain = request.PortfolioImage.IsMain;
+            entity.IsMain = true;
             await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
         else
@@ -65,9 +64,9 @@ public class UpdatePortfolioImageCommandHandler : IRequestHandler<UpdatePortfoli
             {
                 if (portfolio.IsMain) count++;
             }
-            if (count != 1)
+            if (count < 1)
                 throw new FileException("1 image must be isMain");
-            entity.IsMain = request.PortfolioImage.IsMain;
+            entity.IsMain = false;
             await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
         

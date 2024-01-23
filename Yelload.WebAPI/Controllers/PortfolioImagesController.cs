@@ -18,10 +18,10 @@ public class PortfolioImagesController : ApiControllerBase
 {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
-   => Ok(await Mediator.Send(new PortfolioImageSingleQuery(id)));
+    => Ok(await Mediator.Send(new PortfolioImageSingleQuery(id)));
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
-   => Ok(await Mediator.Send(new PortfolioImageAllQuery()));
+    => Ok(await Mediator.Send(new PortfolioImageAllQuery()));
     [HttpGet("paginate")]
     public async Task<ActionResult<List<PortfolioImage>>> GetPortfolioImages(int page = 1, int size = 10)
     {
