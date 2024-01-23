@@ -55,17 +55,22 @@ public class UpdatePortfolioImageCommandHandler : IRequestHandler<UpdatePortfoli
             {
                 item.IsMain = false;
             }
+            entity.IsMain = request.PortfolioImage.IsMain;
             await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
-        entity.IsMain = request.PortfolioImage.IsMain;
-        var count = 0;
-        foreach ( var portfolio in portfolios)
+        else
         {
-            if(portfolio.IsMain) count++;
+            var count = 0;
+            foreach (var portfolio in portfolios)
+            {
+                if (portfolio.IsMain) count++;
+            }
+            if (count != 1)
+                throw new FileException("1 image must be isMain");
+            entity.IsMain = request.PortfolioImage.IsMain;
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
         
-        if(count!=1)
-            throw new FileException("1 image must be isMain");
 
         await _unitOfWork.PortfolioImageRepository.UpdateAsync(entity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
