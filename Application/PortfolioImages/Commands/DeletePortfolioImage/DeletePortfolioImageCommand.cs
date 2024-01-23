@@ -24,7 +24,10 @@ internal class DeletePortfolioImageCommandHandler : IRequestHandler<DeletePortfo
     {
         PortfolioImage PortfolioImage = await _unitOfWork.PortfolioImageRepository.GetAsync(n => n.Id == request.Id)
             ?? throw new FileException(message:"Image Not Found");
-
+        if(PortfolioImage.IsMain)
+        {
+            throw new FileException(message:"Main image cannot be deleted");
+        }
         if(PortfolioImage.ImagePath!= null)
         {
             _env.ArchiveImage(PortfolioImage.ImagePath);
